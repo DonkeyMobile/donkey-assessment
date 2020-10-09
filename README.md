@@ -5,7 +5,7 @@ Welcome to this assessment.
 ## Requirements
 1. Nodejs
 2. Typescript
-3. NoSQL
+3. MongoDB
 4. Unit tests
 5. Must be possible to run the backend locally
 
