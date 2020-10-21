@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+bin/docker-build
+
+bin/npm install
+bin/reboot

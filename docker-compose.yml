@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  db:
+    image: 'mongo'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+  app:
+    image: 'avoran/assessment/base:latest'
+    ports:
+      - "5000:3000"
+    volumes:
+      - .:/source
+    links:
+      - db

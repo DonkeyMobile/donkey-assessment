@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+#http://stackoverflow.com/a/29754866
+getopt --test > /dev/null
+if [[ $? -ne 4 ]]; then
+    echo "I’m sorry, `getopt --test` failed in this environment."
+    exit 1
+fi
+
+SHORT=p
+LONG=push
+
+PARSED=$(getopt --options $SHORT --longoptions $LONG --name "$0" -- "$@")
+if [[ $? -ne 0 ]]; then
+    exit 2
+fi
+
+eval set -- "$PARSED"
+
+while true; do
+  case "$1" in
+    -p|--push)
+      p=y
+      shift
+      ;;
+    --)
+      shift
+      break
+      ;;
+    *)
+      echo "error"
+      exit 3
+      ;;
+  esac
+done
+
+function build {
+    docker build -t avoran/assessment/$1:latest dev/docker/$1
+    if [[ "$p" = y ]]; then docker push avoran/assessment/"$1":latest; fi
+}
+
+if [[ $# -eq 0 ]]; then
+  build "base"
+else
+  for var in "$@"; do build "$var"; done
+fi

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+container_name=(`docker-compose ps | grep app`)
+
+if [ `docker inspect -f {{.State.Running}} $container_name` == 'false' ]; then
+    docker-compose up -d
+fi
+
+if [ $# -eq 0 ]; then
+    docker exec -itu 1000:1000 $container_name bash
+else
+    docker exec -itu 1000:1000 $container_name "$@"
+fi
