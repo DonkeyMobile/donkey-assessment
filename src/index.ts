@@ -13,7 +13,7 @@ app.use(helmet())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/', async (req: Request, res: Response) => {
+app.get('/posts/:postId', async (req: Request, res: Response) => {
   await container.GetPostHandler.handle(req, res)
 })
 
