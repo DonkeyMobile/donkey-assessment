@@ -1,21 +1,24 @@
-# Donkey assessment
-
-Welcome to this assessment.
+# Donkey assessment API backend
 
 ## Requirements
 1. Nodejs
-2. Typescript
-3. MongoDB
-4. Unit tests
-5. Must be possible to run the backend locally
+2. Docker
 
 ## Description
-A user must be able to create, read, update and delete a post on a timeline.
-This post contains a date, a description, and attachments (photo's, video's, PDF's).
-Also, a user can give comments on a post. 
+This API backend allows you to do all basic CRUD operations on posts on a timeline. It also allows you to add comments to a post.
 
-1. Create a UML diagram. 
-2. Implement an API to support this functionality. Uploading attachments is a bonus.  
-3. Create a pull request on this repository.
+It's mostly covered in tests, it heavily depends on dependency injection, and is mostly wired together in the DI-container.
 
-Happy coding! 🤓
+## Run locally
+* `npm start`
+  * It will start a MongoDB in a docker container and will run a NodeJS server locally while keeping track of TypeScript changes.
+* `npm test`
+  * It will run the unit tests
+
+The folder [requests](./requests) contains a file with dummy requests that you're able to execute. Both VSCode as Jetbrains IDEs support those files. It skips the need for PAW or Postman.
+
+Some thoughts:
+* I skipped the UML diagram; I really see no use in it as a tried to build it loosely coupled, depending on interfaces.
+  Also, I believe you should not need it in small code bases (when you write code properly) and it's not helpfull in large code bases.
+* I spend much too much time (~4 hours) on trying to automatically create a MongoDB containing some data when you start the project. I decided to give up on trying to populate the db on boot.
+
