@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+
+  mongo:
+    image: mongo
+    restart: unless-stopped
+    volumes:
+      - ./data/mongo-data:/data/db
+    networks:
+      - backend
+    ports:
+      - "27017:27017"
+
+  minio:
+    image: minio/minio
+    restart: unless-stopped
+    command: server --address 0.0.0.0:9000 /data
+    volumes:
+      - ./data/minio-data:/data
+    networks:
+      - backend
+    ports:
+      - "9000:9000"
+
+networks:
+  backend:    
+    driver: bridge
