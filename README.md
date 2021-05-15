@@ -1,21 +1,36 @@
 # Donkey assessment
 
-Welcome to this assessment.
-
 ## Requirements
 1. Nodejs
-2. Typescript
-3. MongoDB
-4. Unit tests
-5. Must be possible to run the backend locally
+2. Docker
 
 ## Description
-A user must be able to create, read, update and delete a post on a timeline.
-This post contains a date, a description, and attachments (photo's, video's, PDF's).
-Also, a user can give comments on a post. 
+This API supports:
+* create, read, list, update and delete on a post
+* create, read, and delete of comments on a post
+* uploading an attachment on a post is implemented but not functioning correctly
 
-1. Create a UML diagram. 
-2. Implement an API to support this functionality. Uploading attachments is a bonus.  
-3. Create a pull request on this repository.
+## UML diagrams
 
-Happy coding! 🤓
+### Entity models
+<img src="./uml/entities.drawio.svg">
+
+### Sequence diagrams
+#### Posts
+<img src="./uml/post.sequence.drawio.svg">
+
+#### Comments
+<img src="./uml/comment.sequence.drawio.svg">
+
+#### Attachment
+<img src="./uml/attachment.sequence.drawio.svg">
+
+## Run locally
+* `docker-compose up -d [mongo/minio]`
+    * This will start a mongo and/or minio container
+* `npm start`
+    * This will start the API application
+  
+### Postman collection 
+The API can be tested with the sample requests in the postman collection, which can be found in:
+* `postman\donkey-assignment.postman_collection.json`
