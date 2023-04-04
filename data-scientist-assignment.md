@@ -8,10 +8,10 @@ Welcome to this assessment.
 3. Must be possible to run the locally
 
 ## Description
-Create bash script to install Apache Airflow locally.
-Write a DAG to process data from MongoDB to MySQL.
-
-Write a SQL query to retrieve which group is the most active and which user is the most active.
+1. Create bash script to install and run Apache Airflow locally.
+2. Write a DAG to process data from MongoDB to MySQL.
+3. Write a SQL query to retrieve which group is the most active and which user is the most active.
+4. Make a pull request containing the bash script, DAG and SQL query, and assign the PR to us.
 
 ## Context
 To help you start we have prepared a dockerized MongoDb and a dockerized MySQL database.
