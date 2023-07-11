@@ -12,7 +12,7 @@ A user must be able to sign in.
 After successfully signing in, the main page must be displayed.
 
 1. Create a branch.
-2. Implement a React app with two pages (signin and main page).
+2. Implement a good looking React app with two pages (sign-in and main page). Sign-in call can be mocked.
 3. Create a pull request on this repository.
 
 Happy coding! 🤓
