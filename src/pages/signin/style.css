@@ -1,0 +1,183 @@
+.signing-container {
+    height: 100vh;
+    background-image: url("../../assets/images/BC.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    filter: blur(2px) brightness(0.4);
+    width: 100%;
+}
+
+.contents {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    height: 100vh;
+}
+
+.otherLogin_container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.otherloginbox {
+    position: relative;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+    color: #F8F4E9;
+}
+
+.otherloginbox::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 30%;
+    height: 1px;
+    background-color: #A09F99;
+}
+
+.otherloginbox::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 30%;
+    height: 1px;
+    background-color: #A09F99;
+}
+
+.box_parent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.box_styles {
+    background-color: #484848;
+    width: 105px;
+    height: 55px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.passwordParent {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    height: 55px;
+    padding: 8px;
+    border: 1px solid #F8F4E9 !important;
+    border-radius: 9px;
+    background-color: #F8F4E9;
+}
+
+.passwordStyle {
+    width: 90%;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.passwordIcon {
+    width: 20px;
+}
+
+.signupText {
+    font-weight: 400;
+    font-size: 16px;
+    color: #F8F4E9 !important;
+}
+
+.signupText span {
+    font-weight: 700;
+    color: #FFDB72;
+}
+
+.signinTitle {
+    font-size: 36px;
+    color: white;
+    font-weight: 700;
+}
+
+.forgot {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.forgot h5 {
+    font-weight: 400;
+    font-size: 14px;
+    color: #F8F4E9;
+    text-decoration: underline;
+}
+
+.signing-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    display: block;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.input {
+    display: flex;
+    width: 100%;
+    height: 55px;
+    padding: 8px;
+    border: 1px solid #F8F4E9 !important;
+    border-radius: 9px;
+    background-color: #F8F4E9;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+}
+
+.input::placeholder {
+    color: #A09F99;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.loginbutton {
+    width: 100%;
+    padding: 10px 60px 10px 60px;
+    height: 55px;
+    margin-top: 20px;
+    font-weight: bold;
+    background-color: #FFDB72;
+    color: #202020;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
