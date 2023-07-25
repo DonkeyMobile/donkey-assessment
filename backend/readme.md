@@ -21,13 +21,13 @@ Zie onderstaand het class diagram.
 Leuk project! Zat wel aardig wat tijdsdruk achter aangezien ik morgen richting IJsland vlieg, maar volgens mij heb ik er wat moois van kunnen maken. Onderstaand toelichting op bepaalde keuzes die ik heb gemaakt.
 
 **Het volgende is mogelijk:**<br>
-Post aanmaken zonder attachments
-Post verwijderen
-Post bewerken
-Alle posts bekijken inclusief comments en attachments
-Specifieke post bekijken inclusief comments en attachments
-Attachment toevoegen aan al bestaande post
-Comment toevoegen aan al bestaande post
+- Post aanmaken zonder attachments
+- Post verwijderen
+- Post bewerken
+- Alle posts bekijken inclusief comments en attachments
+- Specifieke post bekijken inclusief comments en attachments
+- Attachment toevoegen aan al bestaande post
+- Comment toevoegen aan al bestaande post
 
 Daarnaast heb ik een aantal simpele testen geschreven. Vanwege tijdgebrek heb ik het hierbij gehouden:
 - De mongoose test is eigenlijk integration testen. Het zal vast mogelijk zijn om deze zonder externe database te testen, maar hier zal ik dan dieper in moeten duiken.
