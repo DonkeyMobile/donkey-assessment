@@ -13,7 +13,9 @@ US6 - user must be able to create a comment on a post.
 US7 - user must be able to add attachment to a post (bonus-points)
 US8 - post must have a created date so it can be viewed on a timeline
 
-Zie ook het UML via het bestand class-diagram v2.png
+Zie onderstaand het class diagram.
+
+![class-diagram](class-diagram-v2.png)
 
 # Ervaring & toelichting
 Leuk project! Zat wel aardig wat tijdsdruk achter aangezien ik morgen richting IJsland vlieg, maar volgens mij heb ik er wat moois van kunnen maken. Onderstaand toelichting op bepaalde keuzes die ik heb gemaakt.
