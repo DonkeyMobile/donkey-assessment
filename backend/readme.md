@@ -47,6 +47,7 @@ De server geeft nu een error:
 - Als een post niet gevonden kan worden
 - Als het ID niet overeenkomt met de regex van de IDs van MongoDB
 - Als er fouten optreden bij het aanmaken van een post, comment of attachment
+- Als er fouten optreden bij het bijwerken van een post
 
 Ik heb er daarnaast voor gekozen om het bij services en models te houden, en daarnaast de routes te scheiden aangezien dit wat overzichtelijker is. Om dit uit te breiden zou ik nog DTO's en controllers kunnen toevoegen zodat de verantwoordelijkheden meer opgesplitst zijn.
 
