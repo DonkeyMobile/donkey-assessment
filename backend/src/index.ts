@@ -5,6 +5,9 @@ import bodyParser from 'body-parser';
 const app = express();
 const port = 3000;
 
+// Routes
+import postRoutes from './routers/post.routes';
+
 // Connect to local MongoDB instance
 const MONGO_URI = "mongodb+srv://dm:D0nk3yMobile2023@donkeymobile.uxtzesu.mongodb.net/donkeymobile";
 
@@ -25,6 +28,9 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.send('Backend is working!');
 });
+
+// Load routes
+app.use('/api/posts', postRoutes);
 
 app.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
