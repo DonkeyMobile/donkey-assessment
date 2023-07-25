@@ -33,16 +33,16 @@ export async function getWithId(id: string): Promise<IPost | null> {
     if (regex.test(id)) {
         try {
             const specificPost: IPost | null = await PostModel.findById(id);
-    
+
             if (!specificPost) {
-                throw new CustomError("NotFoundError", `Post with ${ id } not found.`, 404)
+                throw new CustomError("NotFoundError", `Post with ${id} not found.`, 404)
             }
             return specificPost;
         } catch (error) {
             throw error;
         }
     } else {
-        throw new CustomError("TypeError", `Id (${ id }) not valid.`, 500)
+        throw new CustomError("TypeError", `Id (${id}) not valid.`, 500)
     }
 }
 
@@ -52,14 +52,14 @@ export async function deleteWithId(id: string): Promise<IPost> {
             const deletedPost: IPost | null = await PostModel.findByIdAndDelete(id);
 
             if (!deletedPost) {
-                throw new CustomError("NotFoundError", `Post with ${ id } not found.`, 404)
+                throw new CustomError("NotFoundError", `Post with ${id} not found.`, 404)
             }
             return deletedPost;
         } catch (error) {
             throw error;
         }
     } else {
-        throw new CustomError("TypeError", `Id (${ id }) not valid.`, 500)
+        throw new CustomError("TypeError", `Id (${id}) not valid.`, 500)
     }
 }
 
@@ -70,14 +70,14 @@ export async function updateWithId(id: string, title: string, content: string): 
             const updatedPost: IPost | null = await PostModel.findByIdAndUpdate(id, { title, content, updatedAt }, { new: true });
 
             if (!updatedPost) {
-                throw new CustomError("NotFoundError", `Post with ${ id } not found.`, 404)
+                throw new CustomError("NotFoundError", `Post with ${id} not found.`, 404)
             }
             return updatedPost;
         } catch (error) {
             throw error;
         }
     } else {
-        throw new CustomError("TypeError", `Id (${ id }) not valid.`, 500)
+        throw new CustomError("TypeError", `Id (${id}) not valid.`, 500)
     }
 }
 
@@ -88,7 +88,7 @@ export async function addComment(id: string, author: string, comment: string): P
             const post: IPost | null = await PostModel.findById(id);
 
             if (!post) {
-                throw new CustomError("NotFoundError", `Post with ${ id } not found.`, 404)
+                throw new CustomError("NotFoundError", `Post with ${id} not found.`, 404)
             }
 
             const newComment = {
@@ -106,7 +106,7 @@ export async function addComment(id: string, author: string, comment: string): P
             throw error;
         }
     } else {
-        throw new CustomError("TypeError", `Id (${ id }) not valid.`, 500)
+        throw new CustomError("TypeError", `Id (${id}) not valid.`, 500)
     }
 }
 
@@ -116,7 +116,7 @@ export async function addAttachment(id: string, fileName: string, mimeType: stri
             const post: IPost | null = await PostModel.findById(id);
 
             if (!post) {
-                throw new CustomError("NotFoundError", `Post with ${ id } not found.`, 404)
+                throw new CustomError("NotFoundError", `Post with ${id} not found.`, 404)
             }
             if (!filePath) {
                 throw new CustomError("ServerError", "There wen't something wrong with uploading the file.", 500);
@@ -131,12 +131,12 @@ export async function addAttachment(id: string, fileName: string, mimeType: stri
             post.attachments.push(newFile);
 
             const updatedPost = await post.save()
-            
+
             return updatedPost;
         } catch (error) {
             throw error;
         }
     } else {
-        throw new CustomError("TypeError", `Id (${ id }) not valid.`, 500)
+        throw new CustomError("TypeError", `Id (${id}) not valid.`, 500)
     }
 }
