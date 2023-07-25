@@ -3,7 +3,6 @@
 npm install
 npm run build
 npm run start
-node dist/index.js
 
 # User stories
 US2 - user must be able create a post.
