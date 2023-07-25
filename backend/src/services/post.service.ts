@@ -1,6 +1,9 @@
 import PostModel, { IComment, IFile, IPost } from '../models/post.model';
+import { CustomError } from "../utils/customErrorHandling"
 
-async function createPost(title: string, author: string, content: string): Promise<IPost> {
+var regex = /^[a-f\d]{24}$/i
+
+export async function create(title: string, author: string, content: string): Promise<IPost> {
     const post = new PostModel({
         title,
         author,
@@ -10,111 +13,130 @@ async function createPost(title: string, author: string, content: string): Promi
     try {
         const savedPost = await post.save();
         return savedPost;
-    } catch (error: any) {
-        throw new Error(error.message)
+    } catch (error) {
+        throw error;
     }
 }
 
-async function getAllPosts(): Promise<IPost[]> {
+export async function getAll(): Promise<IPost[]> {
     try {
         const allPosts: IPost[] = await PostModel.find();
 
         return allPosts;
-    } catch (error: any) {
-        throw new Error(error.message)
+    } catch (error) {
+        throw error;
     }
 }
 
-async function getSpecificPost(id: string): Promise<IPost | null> {
-    try {
-        const specificPost: IPost | null = await PostModel.findById(id);
+export async function getWithId(id: string): Promise<IPost | null> {
 
-        if (!specificPost) {
-            throw new Error('Post not found.');
+    if (regex.test(id)) {
+        try {
+            const specificPost: IPost | null = await PostModel.findById(id);
+    
+            if (!specificPost) {
+                throw new CustomError("NotFoundError", `Post with ${ id } not found.`, 404)
+            }
+            return specificPost;
+        } catch (error) {
+            throw error;
         }
-        return specificPost;
-    } catch (error: any) {
-        throw new Error(error.message)
+    } else {
+        throw new CustomError("TypeError", `Id (${ id }) not valid.`, 500)
     }
 }
 
-async function deleteSpecificPost(id: string): Promise<IPost> {
-    try {
-        const deletedPost: IPost | null = await PostModel.findByIdAndDelete(id);
+export async function deleteWithId(id: string): Promise<IPost> {
+    if (regex.test(id)) {
+        try {
+            const deletedPost: IPost | null = await PostModel.findByIdAndDelete(id);
 
-        if (!deletedPost) {
-            throw new Error('Post not found.');
+            if (!deletedPost) {
+                throw new CustomError("NotFoundError", `Post with ${ id } not found.`, 404)
+            }
+            return deletedPost;
+        } catch (error) {
+            throw error;
         }
-        return deletedPost;
-    } catch (error: any) {
-        throw new Error(error.message)
+    } else {
+        throw new CustomError("TypeError", `Id (${ id }) not valid.`, 500)
     }
 }
 
-async function updateSpecificPost(id: string, title: string, content: string): Promise<IPost> {
-    const updatedAt = Date.now()
-    try {
-        const updatedPost: IPost | null = await PostModel.findByIdAndUpdate(id, { title, content, updatedAt }, { new: true });
+export async function updateWithId(id: string, title: string, content: string): Promise<IPost> {
+    if (regex.test(id)) {
+        const updatedAt = Date.now()
+        try {
+            const updatedPost: IPost | null = await PostModel.findByIdAndUpdate(id, { title, content, updatedAt }, { new: true });
 
-        if (!updatedPost) {
-            throw new Error('Post not found.');
+            if (!updatedPost) {
+                throw new CustomError("NotFoundError", `Post with ${ id } not found.`, 404)
+            }
+            return updatedPost;
+        } catch (error) {
+            throw error;
         }
-        return updatedPost;
-    } catch (error: any) {
-        throw new Error(error.message)
+    } else {
+        throw new CustomError("TypeError", `Id (${ id }) not valid.`, 500)
     }
 }
 
-async function addCommentToPost(id: string, author: string, comment: string): Promise<IPost> {
-    try {
+export async function addComment(id: string, author: string, comment: string): Promise<IPost> {
+    if (regex.test(id)) {
+        try {
 
-        const post: IPost | null = await PostModel.findById(id);
+            const post: IPost | null = await PostModel.findById(id);
 
-        if (!post) {
-            throw new Error('Post not found.');
+            if (!post) {
+                throw new CustomError("NotFoundError", `Post with ${ id } not found.`, 404)
+            }
+
+            const newComment = {
+                author: author,
+                content: comment,
+                createdAt: new Date(),
+            } as IComment;
+
+            post.comments.push(newComment);
+
+            const updatedPost = await post.save();
+
+            return updatedPost;
+        } catch (error) {
+            throw error;
         }
-
-        const newComment = {
-            author: author,
-            content: comment,
-            createdAt: new Date(),
-        } as IComment;
-
-        post.comments.push(newComment);
-
-        const updatedPost = await post.save();
-
-        return updatedPost;
-    } catch (error: any) {
-        throw new Error(error.message)
+    } else {
+        throw new CustomError("TypeError", `Id (${ id }) not valid.`, 500)
     }
 }
 
-async function addAttachmentsToPost(id: string, fileName: string, mimeType: string, filePath: string): Promise<IPost> {
-    try {
-        const post: IPost | null = await PostModel.findById(id).orFail();
+export async function addAttachment(id: string, fileName: string, mimeType: string, filePath: string): Promise<IPost> {
+    if (regex.test(id)) {
+        try {
+            const post: IPost | null = await PostModel.findById(id);
 
-        if (!post) {
-            throw new Error('Post not found.');
+            if (!post) {
+                throw new CustomError("NotFoundError", `Post with ${ id } not found.`, 404)
+            }
+            if (!filePath) {
+                throw new CustomError("ServerError", "There wen't something wrong with uploading the file.", 500);
+            }
+
+            const newFile = {
+                fileName: fileName,
+                mimeType: mimeType,
+                path: filePath,
+            } as IFile;
+
+            post.attachments.push(newFile);
+
+            const updatedPost = await post.save()
+            
+            return updatedPost;
+        } catch (error) {
+            throw error;
         }
-        if (!filePath) {
-            throw new Error("There wen't something wrong with uploading the file.");
-        }
-
-        const newFile = {
-            fileName: fileName,
-            mimeType: mimeType,
-            path: filePath,
-        } as IFile;
-
-        post.attachments.push(newFile);
-
-        const updatedPost = await post.save()
-        
-        return updatedPost;
-    } catch (error: any) {
-        throw new Error(error.message)
+    } else {
+        throw new CustomError("TypeError", `Id (${ id }) not valid.`, 500)
     }
 }
-
-export { createPost, getAllPosts, getSpecificPost, deleteSpecificPost, updateSpecificPost, addCommentToPost, addAttachmentsToPost };
