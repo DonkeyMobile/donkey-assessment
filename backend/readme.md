@@ -4,7 +4,7 @@ npm install
 npm run build
 npm run start
 
-# User stories
+# User stories, class diagram & postman
 - US2 - user must be able create a post.
 - US3 - user must be able edit a post.
 - US4 - user must be able delete a post.
@@ -12,6 +12,8 @@ npm run start
 - US6 - user must be able to create a comment on a post.
 - US7 - user must be able to add attachment to a post (bonus-points)
 - US8 - post must have a created date so it can be viewed on a timeline
+
+Zie de [Postman collectie](DonkeyMobile.postman_collection.json) om de api uit te proberen.
 
 Zie onderstaand het class diagram.
 
