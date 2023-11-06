@@ -9,10 +9,10 @@ Welcome to this assessment.
 
 ## Description
 A user must be able to sign in. 
-After successfully signing in, the main page must be displayed.
+After successfully signing in, the main page must be displayed with groups and a lot of posts.
 
 1. Create a branch.
-2. Implement a good looking React app with two pages (sign-in and main page). Sign-in call can be mocked.
+2. Implement a good looking React app. All the data can be mocked.
 3. Create a pull request on this repository.
 
 Happy coding! 🤓
