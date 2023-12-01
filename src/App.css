@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Alef:wght@700&display=swap");
+
+.main-container {
+  text-align: center;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.container,
+.login-form,
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 1rem;
+}
+
+.container {
+  -webkit-box-shadow: 0px 2px 22px 3px rgba(156, 156, 156, 1);
+  -moz-box-shadow: 0px 2px 22px 3px rgba(156, 156, 156, 1);
+  box-shadow: 0px 2px 22px 3px rgba(156, 156, 156, 1);
+}
+
+.error {
+  color: #c90000;
+  text-align: left;
+}
+
+.logo {
+  max-width: 20vw;
+  margin-bottom: 2vw;
+}
+
+label {
+  text-align: left;
+  padding: 0.25rem 0;
+  font-family: "Alef", sans-serif;
+  color: rgb(68, 80, 88);
+}
+
+input {
+  background-color: #f6f6f6;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  color: #5c4320;
+  font-size: 18px;
+}
+
+input:focus-visible {
+  outline: none;
+  border-color: #a8834f;
+}
+
+.submit {
+  border: none;
+  background-color: #a8834f;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #5c4320;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  font-size: 14px;
+  text-decoration: underline;
+  font-family: "Alef", sans-serif;
+  color: rgb(68, 80, 88);
+}
+
+h2 {
+  font-family: "Alef", sans-serif;
+  color: rgb(68, 80, 88);
+}
