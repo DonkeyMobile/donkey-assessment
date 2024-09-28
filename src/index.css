@@ -1,0 +1,10 @@
+:root {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    color: rgb(5, 24, 66);
+    background-image: url(../../afbeeldingen/duif_achtergrond.png);
+    background-size: cover;
+    max-height: 100vh;
+}
