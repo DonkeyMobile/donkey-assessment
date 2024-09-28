@@ -1,0 +1,101 @@
+.mainpage {
+  display: grid;
+  width: 80%;
+  max-width: 1000px;
+  height: 70vh;
+  margin: auto;
+  grid-template-columns: 20rem auto;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+/* Groups */
+.groups {
+  background-color: rgb(197 221 255 / 50%);
+  padding: 1rem;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  border-right: #773833 1px solid;
+  scrollbar-color: rgb(197 221 255 / 50%);
+}
+
+.groupBox {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.groupBox:hover {
+  background-color: rgb(197 221 255 / 75%);
+}
+
+.selected {
+  background-color: rgb(197 221 255 / 100%);
+}
+
+.groupBox img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+}
+
+.groupBox p {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Posts */
+.posts {
+  background-color: rgb(197 221 255 / 50%);
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-color: rgb(35, 84, 160) rgb(197 221 255 / 50%);
+}
+
+.postBox {
+  width: 80%;
+  background-color: white;
+  border: #773833 solid 1px;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 2rem;
+}
+
+/* UserBox */
+.userBox {
+  display: grid;
+  grid-template-columns: 50px auto;
+  grid-template-rows: 30px 20px;
+  grid-template-areas:
+    "img username"
+    "img groupname";
+  align-items: center;
+  column-gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.userBox img {
+  grid-area: img;
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+}
+
+.userBox .userName {
+  grid-area: username;
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin-top: 2px;
+}
+
+.userBox .groupName {
+  grid-area: groupname;
+  font-weight: lighter;
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
