@@ -1,25 +1,12 @@
-import userData from "../data/users.json";
 import groupData from "../data/groups.json";
 import postData from "../data/posts.json";
 import "./MainPage.css";
 import { useState } from "react";
 import duif from "../assets/duif.png";
-
-type Group = {
-  id: number;
-  name: string;
-  picture: string;
-};
-
-type Post = {
-  id: number;
-  userId: number;
-  groupId: number;
-  message: string;
-};
+import { Group, Post } from "../types";
+import { findUser, findGroupName } from "../utils/helpers";
 
 export const MainPage = () => {
-  const { users } = userData;
   const { groups } = groupData;
   const { posts } = postData;
 
@@ -29,20 +16,13 @@ export const MainPage = () => {
     chosenGroup !== 0 ? post.groupId === chosenGroup : posts
   );
 
-  const findUser = (userId: Number) => {
-    const user = users.find((user) => user.id === userId);
-    return user;
-  };
-
-  const findGroupName = (groupId: Number) => {
-    const groupName = groups.find((group) => group.id === groupId);
-    return groupName?.name;
-  };
-
   return (
     <div className="mainpage">
       <div className="groups">
-        <div className={`groupBox ${chosenGroup === 0 ? "selected" : ""}`} onClick={() => setChosenGroup(0)}>
+        <div
+          className={`groupBox ${chosenGroup === 0 ? "selected" : ""}`}
+          onClick={() => setChosenGroup(0)}
+        >
           <img src={duif} alt="duif" />
           <p>Mijn kerk</p>
         </div>
@@ -52,7 +32,7 @@ export const MainPage = () => {
             className={`groupBox ${chosenGroup === group.id ? "selected" : ""}`}
             onClick={() => setChosenGroup(group.id)}
           >
-            <img src={require(`../assets/${group.picture}`)} alt={group.name} />
+            <img src={require(`../assets/groups/${group.picture}`)} alt={group.name} />
             <p>{group.name}</p>
           </div>
         ))}
@@ -62,7 +42,7 @@ export const MainPage = () => {
           <div key={post.id} className="postBox">
             <div className="userBox">
               <img
-                src={require(`../assets/${findUser(post.userId)?.picture}`)}
+                src={require(`../assets/users/${findUser(post.userId)?.picture}`)}
                 alt={findUser(post.userId)?.name}
               />
               <div className="userName">{findUser(post.userId)?.name}</div>

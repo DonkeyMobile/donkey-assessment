@@ -1,11 +1,24 @@
 header {
-    height: 20vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 h1 {
-    color: white;
-    text-shadow: 0 0 15px #0d3688;
+  color: white;
+  text-shadow: 0 0 15px #0d3688;
+  margin-block-end: 0.3em;
+}
+
+button {
+  width: fit-content;
+  background-color: white;
+  color: rgb(5, 24, 66);
+  border: 1px solid #773833;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 5px 10px;
+  margin-bottom: 0.67em;
 }

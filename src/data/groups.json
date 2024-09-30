@@ -1,29 +1,29 @@
 {
-        "groups": [
-        {
-            "id": 1,
-            "name": "kerkenraad",
-            "picture": "kerkenraad.jpeg"
-        },
-        {
-            "id": 2,
-            "name": "vrouwenvereniging",
-            "picture": "vrouwenvereniging.png"
-        },
-        {
-            "id": 3,
-            "name": "schoonmaak",
-            "picture": "schoonmaak.jpg"
-        },
-        {
-            "id": 4,
-            "name": "kidsclub",
-            "picture": "kidsclub.jpg"
-        },
-        {
-            "id": 5,
-            "name": "activiteitencommissie",
-            "picture": "activiteitencommissie.png"
-        }
-    ]
+  "groups": [
+    {
+      "id": 1,
+      "name": "kerkenraad",
+      "picture": "kerkenraad.jpeg"
+    },
+    {
+      "id": 2,
+      "name": "vrouwenvereniging",
+      "picture": "vrouwenvereniging.png"
+    },
+    {
+      "id": 3,
+      "name": "schoonmaak",
+      "picture": "schoonmaak.jpg"
+    },
+    {
+      "id": 4,
+      "name": "kidsclub",
+      "picture": "kidsclub.jpg"
+    },
+    {
+      "id": 5,
+      "name": "activiteitencommissie",
+      "picture": "activiteitencommissie.png"
+    }
+  ]
 }
