@@ -1,0 +1,189 @@
+[
+  {
+    "id": 1,
+    "title": "Nieuwe AI doorbraak versnelt medische diagnoses",
+    "description": "Onderzoekers hebben een nieuwe AI-tool ontwikkeld die medische scans 50% sneller analyseert. Dit kan wachttijden in ziekenhuizen drastisch verkorten.",
+    "imageURL": "/posts/1.jpg",
+    "categoryId": 1,
+    "date": "2024-12-20",
+    "author": "Lisa van Dijk",
+    "readingTime": "3 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 2,
+    "title": "Apple kondigt draadloze VR-bril aan",
+    "description": "Apple heeft officieel de VisionAir aangekondigd, een draadloze VR-bril met 8K-resolutie en ingebouwde AI-assistent.",
+    "imageURL": "/posts/2.webp",
+    "categoryId": 1,
+    "date": "2024-12-20",
+    "author": "Kevin Janssen",
+    "readingTime": "4 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 3,
+    "title": "Cyberaanval treft duizenden bedrijven in Europa",
+    "description": "Een grootschalige ransomware-aanval heeft IT-systemen in meerdere landen lamgelegd. Experts waarschuwen voor meer aanvallen in de komende weken.",
+    "imageURL": "/posts/3.jpg",
+    "categoryId": 1,
+    "date": "2024-12-20",
+    "author": "Tom de Boer",
+    "readingTime": "5 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 4,
+    "title": "Stijging in griepgevallen zet druk op ziekenhuizen",
+    "description": "Nederlandse ziekenhuizen rapporteren een verdubbeling van het aantal griepgevallen vergeleken met vorig jaar.",
+    "imageURL": "/posts/4.jpg",
+    "categoryId": 2,
+    "date": "2024-12-20",
+    "author": "Sophie de Vries",
+    "readingTime": "3 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 5,
+    "title": "Onderzoek: plantaardige diëten verbeteren mentale gezondheid",
+    "description": "Een nieuw onderzoek toont aan dat een plantaardig dieet stress en angst kan verminderen, vooral bij jongvolwassenen.",
+    "imageURL": "/posts/5.png",
+    "categoryId": 2,
+    "date": "2024-12-20",
+    "author": "Laura Bakker",
+    "readingTime": "4 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 6,
+    "title": "Doorbraak in behandeling van Alzheimer",
+    "description": "Een nieuwe medicatie vertraagt de progressie van Alzheimer met 30%, volgens een recent klinisch onderzoek.",
+    "imageURL": "/posts/6.jpg",
+    "categoryId": 2,
+    "date": "2024-12-20",
+    "author": "Mark Visser",
+    "readingTime": "5 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 7,
+    "title": "Oranje Vrouwen plaatsen zich voor de finale van EK",
+    "description": "Het Nederlandse vrouwenelftal versloeg Duitsland in een spannende halve finale met 2-1.",
+    "imageURL": "/posts/7.jpg",
+    "categoryId": 3,
+    "date": "2024-12-20",
+    "author": "Jan de Groot",
+    "readingTime": "3 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 8,
+    "title": "Max Verstappen wint vierde Formule 1-wereldtitel",
+    "description": "Verstappen domineerde het seizoen opnieuw en behaalde zijn vierde wereldkampioenschap op rij.",
+    "imageURL": "/posts/8.jpg",
+    "categoryId": 3,
+    "date": "2024-12-20",
+    "author": "Peter van Dam",
+    "readingTime": "4 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 9,
+    "title": "Marathon van Amsterdam breekt records",
+    "description": "Zowel bij de mannen als de vrouwen werden nieuwe parcoursrecords gevestigd tijdens de Marathon van Amsterdam.",
+    "imageURL": "/posts/9.jpg",
+    "categoryId": 3,
+    "date": "2024-12-20",
+    "author": "Karin Jansen",
+    "readingTime": "4 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 10,
+    "title": "Nederlandse film wint internationale prijs",
+    "description": "De Nederlandse film *Onder Water* won de prijs voor Beste Internationale Film bij het Cannes Film Festival.",
+    "imageURL": "/posts/10.jpg",
+    "categoryId": 4,
+    "date": "2024-12-20",
+    "author": "Emma Vos",
+    "readingTime": "3 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 11,
+    "title": "Taylor Swift kondigt nieuw album aan voor 2025",
+    "description": "Popicoon Taylor Swift onthulde dat ze in januari 2025 een nieuw album, *Eternal*, uitbrengt.",
+    "imageURL": "/posts/11.webp",
+    "categoryId": 4,
+    "date": "2024-12-20",
+    "author": "Sarah Meijer",
+    "readingTime": "2 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 12,
+    "title": "Netflix lanceert interactieve serie",
+    "description": "De nieuwe Netflix-serie *Choice* laat kijkers de loop van het verhaal bepalen, met meer dan 50 mogelijke eindes.",
+    "imageURL": "/posts/12.jpg",
+    "categoryId": 4,
+    "date": "2024-12-20",
+    "author": "Bas de Koning",
+    "readingTime": "3 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 13,
+    "title": "Beyoncé’s wereldtournee breekt verkooprecords",
+    "description": "Tickets voor Beyoncé’s *Renaissance Tour* waren binnen enkele minuten uitverkocht, wat een nieuw record vestigde.",
+    "imageURL": "/posts/13.jpg",
+    "categoryId": 4,
+    "date": "2024-12-20",
+    "author": "Fleur Verhoeven",
+    "readingTime": "3 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 14,
+    "title": "Amsterdamse kerstmarkt trekt duizenden bezoekers",
+    "description": "De jaarlijkse kerstmarkt op het Museumplein trekt dit jaar meer bezoekers dan ooit.",
+    "imageURL": "/posts/14.jpeg",
+    "categoryId": 4,
+    "date": "2024-12-20",
+    "author": "Anne de Haan",
+    "readingTime": "3 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 15,
+    "title": "Nieuwe fantasy-serie wordt wereldwijde hit",
+    "description": "De serie *Legends of Eldoria* is in recordtijd populair geworden en wordt vergeleken met *Game of Thrones*.",
+    "imageURL": "/posts/15.webp",
+    "categoryId": 4,
+    "date": "2024-12-20",
+    "author": "Rick van Leeuwen",
+    "readingTime": "5 minuten",
+    "variant": "standard"
+  },
+  {
+    "id": 16,
+    "title": "Galaxy S25 Ultra krijgt mogelijk dunnere randen dan Galaxy S24 Ultra en concurrenten",
+    "description": "Galaxy S25 Ultra krijgt mogelijk dunnere randen dan Galaxy S24 Ultra en concurrenten",
+    "imageURL": "/posts/16.png",
+    "categoryId": 3,
+    "date": "2024-12-20",
+    "author": "Rick van Leeuwen",
+    "readingTime": "5 minuten",
+    "variant": "trending"
+  },
+  {
+    "id": 17,
+    "title": "Nieuwe fantasy-serie wordt wereldwijde hit",
+    "description": "De serie *Legends of Eldoria* is in recordtijd populair geworden en wordt vergeleken met *Game of Thrones*.",
+    "imageURL": "/posts/17.png",
+    "categoryId": 2,
+    "date": "2024-12-20",
+    "author": "Rick van Leeuwen",
+    "readingTime": "5 minuten",
+    "variant": "trending"
+  }
+]

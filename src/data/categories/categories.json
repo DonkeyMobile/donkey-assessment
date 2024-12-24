@@ -1,0 +1,22 @@
+[
+    {
+      "id": 1,
+      "title": "Technologie",
+      "imageURL": "/technology.png"
+    },
+    {
+      "id": 2,
+      "title": "Gezondheid",
+      "imageURL": "/health-care.png"
+    },
+    {
+      "id": 3,
+      "title": "Sport",
+      "imageURL": "/sport.png"
+    },
+    {
+      "id": 4,
+      "title": "Entertainment",
+      "imageURL": "/entertainment.png"
+    }
+]
