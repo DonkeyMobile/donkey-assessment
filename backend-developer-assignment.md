@@ -7,7 +7,7 @@ Welcome to this assessment.
 2. Typescript
 3. MongoDB
 4. Unit tests
-5. Must be possible to run the backend locally
+5. Must be possible to run the server and database locally using Docker
 
 ## Description
 A user must be able to create, read, update and delete a post on a timeline.
