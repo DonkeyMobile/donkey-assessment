@@ -23,11 +23,12 @@ userSchema.pre("findOneAndDelete", async function (next) {
         // ✅ Delete all attachments related to the user's posts
         for (const post of posts) {
             await Attachment.deleteMany({ post: post._id });
+            await Comment.deleteMany({ post: post._id }); // ✅ Delete all comments under the post
         }
 
-        // ✅ Delete posts & comments made by the user
-        await Post.deleteMany({ user: userId });
-        await Comment.deleteMany({ user: userId });
+        // ✅ Delete all posts & comments made by the user
+        await Post.deleteMany({ user: userId }); // ✅ Delete user's posts
+        await Comment.deleteMany({ user: userId }); // ✅ Delete user's own comments
     }
 
     next();
