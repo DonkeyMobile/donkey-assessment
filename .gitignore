@@ -1,0 +1,16 @@
+# Xcode files
+.DS_Store
+*.xcworkspace/
+*.xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+
+# Derived data & build artifacts
+DerivedData/
+Build/
+*.hmap
+*.ipa
+*.dSYM
+*.xcarchive
