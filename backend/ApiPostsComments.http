@@ -1,0 +1,146 @@
+@baseUrl = http://localhost:3000
+@postId = 9e33b53e-c8b7-4745-b309-9e67d5a26961
+@commentId = c0c85e5b-1e15-463a-a4d6-e75b957fbf06
+@attachmentId = c55f7213-e102-4309-9cd0-8be99dbf30cd
+
+### Access the UI
+GET {{baseUrl}}/ui
+
+### List all posts (stub data from dev build)
+GET {{baseUrl}}/posts
+
+> {%
+    client.test("Status code is 200", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+### Get the sample post
+GET {{baseUrl}}/posts/{{postId}}
+
+> {%
+    client.test("Status code is 200", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+### Create a new post
+POST {{baseUrl}}/posts
+Content-Type: application/json
+
+{
+  "description": "This is a new post from the .http file"
+}
+
+### Update the newly created post
+PATCH {{baseUrl}}/posts/{{postId}}
+Content-Type: application/json
+
+{
+  "description": "Updated description via .http file"
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+
+### List all comments (stub data from dev build)
+GET {{baseUrl}}/posts/{{postId}}/comments
+
+> {%
+    client.test("Status code is 200", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+### Get a specific sample comment
+GET {{baseUrl}}/posts/{{postId}}/comments/{{commentId}}
+
+> {%
+    client.test("Status code is 200", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+### Create a new comment on the sample post
+POST {{baseUrl}}/posts/{{postId}}/comments
+Content-Type: application/json
+
+{
+  "content": "Great post! This comment is added via the .http file."
+}
+
+### Update the comment
+PATCH {{baseUrl}}/posts/{{postId}}/comments/{{commentId}}
+Content-Type: application/json
+
+{
+  "content": "Updated comment content via .http file"
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+### Upload an attachment to an existing post
+POST {{baseUrl}}/posts/{{postId}}/attachments
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="koln.jpg"
+Content-Type: image/jpeg
+
+< ./test/images/koln.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+> {%
+    client.test("Status code is 201", function () {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+    client.test("Attachment was created", function () {
+        client.assert(response.body.id, "Attachment ID is missing");
+        client.assert(response.body.filename, "Attachment filename is missing");
+    });
+%}
+
+### Get attachment content (raw file)
+GET {{baseUrl}}/posts/{{postId}}/attachments/{{attachmentId}}/content
+
+> {%
+    client.test("Status code is 200", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+### Delete an attachment
+DELETE {{baseUrl}}/posts/{{postId}}/attachments/{{attachmentId}}
+
+> {%
+    client.test("Status code is 200", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+
+### Delete the comment
+DELETE {{baseUrl}}/posts/{{postId}}/comments/{{commentId}}
+
+> {%
+    client.test("Status code is 200", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+###  Delete the post
+DELETE {{baseUrl}}/posts/{{postId}}
+
+> {%
+    client.test("Status code is 200", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}

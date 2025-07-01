@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline Posts</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .post {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .post-description {
+            margin-bottom: 10px;
+        }
+        .post-date {
+            color: #666;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .attachments {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .attachment-image {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        .comments-section {
+            margin-top: 10px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        .comments-toggle {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+            display: inline-block;
+        }
+        .comments-toggle:hover {
+            background-color: #e9e9e9;
+        }
+        .comments-container {
+            margin-top: 10px;
+            display: none;
+        }
+        .comments-container.active {
+            display: block;
+        }
+        .comment {
+            padding: 8px;
+            margin-bottom: 8px;
+            background-color: #f9f9f9;
+            border-radius: 3px;
+        }
+        .comment-content {
+            margin-bottom: 5px;
+        }
+        .comment-date {
+            color: #888;
+            font-size: 0.8em;
+        }
+        .loading-comments {
+            color: #888;
+            font-style: italic;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Timeline Posts</h1>
+
+    <div id="posts-container"
+         hx-get="/posts"
+         hx-trigger="load"
+         hx-swap="innerHTML"
+         hx-headers='{"X-Requested-With": "XMLHttpRequest"}'>
+        <p>Loading posts...</p>
+    </div>
+
+    <script>
+        // Custom handler for rendering posts
+        document.addEventListener('htmx:afterSwap', function(event) {
+            if (event.detail.target.id === 'posts-container') {
+                const posts = JSON.parse(event.detail.xhr.responseText);
+                let postsHtml = '';
+
+                if (posts.length === 0) {
+                    postsHtml = '<p>No posts available.</p>';
+                } else {
+                    posts.forEach(post => {
+                        const date = new Date(post.dateTime).toLocaleString();
+
+                        // Start building the post HTML
+                        let postHtml = `
+                            <div class="post" data-post-id="${post.id}">
+                                <div class="post-description">${post.description}</div>
+                                <div class="post-date">Posted on: ${date}</div>
+                        `;
+
+                        // Add attachments section if there are any
+                        if (post.attachments && post.attachments.length > 0) {
+                            postHtml += '<div class="attachments">';
+
+                            // Filter for image attachments only
+                            const imageAttachments = post.attachments.filter(
+                                attachment => attachment.mimetype && attachment.mimetype.startsWith('image/')
+                            );
+
+                            if (imageAttachments.length > 0) {
+                                imageAttachments.forEach(attachment => {
+                                    // Use absolute URL to ensure correct path regardless of where UI is served
+                                    const imageUrl = window.location.origin + `/posts/${post.id}/attachments/${attachment.id}/content`;
+
+                                    postHtml += `
+                                        <img class="attachment-image" 
+                                             src="${imageUrl}" 
+                                             alt="${attachment.originalname || 'Image attachment'}"
+                                             onerror="this.onerror=null; this.src=''; this.alt='Error loading image';"
+                                        />
+                                    `;
+                                });
+                            }
+
+                            postHtml += '</div>';
+                        }
+
+                        // Add comments section with toggle button
+                        postHtml += `
+                            <div class="comments-section">
+                                <div class="comments-toggle" onclick="toggleComments('${post.id}')">
+                                    Show Comments (${post.comments ? post.comments.length : 0})
+                                </div>
+                                <div id="comments-${post.id}" class="comments-container">
+                                    <div class="loading-comments">Loading comments...</div>
+                                </div>
+                            </div>
+                        `;
+
+                        // Close the post div
+                        postHtml += '</div>';
+
+                        postsHtml += postHtml;
+                    });
+                }
+
+                event.detail.target.innerHTML = postsHtml;
+            }
+        });
+
+        // Function to toggle comments visibility and load them if needed
+        function toggleComments(postId) {
+            const commentsContainer = document.getElementById(`comments-${postId}`);
+
+            // Toggle active class to show/hide comments
+            commentsContainer.classList.toggle('active');
+
+            // Update toggle button text
+            const toggleButton = commentsContainer.previousElementSibling;
+            const isActive = commentsContainer.classList.contains('active');
+            const commentCount = document.querySelector(`.post[data-post-id="${postId}"]`)
+                .querySelector('.comments-toggle')
+                .textContent
+                .match(/\((\d+)\)/)[1];
+
+            toggleButton.textContent = isActive ? 
+                `Hide Comments (${commentCount})` : 
+                `Show Comments (${commentCount})`;
+
+            // If comments are now visible and haven't been loaded yet, load them
+            if (isActive && commentsContainer.querySelector('.loading-comments')) {
+                // Fetch comments for this post
+                fetch(`/posts/${postId}/comments`)
+                    .then(response => response.json())
+                    .then(comments => {
+                        let commentsHtml = '';
+
+                        if (comments.length === 0) {
+                            commentsHtml = '<div class="no-comments">No comments yet.</div>';
+                        } else {
+                            comments.forEach(comment => {
+                                const commentDate = new Date(comment.dateTime).toLocaleString();
+                                commentsHtml += `
+                                    <div class="comment">
+                                        <div class="comment-content">${comment.content}</div>
+                                        <div class="comment-date">${commentDate}</div>
+                                    </div>
+                                `;
+                            });
+                        }
+
+                        commentsContainer.innerHTML = commentsHtml;
+                    })
+                    .catch(error => {
+                        commentsContainer.innerHTML = '<div class="error">Error loading comments.</div>';
+                    });
+            }
+        }
+    </script>
+</body>
+</html>
