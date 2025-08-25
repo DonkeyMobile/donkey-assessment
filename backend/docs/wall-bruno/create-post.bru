@@ -1,0 +1,15 @@
+meta {
+  name: create-post
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/posts
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

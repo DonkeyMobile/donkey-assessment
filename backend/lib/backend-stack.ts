@@ -29,12 +29,14 @@ export class BackendStack extends cdk.Stack {
             runtime: Runtime.NODEJS_22_X,
             handler: 'handler',
             timeout: Duration.seconds(10),
-
         });
     }
 
     private createHttpGateway(lambdas: HttpGatewayLambda[]) {
-        const api = new HttpApi(this, 'donkey-wall');
+        const api = new HttpApi(this, 'donkey-wall', {
+            createDefaultStage: true,
+        });
+
         for (const lambda of lambdas) {
             api.addRoutes({
                 path: lambda.path,
@@ -42,5 +44,7 @@ export class BackendStack extends cdk.Stack {
                 integration: new HttpLambdaIntegration(`${lambda.function.node.id}-integration`, lambda.function),
             });
         }
+
+        new cdk.CfnOutput(this, 'HttpApiUrl', { value: api.apiEndpoint });
     }
 }
