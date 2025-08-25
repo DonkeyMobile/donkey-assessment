@@ -1,0 +1,56 @@
+openapi: 3.1.1
+info:
+  title: donkey-assessment
+  description: Create a wall of posts
+  version: '1.0'
+paths:
+
+  /v1/posts:
+    post:
+      description: Create a post
+      operationId: createPost
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePostRequest'
+      responses:
+        '200':
+          description: Created the post successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePostResponse'
+      x-amazon-apigateway-integration:
+        uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/{{create-post}}/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+
+components:
+  schemas:
+
+    CreatePostRequest:
+      type: object
+      properties:
+        description:
+          type: string
+      required:
+        - description
+
+    CreatePostResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+
+# Define one or more validators
+x-amazon-apigateway-request-validators:
+  all:
+    validateRequestBody: true
+
+# Enable global validator, can be overridden per method
+x-amazon-apigateway-request-validator: all

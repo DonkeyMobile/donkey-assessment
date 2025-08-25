@@ -6,10 +6,9 @@
 ```bash
 mkdir backend && cd backend
 cdk init app --language typescript
-cd ..
 ```
 
 Deploy:
 ```bash
-npm run cdk:deploy
+npm run cdk deploy
 ```

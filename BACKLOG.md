@@ -1,16 +1,15 @@
 # Planning
 
 ## Done
-
- - [x] set-up project
- - [x] add first endpoint
+- [x] set-up project
+- [x] add first endpoint
+- [x] deploy first handler to AWS
+- [x] Add open API spec
 
 ## Working on
-- [ ] deploy first handler to AWS
+- [ ] Create Post endpoint with DynamoDB
 
 ## Backlog
-- [ ] Add open API spec
-- [ ] Create Post endpoint with DynamoDB
 - [ ] Change Post endpoint with Cognito
 - [ ] Read Post endpoint
 - [ ] Update Post endpoint
