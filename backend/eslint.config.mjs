@@ -1,0 +1,93 @@
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+
+export default tseslint.config(
+    eslint.configs.recommended,
+    ...tseslint.configs.strict,
+    ...tseslint.configs.stylistic,
+    {
+        languageOptions: {
+            ecmaVersion: 2024,
+            sourceType: 'module',
+            parserOptions: {
+                project: './tsconfig.json',
+                createDefaultProgram: true,
+            },
+        },
+        plugins: {
+            import: import('eslint-plugin-import'),
+        },
+        settings: {
+            'import/parsers': {
+                '@typescript-eslint/parser': ['.ts'],
+            },
+            'import/resolver': {
+                node: {},
+                typescript: {
+                    directory: './tsconfig.json',
+                    alwaysTryTypes: true,
+                },
+            },
+        },
+        rules: {
+            '@typescript-eslint/no-require-imports': ['error'],
+            '@/indent': ['error', 4, { SwitchCase: 1 }],
+            'quotes': ['error', 'single', { avoidEscape: true }],
+            'comma-dangle': ['error', 'always-multiline'],
+            'comma-spacing': ['error', { before: false, after: true }],
+            'no-multi-spaces': ['error', { ignoreEOLComments: false }],
+            'array-bracket-spacing': ['error', 'never'],
+            'array-bracket-newline': ['error', 'consistent'],
+            'object-curly-spacing': ['error', 'always'],
+            'object-curly-newline': ['error', { multiline: true, consistent: true }],
+            'object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
+            'keyword-spacing': ['error'],
+            'brace-style': ['error', '1tbs', { allowSingleLine: true }],
+            'space-before-blocks': 'error',
+            'curly': ['error', 'multi-line', 'consistent'],
+            'no-var': ['error'],
+            'spaced-comment': ['error', 'always'],
+            'no-duplicate-imports': ['error'],
+            'no-shadow': 'off',
+            '@typescript-eslint/no-shadow': ['error'],
+            'no-unused-vars': 'off',
+            '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+            'key-spacing': ['error'],
+            'no-whitespace-before-property': ['error'],
+            'space-infix-ops': 'error',
+            'semi': ['error', 'always'],
+            'quote-props': ['error', 'consistent-as-needed'],
+            'no-multiple-empty-lines': ['error'],
+            'max-len': ['error', {
+                code: 150,
+                ignoreUrls: true,
+                ignoreStrings: true,
+                ignoreTemplateLiterals: true,
+                ignoreComments: true,
+                ignoreRegExpLiterals: true,
+            }],
+            '@typescript-eslint/no-floating-promises': ['error'],
+            'no-return-await': 'off',
+            '@typescript-eslint/return-await': 'warn',
+            'no-console': ['error'],
+            'no-trailing-spaces': ['error', { skipBlankLines: true }],
+            'dot-notation': ['error'],
+            'no-bitwise': ['error'],
+            '@typescript-eslint/member-ordering': ['error', {
+                default: [
+                    'public-static-field',
+                    'protected-static-field',
+                    'private-static-field',
+                    'field',
+                    'constructor',
+                    'public-static-method',
+                    'protected-static-method',
+                    'private-static-method',
+                    'method',
+                ],
+            }],
+            'jest/expect-expect': 'off',
+            'jest/no-conditional-expect': 'off',
+        },
+    },
+);
