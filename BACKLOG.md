@@ -8,9 +8,9 @@
 - [x] Create Post endpoint with DynamoDB
 
 ## Working on
+- [ ] Change Post endpoint with Cognito
 
 ## Backlog
-- [ ] Change Post endpoint with Cognito
 - [ ] Read Post endpoint
 - [ ] Update Post endpoint
 - [ ] Delete Post endpoint
@@ -25,3 +25,4 @@ These are not in scope for the assignment, but suggestions I'd pick up if I were
 - Zod models are used throughout the handler and service, we control the database, but ideally you'd use DTOs
 - Add non-happy scenarios (400/500) to OpenAPI specification
 - Add generic error handling (catch on the handler)
+- Move critical resources such as Cognito pool outside backend stack

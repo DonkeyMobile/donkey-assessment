@@ -10,6 +10,10 @@ post {
   auth: inherit
 }
 
+headers {
+  Authorization: Bearer {{BEARER}}
+}
+
 body:json {
   {
     "description": "Happy coding💻"

@@ -8,6 +8,8 @@ import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { AttributeType, BillingMode, Table } from 'aws-cdk-lib/aws-dynamodb';
+import { UserPool, UserPoolClient } from 'aws-cdk-lib/aws-cognito';
+import { HttpUserPoolAuthorizer } from 'aws-cdk-lib/aws-apigatewayv2-authorizers';
 
 interface HttpGatewayLambda {
     path: string;
@@ -19,19 +21,42 @@ export class BackendStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
+        const userPoolAuthoriser = this.createCognito();
+
         const table = this.createTable();
 
         const createPostLambda = this.createLambda('create-post', table);
 
-        this.createHttpGateway([
-            { path: '/v1/posts', method: HttpMethod.POST, function: createPostLambda },
-        ]);
+        this.createHttpGateway(
+            [
+                { path: '/v1/posts', method: HttpMethod.POST, function: createPostLambda },
+            ],
+            userPoolAuthoriser,
+        );
 
         table.grantReadWriteData(createPostLambda);
     }
 
+    private createCognito(): HttpUserPoolAuthorizer {
+        const userPool = new UserPool(this, 'posts-userpool', {
+            userPoolName: 'posts-userpool',
+            signInCaseSensitive: false,
+        });
+
+        const userPoolClient = new UserPoolClient(this, 'posts-userpool-client', {
+            userPool: userPool,
+            authFlows: {
+                userPassword: true,
+            },
+        });
+
+        return new HttpUserPoolAuthorizer('posts-userpool-authoriser', userPool, {
+            userPoolClients: [userPoolClient],
+        });
+    }
+
     private createTable(): Table {
-        return new Table(this, 'posts', {
+        return new Table(this, 'posts-table', {
             tableName: 'posts',
             partitionKey: { name: 'pk', type: AttributeType.STRING },
             sortKey: { name: 'sk', type: AttributeType.STRING },
@@ -53,8 +78,8 @@ export class BackendStack extends cdk.Stack {
         });
     }
 
-    private createHttpGateway(lambdas: HttpGatewayLambda[]) {
-        const api = new HttpApi(this, 'donkey-wall', {
+    private createHttpGateway(lambdas: HttpGatewayLambda[], authoriser: HttpUserPoolAuthorizer) {
+        const api = new HttpApi(this, 'posts-http-gateway', {
             createDefaultStage: true,
         });
 
@@ -63,6 +88,7 @@ export class BackendStack extends cdk.Stack {
                 path: lambda.path,
                 methods: [lambda.method],
                 integration: new HttpLambdaIntegration(`${lambda.function.node.id}-integration`, lambda.function),
+                authorizer: authoriser,
             });
         }
 
