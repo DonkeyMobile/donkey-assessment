@@ -8,14 +8,18 @@ const tableName: string = process.env.POSTS_TABLE_NAME ?? '';
 
 export class PostsService {
     async createItem(post: CreatePostRequest) {
+        const postId = ulid();
+        const now = new Date().toISOString();
+        const userId = 'cognito-sub-123456';
+
         const item = {
-            pk: 'USER#cognito-sub-123456',
-            sk: 'TS#2025-08-26T20:15:33.120Z|POST#01J9ABCDEF123XYZ456',
-            postId: ulid(),
-            userId: 'cognito-sub-123456',
+            pk: `USER#${userId}`,
+            sk: `POST#${postId}`,
+            postId,
+            userId,
             description: post.description,
-            createdAt: '2025-08-26T20:15:33.120Z',
-            updatedAt: '2025-08-26T20:15:33.120Z',
+            createdAt: now,
+            updatedAt: now,
         };
 
         await client.send(new PutCommand({

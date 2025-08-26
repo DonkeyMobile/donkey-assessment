@@ -5,9 +5,9 @@
 - [x] add first endpoint
 - [x] deploy first handler to AWS
 - [x] Add open API spec
+- [x] Create Post endpoint with DynamoDB
 
 ## Working on
-- [ ] Create Post endpoint with DynamoDB
 
 ## Backlog
 - [ ] Change Post endpoint with Cognito
@@ -22,3 +22,4 @@ These are not in scope for the assignment, but suggestions I'd pick up if I were
 
 - Group the Lambdas in CDK better in a map or some other form, so that I can iterate over them
 - Add multi-env support: dev, stg, prd
+- Zod models are used throughout the handler and service, we control the database, but ideally you'd use DTOs
