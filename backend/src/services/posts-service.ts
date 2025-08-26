@@ -8,10 +8,9 @@ const client = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 const tableName: string = process.env.POSTS_TABLE_NAME ?? '';
 
 export class PostsService {
-    async createItem(post: CreatePostRequest): Promise<Post> {
+    async createItem(post: CreatePostRequest, userId: string): Promise<Post> {
         const postId = ulid();
         const now = Temporal.Now.instant().toString();
-        const userId = 'cognito-sub-123456';
 
         const item = {
             pk: `USER#${userId}`,

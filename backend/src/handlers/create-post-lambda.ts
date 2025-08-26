@@ -22,7 +22,17 @@ class Lambda implements LambdaInterface {
             };
         }
 
-        const post = await postsService.createItem(postRequest.data);
+
+        const userId = event.requestContext?.authorizer?.jwt.claims.sub;
+        if (!userId) {
+            logger.warn('Unauthorized request: missing user id in JWT claims');
+            return {
+                statusCode: 401,
+                body: JSON.stringify({ message: 'Unauthorised' }),
+            };
+        }
+
+        const post = await postsService.createItem(postRequest.data, userId);
 
         const response = CreatePostResponse.safeParse({ message: 'created', post: post });
         return {

@@ -1,14 +1,31 @@
-# Welcome to your CDK TypeScript project
+# Timeline
 
-This is a blank project for CDK development with TypeScript.
+## Getting started
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+To get started in AWS:
+```bash
+npm run cdk:deploy
+```
 
-## Useful commands
+Next, create a user in cognito, let cognito generate a password and let is be sent to your mail.
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+Log in via the following command:
+ - client id is output of the CDK stack
+ - Username and password need to be replaced as well
+```bash
+aws cognito-idp initiate-auth \
+  --auth-flow USER_PASSWORD_AUTH \
+  --client-id $CLIENT_ID \
+  --auth-parameters USERNAME=$USERNAME,PASSWORD=$PASSWORD \
+  --query 'AuthenticationResult.IdToken' \
+  --output text
+```
+
+While you could use the Bruno (open source postman) collection I've made, it is easier to use curl: 
+ - please replace the base url and the bearer
+```bash
+curl -i -X POST "https:/$BASE_URL/v1/posts" \
+  -H "Authorization: Bearer $BEARER" \
+  -H "Content-Type: application/json" \
+  -d '{"description":"created via matching audience"}'
+```

@@ -6,9 +6,9 @@
 - [x] deploy first handler to AWS
 - [x] Add open API spec
 - [x] Create Post endpoint with DynamoDB
+- [x] Change Post endpoint with Cognito
 
 ## Working on
-- [ ] Change Post endpoint with Cognito
 
 ## Backlog
 - [ ] Read Post endpoint

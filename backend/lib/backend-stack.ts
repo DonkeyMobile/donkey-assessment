@@ -50,6 +50,8 @@ export class BackendStack extends cdk.Stack {
             },
         });
 
+        new cdk.CfnOutput(this, 'clientId', { value: userPoolClient.userPoolClientId });
+
         return new HttpUserPoolAuthorizer('posts-userpool-authoriser', userPool, {
             userPoolClients: [userPoolClient],
         });
