@@ -6,8 +6,14 @@ meta {
 
 post {
   url: {{BASE_URL}}/v1/posts
-  body: none
+  body: json
   auth: inherit
+}
+
+body:json {
+  {
+    "description": "Happy coding💻"
+  }
 }
 
 settings {

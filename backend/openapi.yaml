@@ -16,7 +16,7 @@ paths:
             schema:
               $ref: '#/components/schemas/CreatePostRequest'
       responses:
-        '200':
+        '201':
           description: Created the post successfully
           content:
             application/json:

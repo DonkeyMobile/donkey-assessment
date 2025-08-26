@@ -48,6 +48,7 @@ export class BackendStack extends cdk.Stack {
             timeout: Duration.seconds(10),
             environment: {
                 POSTS_TABLE_NAME: table.tableName,
+                POWERTOOLS_DEV: '1',
             },
         });
     }
