@@ -23,3 +23,5 @@ These are not in scope for the assignment, but suggestions I'd pick up if I were
 - Group the Lambdas in CDK better in a map or some other form, so that I can iterate over them
 - Add multi-env support: dev, stg, prd
 - Zod models are used throughout the handler and service, we control the database, but ideally you'd use DTOs
+- Add non-happy scenarios (400/500) to OpenAPI specification
+- Add generic error handling (catch on the handler)

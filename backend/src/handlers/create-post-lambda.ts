@@ -9,22 +9,22 @@ const logger = new Logger({ serviceName: 'create-post-lambda' });
 class Lambda implements LambdaInterface {
 
     public async handler(event: APIGatewayProxyEvent, _context: Context): Promise<APIGatewayProxyStructuredResultV2> {
-        const post = CreatePostRequest.safeParse(JSON.parse(event.body ?? '{}'));
-        if (!post.success) {
-            logger.warn('Invalid JSON body ', JSON.parse(post.error.message));
+        const postRequest = CreatePostRequest.safeParse(JSON.parse(event.body ?? '{}'));
+        if (!postRequest.success) {
+            logger.warn('Invalid JSON body ', JSON.parse(postRequest.error.message));
             return {
                 statusCode: 400,
                 body: JSON.stringify({
                     message: 'Invalid request body',
                     // sending this is a GDPR consideration
-                    error: JSON.parse(post.error.message),
+                    error: JSON.parse(postRequest.error.message),
                 }),
             };
         }
 
-        await postsService.createItem(post.data);
+        const post = await postsService.createItem(postRequest.data);
 
-        const response = CreatePostResponse.safeParse({ message: 'created' });
+        const response = CreatePostResponse.safeParse({ message: 'created', post: post });
         return {
             statusCode: 201,
             body: JSON.stringify(response.data),

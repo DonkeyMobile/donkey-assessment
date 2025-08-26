@@ -1,15 +1,16 @@
 import { ulid } from 'ulid';
 import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { CreatePostRequest } from '../handlers/generated/rest-model';
+import { CreatePostRequest, Post } from '../handlers/generated/rest-model';
+import { Temporal } from 'temporal-polyfill';
 
 const client = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 const tableName: string = process.env.POSTS_TABLE_NAME ?? '';
 
 export class PostsService {
-    async createItem(post: CreatePostRequest) {
+    async createItem(post: CreatePostRequest): Promise<Post> {
         const postId = ulid();
-        const now = new Date().toISOString();
+        const now = Temporal.Now.instant().toString();
         const userId = 'cognito-sub-123456';
 
         const item = {
@@ -26,6 +27,14 @@ export class PostsService {
             TableName: tableName,
             Item: item,
         }));
+
+        return {
+            postId: postId,
+            description: post.description,
+            createdAt: now,
+            updatedAt: now,
+            userId: userId,
+        };
     }
 }
 

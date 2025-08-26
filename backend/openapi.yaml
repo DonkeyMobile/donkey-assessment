@@ -43,14 +43,32 @@ components:
       properties:
         message:
           type: string
+        post:
+          $ref: '#/components/schemas/Post'
       required:
         - message
 
-#    Post:
-#      type: object
-#      properties:
-#        id:
-#          type:
+    Post:
+      type: object
+      properties:
+        postId:
+          description: An ulid
+          type: string
+          example: 01K3M6JW6DK1T48H3EK3513XWP
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          example: 2025-08-26T22:04:41.037Z
+        updatedAt:
+          type: string
+          format: date-time
+          example: 2025-08-26T22:04:41.037Z
+        userId:
+          description: Cognito userId
+          type: string
+
 
 # Define one or more validators
 x-amazon-apigateway-request-validators:

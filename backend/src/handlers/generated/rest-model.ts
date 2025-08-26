@@ -5,14 +5,19 @@ export const CreatePostRequest = z.object({
     description: z.string(),
 });
 
+export type Post = z.infer<typeof Post>;
+export const Post = z.object({
+    postId: z.string().optional(),
+    description: z.string().optional(),
+    createdAt: z.string().optional(),
+    updatedAt: z.string().optional(),
+    userId: z.string().optional(),
+});
+
 export type CreatePostResponse = z.infer<typeof CreatePostResponse>;
 export const CreatePostResponse = z.object({
     message: z.string(),
-});
-
-export type Post = z.infer<typeof Post>;
-export const Post = z.object({
-    id: z.unknown().optional(),
+    post: z.union([Post, z.undefined()]).optional(),
 });
 
 export type post_CreatePost = typeof post_CreatePost;
