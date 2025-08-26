@@ -1,10 +1,10 @@
-openapi: 3.1.1
+openapi: 3.0.1
 info:
   title: donkey-assessment
   description: Create a wall of posts
-  version: '1.0'
-paths:
+  version: 1.0.0
 
+paths:
   /v1/posts:
     post:
       description: Create a post
@@ -30,7 +30,6 @@ paths:
 
 components:
   schemas:
-
     CreatePostRequest:
       type: object
       properties:
@@ -46,6 +45,12 @@ components:
           type: string
       required:
         - message
+
+#    Post:
+#      type: object
+#      properties:
+#        id:
+#          type:
 
 # Define one or more validators
 x-amazon-apigateway-request-validators:

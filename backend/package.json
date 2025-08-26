@@ -1,6 +1,7 @@
 {
   "name": "backend",
   "version": "0.1.0",
+  "type": "module",
   "bin": {
     "backend": "bin/backend.js"
   },
@@ -8,9 +9,15 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "vitest run",
-    "cdk": "cdk"
+    "generate-openapi-models": "typed-openapi ./openapi.yaml -o ./src/handlers/generated/rest-model.ts -r zod && eslint ./src/handlers/generated/rest-model.ts --fix",
+    "cdk": "cdk",
+    "cdk:deploy": "npx cdk deploy --require-approval never",
+    "cdk:watch": "npx cdk watch --require-approval never",
+    "cdk:synth:template": "npm run cdk synth > cdk.out/template.json",
+    "dev": "npm run build && npm run cdk:synth:template"
   },
   "devDependencies": {
+    "@aws-sdk/client-dynamodb": "^3.876.0",
     "@eslint/js": "^9.34.0",
     "@types/aws-lambda": "^8.10.152",
     "@types/jest": "^30.0.0",
@@ -25,13 +32,21 @@
     "mustache": "^4.2.0",
     "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
+    "typed-openapi": "^0.10.1",
     "typescript": "~5.9.2",
-    "typescript-eslint": "^8.41.0"
+    "typescript-eslint": "^8.41.0",
+    "zod": "^4.1.3"
   },
   "dependencies": {
     "@aws-lambda-powertools/commons": "^2.25.1",
+    "@aws-lambda-powertools/logger": "^2.25.2",
+    "@aws-lambda-powertools/parameters": "^2.25.2",
+    "@aws-lambda-powertools/parser": "^2.25.2",
+    "@aws-sdk/lib-dynamodb": "^3.876.0",
+    "@middy/core": "^6.4.4",
     "aws-cdk-lib": "2.212.0",
     "constructs": "^10.4.2",
+    "ulid": "^3.0.1",
     "vite": "^7.1.3",
     "vitest": "^3.2.4"
   }

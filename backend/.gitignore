@@ -9,3 +9,6 @@ cdk.out
 
 # Intellij
 .idea
+
+# Vitest
+coverage
