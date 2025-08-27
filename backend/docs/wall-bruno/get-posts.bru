@@ -1,0 +1,27 @@
+meta {
+  name: get-posts
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{BASE_URL}}/v1/posts
+  body: none
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{BEARER}}
+  ~x-userid: user-1234
+  ~X-User-Email: test@example.com
+}
+
+body:json {
+  {
+    "description": "Happy coding💻"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

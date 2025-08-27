@@ -1,0 +1,25 @@
+meta {
+  name: create-post
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/posts
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{BEARER}}
+}
+
+body:json {
+  {
+    "description": "Happy coding💻"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

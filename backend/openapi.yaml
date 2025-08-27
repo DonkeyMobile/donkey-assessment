@@ -1,0 +1,87 @@
+openapi: 3.0.1
+info:
+  title: donkey-assessment
+  description: Create a wall of posts
+  version: 1.0.0
+
+paths:
+  /v1/posts:
+    get:
+      description: Get posts
+      operationId: createPost
+      responses:
+        '201':
+          description: Retrieved posts successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPostsResponse'
+    post:
+      description: Create a post
+      operationId: createPost
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePostRequest'
+      responses:
+        '201':
+          description: Created the post successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePostResponse'
+
+components:
+  schemas:
+    GetPostsResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        posts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Post'
+      required:
+        - message
+
+    CreatePostRequest:
+      type: object
+      properties:
+        description:
+          type: string
+      required:
+        - description
+
+    CreatePostResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        post:
+          $ref: '#/components/schemas/Post'
+      required:
+        - message
+
+    Post:
+      type: object
+      properties:
+        postId:
+          description: An ulid
+          type: string
+          example: 01K3M6JW6DK1T48H3EK3513XWP
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          example: 2025-08-26T22:04:41.037Z
+        updatedAt:
+          type: string
+          format: date-time
+          example: 2025-08-26T22:04:41.037Z
+        userId:
+          description: Cognito userId
+          type: string
