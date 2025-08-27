@@ -29,3 +29,11 @@ curl -i -X POST "https:/$BASE_URL/v1/posts" \
   -H "Content-Type: application/json" \
   -d '{"description":"created via matching audience"}'
 ```
+
+## Pipeline
+
+To make the pipeline work, you need to add the following secrets to your GitHub repository. 
+If you didn't follow getting started, the pipeline will fail due to the AWS account hardcoded in the CDK stack (`bin/backend.ts`).
+GitHub, under Settings -> Secrets and variables -> Actions -> New repository secret:
+ - AWS_ACCESS_KEY_ID: your AWS access key id
+ - AWS_SECRET_ACCESS_KEY: your AWS secret access key

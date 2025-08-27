@@ -8,9 +8,9 @@
 - [x] Create Post endpoint with DynamoDB
 - [x] Change Post endpoint with Cognito
 - [x] Read Post endpoint
-- 
+- [x] Add CI/CD
+
 ## Working on
-- [ ] Add CI/CD
 
 ## Backlog
 - [ ] Update Post endpoint
@@ -29,3 +29,5 @@ These are not in scope for the assignment, but suggestions I'd pick up if I were
 - Move critical resources such as Cognito pool outside backend stack
 - Research best practices to validate if I secured Cognito well
 - Unit tests/mocking/integration tests
+- Use proper OICD if staying in GitHub Actions
+  - Alternative: Could move to CodeBuild for increased security

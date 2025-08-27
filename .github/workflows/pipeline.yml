@@ -11,6 +11,7 @@ env:
   NODE_VERSION: '22'
   WORKING_DIR: backend
   AWS_REGION: eu-west-1
+  CDK_STACKS: BackendStack
 
 jobs:
   build_test_audit:
@@ -43,3 +44,34 @@ jobs:
 
       - name: Audit
         run: npm audit --production --audit-level=high
+
+  deploy:
+    needs: build_test_audit
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIR }}
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Configure AWS (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Install CDK deps
+        run: npm ci
+
+      - name: CDK deploy
+        run: npx cdk deploy $CDK_STACKS --require-approval never
