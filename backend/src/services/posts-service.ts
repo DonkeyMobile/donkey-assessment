@@ -6,11 +6,12 @@ import { Temporal } from 'temporal-polyfill';
 
 const client = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 const tableName: string = process.env.POSTS_TABLE_NAME ?? '';
-if (!tableName) {
-    throw new Error('POSTS_TABLE_NAME is not set');
-}
+
 export class PostsService {
     async createPost(post: CreatePostRequest, userId: string): Promise<Post> {
+        if (!tableName) {
+            throw new Error('POSTS_TABLE_NAME is not set');
+        }
         const postId = ulid();
         const now = Temporal.Now.instant().toString();
 
