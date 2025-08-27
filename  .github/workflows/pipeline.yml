@@ -2,7 +2,10 @@ name: Posts app
 
 on:
   push:
-    branches: [ main, feature/* ]
+    branches:
+      - main
+      - feature/*
+  workflow_dispatch: {}
 
 env:
   NODE_VERSION: '22'
