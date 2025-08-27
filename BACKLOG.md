@@ -11,12 +11,12 @@
 - [x] Add CI/CD
 
 ## Working on
+- [ ] Enable SAM
 
 ## Backlog
 - [ ] Update Post endpoint
 - [ ] Delete Post endpoint
 - [ ] Document monitoring/logging
-- [ ] Enable SAM
 
 ## Things I would change
 These are not in scope for the assignment, but suggestions I'd pick up if I were to productionalise this.
@@ -31,3 +31,5 @@ These are not in scope for the assignment, but suggestions I'd pick up if I were
 - Unit tests/mocking/integration tests
 - Use proper OICD if staying in GitHub Actions
   - Alternative: Could move to CodeBuild for increased security
+- Local SAM should point to local DynamoDB
+- Move logs of Lambda to the path /posts/create-post etc in CloudWatch Logs

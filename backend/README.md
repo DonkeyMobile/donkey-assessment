@@ -30,6 +30,15 @@ curl -i -X POST "https:/$BASE_URL/v1/posts" \
   -d '{"description":"created via matching audience"}'
 ```
 
+## Local development
+
+Unfortunately, AWS SAM does not support Cognito authorizers locally, so you will have to test the endpoints without authorization.
+
+Requiremens:
+ - Latest AWS CLI
+ - On a fresh install I also had AWS SAM, recommended to have latest version of that as well
+ - docker
+
 ## Pipeline
 
 To make the pipeline work, you need to add the following secrets to your GitHub repository. 

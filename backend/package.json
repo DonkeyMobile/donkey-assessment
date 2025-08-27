@@ -15,8 +15,9 @@
     "cdk": "cdk",
     "cdk:deploy": "cdk deploy --require-approval never",
     "cdk:watch": "cdk watch --require-approval never",
-    "cdk:synth:template": "npm run cdk synth > cdk.out/template.json",
-    "dev": "npm run build && npm run cdk:synth:template"
+    "cdk:synth:template": "cdk synth > cdk.out/template.yaml",
+    "dev:prepare": "npm run cdk:synth:template && grep -B1 'Type: AWS::Lambda::Function' cdk.out/template.yaml | grep '^[[:space:]]\\{2\\}[A-Za-z0-9]\\+:' | sed 's/^[[:space:]]*//; s/:$//' | jq -Rn '[inputs|{(.): {\"FIXED_USER_ID\":\"user-123\"}}] | add' > env.local.json",
+    "dev": "npm run build && npm run cdk:synth:template && sam local start-api -t cdk.out/template.yaml --env-vars env.local.json"
   },
   "devDependencies": {
     "@aws-sdk/client-dynamodb": "^3.876.0",
