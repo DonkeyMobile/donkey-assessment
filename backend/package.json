@@ -6,13 +6,14 @@
     "backend": "bin/backend.js"
   },
   "scripts": {
+    "audit": "better-npm-audit audit",
     "build": "tsc",
     "watch": "tsc -w",
     "test": "vitest run",
     "generate-openapi-models": "typed-openapi ./openapi.yaml -o ./src/handlers/generated/rest-model.ts -r zod && eslint ./src/handlers/generated/rest-model.ts --fix",
     "cdk": "cdk",
-    "cdk:deploy": "npx cdk deploy --require-approval never",
-    "cdk:watch": "npx cdk watch --require-approval never",
+    "cdk:deploy": "cdk deploy --require-approval never",
+    "cdk:watch": "cdk watch --require-approval never",
     "cdk:synth:template": "npm run cdk synth > cdk.out/template.json",
     "dev": "npm run build && npm run cdk:synth:template"
   },
@@ -31,6 +32,7 @@
     "jiti": "^2.5.1",
     "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.5",
     "typed-openapi": "^0.10.1",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.41.0",
@@ -43,6 +45,7 @@
     "@aws-lambda-powertools/parser": "^2.25.2",
     "@aws-sdk/lib-dynamodb": "^3.876.0",
     "aws-cdk-lib": "2.212.0",
+    "better-npm-audit": "^3.11.0",
     "constructs": "^10.4.2",
     "temporal-polyfill": "^0.3.0",
     "ulid": "^3.0.1",

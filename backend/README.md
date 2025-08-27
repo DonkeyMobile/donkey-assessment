@@ -2,7 +2,7 @@
 
 ## Getting started
 
-To get started in AWS:
+To get started in AWS, first replace your aws account id in backend.ts and then deploy the CDK stack:
 ```bash
 npm run cdk:deploy
 ```
