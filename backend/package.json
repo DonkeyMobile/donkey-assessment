@@ -8,9 +8,10 @@
   "scripts": {
     "audit": "better-npm-audit audit",
     "build": "tsc",
+    "lint": "eslint bin lib src",
     "watch": "tsc -w",
     "test": "vitest run",
-    "generate-openapi-models": "typed-openapi ./openapi.yaml -o ./src/handlers/generated/rest-model.ts -r zod && eslint ./src/handlers/generated/rest-model.ts --fix",
+    "generate-openapi-models": "typed-openapi ./openapi.yaml -o ./src/handlers/generated/rest-model.ts -r zod",
     "cdk": "cdk",
     "cdk:deploy": "cdk deploy --require-approval never",
     "cdk:watch": "cdk watch --require-approval never",
@@ -33,7 +34,7 @@
     "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.5",
-    "typed-openapi": "^0.10.1",
+    "typed-openapi": "^2.1.2",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.41.0",
     "zod": "^4.1.3"

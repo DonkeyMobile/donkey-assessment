@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "esnext",
+    "module": "Preserve",
     "moduleResolution": "node",
     "lib": [
+      "DOM",
       "es2022"
     ],
     "allowSyntheticDefaultImports": true,
