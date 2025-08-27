@@ -37,7 +37,7 @@ export class BackendStack extends cdk.Stack {
         );
 
         table.grantReadWriteData(createPostLambda);
-        table.grantReadWriteData(getPostsLambda);
+        table.grantReadData(getPostsLambda);
     }
 
     private createCognito(): HttpUserPoolAuthorizer {
