@@ -11,7 +11,7 @@
 - [x] Add CI/CD
 
 ## Working on
-- [ ] Enable SAM
+- [ ] Enable SAM: unfortunately, I couldn't get SAM to play well with Cognito
 
 ## Backlog
 - [ ] Update Post endpoint
