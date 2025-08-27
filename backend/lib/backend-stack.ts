@@ -7,7 +7,7 @@ import { Duration, RemovalPolicy } from 'aws-cdk-lib';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { AttributeType, BillingMode, Table } from 'aws-cdk-lib/aws-dynamodb';
+import { AttributeType, BillingMode, ProjectionType, Table } from 'aws-cdk-lib/aws-dynamodb';
 import { UserPool, UserPoolClient } from 'aws-cdk-lib/aws-cognito';
 import { HttpUserPoolAuthorizer } from 'aws-cdk-lib/aws-apigatewayv2-authorizers';
 
@@ -26,15 +26,18 @@ export class BackendStack extends cdk.Stack {
         const table = this.createTable();
 
         const createPostLambda = this.createLambda('create-post', table);
+        const getPostsLambda = this.createLambda('get-posts', table);
 
         this.createHttpGateway(
             [
                 { path: '/v1/posts', method: HttpMethod.POST, function: createPostLambda },
+                { path: '/v1/posts', method: HttpMethod.GET, function: getPostsLambda },
             ],
             userPoolAuthoriser,
         );
 
         table.grantReadWriteData(createPostLambda);
+        table.grantReadWriteData(getPostsLambda);
     }
 
     private createCognito(): HttpUserPoolAuthorizer {
@@ -58,13 +61,23 @@ export class BackendStack extends cdk.Stack {
     }
 
     private createTable(): Table {
-        return new Table(this, 'posts-table', {
+        const table = new Table(this, 'posts-table', {
             tableName: 'posts',
             partitionKey: { name: 'pk', type: AttributeType.STRING },
             sortKey: { name: 'sk', type: AttributeType.STRING },
             billingMode: BillingMode.PAY_PER_REQUEST,
             removalPolicy: RemovalPolicy.DESTROY, // on prod, I would set this on RETAIN
         });
+
+        table.addGlobalSecondaryIndex({
+            indexName: 'gsiAllPosts',
+            partitionKey: { name: 'gsi1pk', type: AttributeType.STRING },
+            sortKey: { name: 'gsi1sk', type: AttributeType.STRING },
+            projectionType: ProjectionType.INCLUDE,
+            nonKeyAttributes: ['postId', 'description', 'createdAt', 'userId'],
+        });
+
+        return table;
     }
 
     private createLambda(name: string, table: Table): Function {

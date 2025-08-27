@@ -12,3 +12,9 @@ Deploy:
 ```bash
 npm run cdk deploy
 ```
+
+## CICD
+```bash
+mkdir pipeline && cd pipeline
+cdk init app --language typescript
+```

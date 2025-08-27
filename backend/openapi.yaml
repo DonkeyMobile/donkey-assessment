@@ -6,6 +6,16 @@ info:
 
 paths:
   /v1/posts:
+    get:
+      description: Get posts
+      operationId: createPost
+      responses:
+        '201':
+          description: Retrieved posts successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPostsResponse'
     post:
       description: Create a post
       operationId: createPost
@@ -22,14 +32,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreatePostResponse'
-      x-amazon-apigateway-integration:
-        uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/{{create-post}}/invocations"
-        passthroughBehavior: "when_no_match"
-        httpMethod: "POST"
-        type: "aws_proxy"
 
 components:
   schemas:
+    GetPostsResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        posts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Post'
+      required:
+        - message
+
     CreatePostRequest:
       type: object
       properties:
@@ -68,12 +85,3 @@ components:
         userId:
           description: Cognito userId
           type: string
-
-
-# Define one or more validators
-x-amazon-apigateway-request-validators:
-  all:
-    validateRequestBody: true
-
-# Enable global validator, can be overridden per method
-x-amazon-apigateway-request-validator: all

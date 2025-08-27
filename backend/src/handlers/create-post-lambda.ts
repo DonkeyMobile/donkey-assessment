@@ -32,7 +32,7 @@ class Lambda implements LambdaInterface {
             };
         }
 
-        const post = await postsService.createItem(postRequest.data, userId);
+        const post = await postsService.createPost(postRequest.data, userId);
 
         const response = CreatePostResponse.safeParse({ message: 'created', post: post });
         return {

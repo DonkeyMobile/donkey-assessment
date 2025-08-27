@@ -1,10 +1,5 @@
 import { z } from 'zod';
 
-export type CreatePostRequest = z.infer<typeof CreatePostRequest>;
-export const CreatePostRequest = z.object({
-    description: z.string(),
-});
-
 export type Post = z.infer<typeof Post>;
 export const Post = z.object({
     postId: z.string().optional(),
@@ -14,11 +9,31 @@ export const Post = z.object({
     userId: z.string().optional(),
 });
 
+export type GetPostsResponse = z.infer<typeof GetPostsResponse>;
+export const GetPostsResponse = z.object({
+    message: z.string(),
+    posts: z.union([z.array(Post), z.undefined()]).optional(),
+});
+
+export type CreatePostRequest = z.infer<typeof CreatePostRequest>;
+export const CreatePostRequest = z.object({
+    description: z.string(),
+});
+
 export type CreatePostResponse = z.infer<typeof CreatePostResponse>;
 export const CreatePostResponse = z.object({
     message: z.string(),
     post: z.union([Post, z.undefined()]).optional(),
 });
+
+export type get_CreatePost = typeof get_CreatePost;
+export const get_CreatePost = {
+    method: z.literal('GET'),
+    path: z.literal('/v1/posts'),
+    requestFormat: z.literal('json'),
+    parameters: z.never(),
+    response: GetPostsResponse,
+};
 
 export type post_CreatePost = typeof post_CreatePost;
 export const post_CreatePost = {
@@ -33,6 +48,9 @@ export const post_CreatePost = {
 
 // <EndpointByMethod>
 export const EndpointByMethod = {
+    get: {
+        '/v1/posts': get_CreatePost,
+    },
     post: {
         '/v1/posts': post_CreatePost,
     },
@@ -41,6 +59,7 @@ export type EndpointByMethod = typeof EndpointByMethod;
 // </EndpointByMethod>
 
 // <EndpointByMethod.Shorthands>
+export type GetEndpoints = EndpointByMethod['get'];
 export type PostEndpoints = EndpointByMethod['post'];
 export type AllEndpoints = EndpointByMethod[keyof EndpointByMethod];
 // </EndpointByMethod.Shorthands>
@@ -101,6 +120,15 @@ export class ApiClient {
         this.baseUrl = baseUrl;
         return this;
     }
+
+    // <ApiClient.get>
+    get<Path extends keyof GetEndpoints, TEndpoint extends GetEndpoints[Path]>(
+        path: Path,
+        ...params: MaybeOptionalArg<z.infer<TEndpoint['parameters']>>
+    ): Promise<z.infer<TEndpoint['response']>> {
+        return this.fetcher('get', this.baseUrl + path, params[0]) as Promise<z.infer<TEndpoint['response']>>;
+    }
+    // </ApiClient.get>
 
     // <ApiClient.post>
     post<Path extends keyof PostEndpoints, TEndpoint extends PostEndpoints[Path]>(
