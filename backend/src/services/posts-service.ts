@@ -9,9 +9,7 @@ const tableName: string = process.env.POSTS_TABLE_NAME ?? '';
 
 export class PostsService {
     async createPost(post: CreatePostRequest, userId: string): Promise<Post> {
-        if (!tableName) {
-            throw new Error('POSTS_TABLE_NAME is not set');
-        }
+        this.throwErrorIfNoTableNamePresent();
         const postId = ulid();
         const now = Temporal.Now.instant().toString();
 
@@ -44,6 +42,8 @@ export class PostsService {
     }
 
     async getPosts(): Promise<Post[]> {
+        this.throwErrorIfNoTableNamePresent();
+
         const result = await client.send(new QueryCommand({
             TableName: tableName,
             IndexName: 'gsiAllPosts',
@@ -54,6 +54,12 @@ export class PostsService {
         }));
 
         return result.Items as Post[] ?? [];
+    }
+
+    private throwErrorIfNoTableNamePresent() {
+        if (!tableName) {
+            throw new Error('POSTS_TABLE_NAME is not set');
+        }
     }
 }
 
