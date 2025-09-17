@@ -31,6 +31,8 @@ jest.mock("../models/user.js", () => {
   
     beforeEach(() => {
       jest.clearAllMocks();
+      mockSave.mockReset();
+      jest.spyOn(console, "error").mockImplementation(() => {});
   
       req = {
         body: {}
@@ -65,14 +67,6 @@ jest.mock("../models/user.js", () => {
     it("should create and return a new post", async () => {
       req.body = { title: "Test Post", content: "Hello", userId: "abc123" };
       User.findById.mockResolvedValue({ _id: "abc123", name: "Author" });
-  
-      const mockPostData = {
-        _id: "post123",
-        title: "Test Post",
-        content: "Hello",
-        userId: "abc123",
-        createdAt: expect.any(Date)
-      };
   
       mockSave.mockResolvedValue(mockPostData);
       Post.mockImplementation(() => ({

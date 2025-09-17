@@ -4,15 +4,15 @@ jest.mock("../models/user.js", () => {
   
     // Simulate Mongoose model constructor
     function MockUser(data) {
-        return {
-          ...data,
-          save: jest.fn().mockResolvedValue({
-            _id: "new-id",
-            name: data.name,
-            email: data.email
-          })
-        };
-      }
+      return {
+        ...data,
+        save: jest.fn().mockResolvedValue({
+          _id: "new-id",
+          name: data.name,
+          email: data.email
+        })
+      };
+    }
   
     MockUser.findOne = mockFindOne;
   
@@ -29,6 +29,7 @@ jest.mock("../models/user.js", () => {
   
     beforeEach(() => {
       jest.clearAllMocks();
+      jest.spyOn(console, "error").mockImplementation(() => {});
   
       req = {
         body: {}
