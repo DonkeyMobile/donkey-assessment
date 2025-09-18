@@ -6,10 +6,10 @@ import { User } from "../models/user.js";
  */
 export const createComment = async (req, res) => {
     try {
-        const { title, content, postId, userId } = req.body;
+        const { content, postId, userId } = req.body;
         // 1. Validate input
-        if (!title || !postId || !userId) {
-            return res.status(400).json({ message: "Title, postId and userId are required." });
+        if (!content || !postId || !userId) {
+            return res.status(400).json({ message: "Content, postId and userId are required." });
         }
         // 2. Check if the post exists
         const post = await Post.findById(postId);
@@ -23,7 +23,6 @@ export const createComment = async (req, res) => {
         }
         // 4. Create the comment
         const newComment = new Comment({
-            title,
             content,
             postId: postId,
             userId: userId,
