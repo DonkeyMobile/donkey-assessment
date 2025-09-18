@@ -14,8 +14,18 @@ export interface IPost extends Document {
 }
 
 const postSchema = new mongoose.Schema({
-    title: {type : String, required: true },
-    content: {type: String},
+    title: {
+      type : String, 
+      required: true,
+      trim: true,
+      minlength: [2, "Title must be at least 2 characters"],
+      maxlength: [500, "Title must be under 100 characters"]},
+    content: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: [2, "Content must be at least 2 characters"],
+      maxlength: [500, "Content must be under 500 characters"]},
     timelineId: { type : Schema.Types.ObjectId, ref: 'Timeline', required: true },  //reference to Timeline model
     userId: { type : Schema.Types.ObjectId, ref: 'User', required: true },          //reference to User model
     comments: { type: [Comment.schema], default: [] },

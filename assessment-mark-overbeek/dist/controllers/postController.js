@@ -7,21 +7,16 @@ import { Timeline } from "../models/timeline.js";
 export const createPost = async (req, res) => {
     try {
         const { title, content, timelineId, userId, comments = [] } = req.body;
-        // Validate required fields
-        if (!title || !timelineId || !userId) {
-            return res.status(400).json({ message: "Title, timelineId and userId are required." });
-        }
-        // 2. Check if the timeline exists
+        // Check if the timeline exists
         const timeline = await Timeline.findById(timelineId);
         if (!timeline) {
             return res.status(404).json({ message: "Timeline not found." });
         }
-        // 3. Check if the author exists
+        // Check if the author exists
         const user = await User.findById(userId);
         if (!user) {
-            return res.status(404).json({ message: "AuthuserId not found." });
+            return res.status(404).json({ message: "UserId not found." });
         }
-        // Optional: validate embedded
         if (!Array.isArray(comments)) {
             return res.status(400).json({ message: "Comments must be arrays." });
         }
@@ -34,8 +29,14 @@ export const createPost = async (req, res) => {
             comments,
             createdAt: new Date()
         });
-        const savedPost = await newPost.save();
-        return res.status(201).json(savedPost);
+        // force schema validation
+        try {
+            await newPost.save();
+        }
+        catch (err) {
+            return res.status(400).json({ error: err.message, err });
+        }
+        return res.status(201).json(newPost);
     }
     catch (error) {
         console.error("Error creating post:", error);
@@ -90,7 +91,7 @@ export const updatePost = async (req, res) => {
     }
     catch (error) {
         console.error("Error updating post:", error);
-        return res.status(500).json({ message: "Internal server error" });
+        return res.status(500).json({ message: "Internal server error", error });
     }
 };
 export const deletePost = async (req, res) => {

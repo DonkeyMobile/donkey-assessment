@@ -5,10 +5,6 @@ import { User } from "../models/user.js";
 export const createUser = async (req, res) => {
     try {
         const { name, email } = req.body;
-        // 1. Validate input
-        if (!name || !email) {
-            return res.status(400).json({ message: "Name and email are required." });
-        }
         // 2. Check if the email already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -19,9 +15,15 @@ export const createUser = async (req, res) => {
             name,
             email
         });
-        let savedUser = await newUser.save();
+        // force schema validation
+        try {
+            await newUser.save();
+        }
+        catch (err) {
+            return res.status(400).json({ error: err.message, err });
+        }
         // 4. Respond with the created user
-        return res.status(201).json(savedUser);
+        return res.status(201).json(newUser);
     }
     catch (error) {
         console.error("Error creating user:", error);

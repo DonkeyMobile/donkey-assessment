@@ -23,3 +23,7 @@ For testing the seperate api's I used Postman.
 ## Use of AI
 
 I made use of AI for fast development in a programming language I do not know very well yet. I tried to keep the code clean and skip things I do not understand.
+
+## Validation
+
+Tried to keep the validation of fields in the type script schema as much as possible.
