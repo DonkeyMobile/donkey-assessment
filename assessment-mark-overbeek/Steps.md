@@ -14,16 +14,13 @@ Not using a relational database was new to me. I choosed to store the documents(
 ## Typescript
 
 Made use of Typescript as it was one of the requirements.
+Tried to keep the validation of fields in the type script schema as much as possible.
 
 ## Unit testing
 
-I found Jest is a common tool to execute unit testing. I did not get it working due to technical difficulties. ESModules and CommonJS where excluding each other. When I choosed ESModules the server.js ran without errors, but Jest was not working. If the .ts files where compiled to CommonJS Jest was working fine but server.js had errors running. Spending a lot of time on finding out what the problem was I decided to add a manual test file. The testfile is in dist/tests/createPostWithCleanup.js
+I found Jest is a common tool to execute unit testing. I did not get it working due to technical difficulties. ESModules and CommonJS where excluding each other. When I choosed ESModules the server.js ran without errors, but Jest was not working. If the .ts files where compiled to CommonJS Jest was working fine but server.js had errors running. Spending a lot of time on finding out what the problem was I decided to use a manual test file instead of using Jest. The testfile is in dist/tests/createPostWithCleanup.js
 For testing the seperate api's I used Postman.
 
 ## Use of AI
 
 I made use of AI for fast development in a programming language I do not know very well yet. I tried to keep the code clean and skip things I do not understand.
-
-## Validation
-
-Tried to keep the validation of fields in the type script schema as much as possible.
