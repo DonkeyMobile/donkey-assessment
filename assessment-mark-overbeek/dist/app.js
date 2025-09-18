@@ -1,13 +1,14 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const postRoutes_js_1 = __importDefault(require("./routes/postRoutes.js"));
-const userRoutes_js_1 = __importDefault(require("./routes/userRoutes.js"));
-const app = (0, express_1.default)();
-app.use(express_1.default.json());
-app.use("/users", userRoutes_js_1.default);
-app.use("/posts", postRoutes_js_1.default);
-exports.default = app;
+import express from "express";
+import postRoutes from "./routes/postRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import commentRoutes from "./routes/commentRoutes.js";
+import attachmentRoutes from "./routes/attachmentRoutes.js";
+import timelineRoutes from "./routes/timelineRoutes.js";
+const app = express();
+app.use(express.json());
+app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
+app.use("/comments", commentRoutes);
+app.use("/attachments", attachmentRoutes);
+app.use("/timelines", timelineRoutes);
+export default app;

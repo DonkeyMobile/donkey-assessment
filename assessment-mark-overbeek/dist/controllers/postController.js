@@ -1,40 +1,35 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.createPost = void 0;
-const post_js_1 = require("../models/post.js");
-const user_js_1 = require("../models/user.js");
+import { Post } from "../models/post.js";
+import { User } from "../models/user.js";
+import { Timeline } from "../models/timeline.js";
 /**
  * Create a new post
  */
-const createPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+export const createPost = async (req, res) => {
     try {
-        const { title, content, userId } = req.body;
+        const { title, content, timelineId, userId } = req.body;
         // 1. Validate input
-        if (!title || !userId) {
-            return res.status(400).json({ message: "Title and userId are required." });
+        if (!title || !timelineId || !userId) {
+            return res.status(400).json({ message: "Title, timelineId and userId are required." });
         }
-        // 2. Check if the author exists
-        const user = yield user_js_1.User.findById(userId);
+        // 2. Check if the timeline exists
+        const timeline = await Timeline.findById(timelineId);
+        if (!timeline) {
+            return res.status(404).json({ message: "Timeline not found." });
+        }
+        // 3. Check if the author exists
+        const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ message: "Author not found." });
         }
-        // 3. Create the post
-        const newPost = new post_js_1.Post({
+        // 4. Create the post
+        const newPost = new Post({
             title,
             content,
+            timelineId: timelineId,
             userId: userId,
             createdAt: new Date()
         });
-        let savedpost = yield newPost.save();
+        let savedpost = await newPost.save();
         // 4. Respond with the created post
         return res.status(201).json(savedpost);
     }
@@ -42,5 +37,64 @@ const createPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         console.error("Error creating post:", error);
         return res.status(500).json({ message: "Internal server error" });
     }
-});
-exports.createPost = createPost;
+};
+// Get posts
+export const getPost = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        const post = await Post.findById(postId);
+        if (!post) {
+            return res.status(404).json({ message: "Post not found." });
+        }
+        return res.status(200).json(post);
+    }
+    catch (error) {
+        console.error("Error fetching post:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+export const getAllPosts = async (req, res) => {
+    try {
+        const posts = await Post.find();
+        return res.status(200).json(posts);
+    }
+    catch (error) {
+        console.error("Error fetching posts:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+// Update a post
+export const updatePost = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        const { title, content } = req.body;
+        const post = await Post.findById(postId);
+        if (!post) {
+            return res.status(404).json({ message: "Post not found." });
+        }
+        if (title !== undefined)
+            post.title = title;
+        if (content !== undefined)
+            post.content = content;
+        const updatedPost = await post.save();
+        return res.status(200).json(updatedPost);
+    }
+    catch (error) {
+        console.error("Error updating post:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+export const deletePost = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        const post = await Post.findByIdAndDelete(postId);
+        if (!post) {
+            return res.status(404).json({ message: "Post not found." });
+        }
+        return res.status(200).json({ message: "Post deleted successfully." });
+    }
+    catch (error) {
+        console.error("Error deleting post:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};

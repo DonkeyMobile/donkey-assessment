@@ -1,9 +1,9 @@
 import mongoose, { Schema } from "mongoose";
-const postSchema = new mongoose.Schema({
+const commentSchema = new mongoose.Schema({
     title: { type: String, required: true },
     content: { type: String },
-    timelineId: { type: Schema.Types.ObjectId, ref: 'Timeline', required: true }, //reference to Timeline model
+    postId: { type: Schema.Types.ObjectId, ref: 'Post', required: true }, //reference to Post model
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true }, //reference to User model
     createdAt: { type: Date, default: Date.now }
 });
-export const Post = mongoose.model("Post", postSchema);
+export const Comment = mongoose.model("Comment", commentSchema);

@@ -1,6 +1,6 @@
 import express from "express";
-import { createUser } from "../controllers/userController.js";
+import { createComment } from "../controllers/commentController.js";
 const router = express.Router();
 // POST /posts
-router.post("/", createUser);
+router.post("/", createComment);
 export default router;
