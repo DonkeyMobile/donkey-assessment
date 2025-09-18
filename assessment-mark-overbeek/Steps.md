@@ -9,7 +9,7 @@ Only the post class has all CRUD methods.
 
 ## MongoDB
 
-Not using a relational database was new to me. I choosed to store the documents(records) in seperate collections with foreign key relations to avoid redundancy, altough it is also possible to store the data nested and redundant. I prevented storing the data nested because if something is updated in a collection you also have to update the same data that could be nested in another collection. Coming at the end of the assessment I realised that it might be better to store comments and attachments directly on the post collection. The data is not redundant and it is likely that all information of the post is retrieved al together, so including comments and attachments.
+Not using a relational database was new to me. I choosed to store the documents(records) in seperate collections with foreign key relations to avoid redundancy, altough it is also possible to store the data nested and redundant. I prevented storing the data nested because if something is updated in a collection you also have to update the same data that could be nested in another collection. Coming at the end of the assessment I realised that it might be better to store comments and attachments directly on the post collection. Therefore I embedded the comments of a post in the post collection. The uploading of attachments are however still kept in a seperate api because a form data api is needed to upload the file.
 
 ## Typescript
 

@@ -6,8 +6,8 @@ import { Timeline } from "../models/timeline.js";
  */
 export const createPost = async (req, res) => {
     try {
-        const { title, content, timelineId, userId } = req.body;
-        // 1. Validate input
+        const { title, content, timelineId, userId, comments = [] } = req.body;
+        // Validate required fields
         if (!title || !timelineId || !userId) {
             return res.status(400).json({ message: "Title, timelineId and userId are required." });
         }
@@ -19,19 +19,23 @@ export const createPost = async (req, res) => {
         // 3. Check if the author exists
         const user = await User.findById(userId);
         if (!user) {
-            return res.status(404).json({ message: "Author not found." });
+            return res.status(404).json({ message: "AuthuserId not found." });
         }
-        // 4. Create the post
+        // Optional: validate embedded
+        if (!Array.isArray(comments)) {
+            return res.status(400).json({ message: "Comments must be arrays." });
+        }
+        // Create post with embedded data
         const newPost = new Post({
             title,
             content,
-            timelineId: timelineId,
-            userId: userId,
+            timelineId,
+            userId,
+            comments,
             createdAt: new Date()
         });
-        let savedpost = await newPost.save();
-        // 4. Respond with the created post
-        return res.status(201).json(savedpost);
+        const savedPost = await newPost.save();
+        return res.status(201).json(savedPost);
     }
     catch (error) {
         console.error("Error creating post:", error);
@@ -67,15 +71,20 @@ export const getAllPosts = async (req, res) => {
 export const updatePost = async (req, res) => {
     try {
         const { postId } = req.params;
-        const { title, content } = req.body;
+        const { title, content, comments } = req.body;
         const post = await Post.findById(postId);
         if (!post) {
             return res.status(404).json({ message: "Post not found." });
         }
+        // Update scalar fields
         if (title !== undefined)
             post.title = title;
         if (content !== undefined)
             post.content = content;
+        // Replace embedded arrays if provided
+        if (Array.isArray(comments)) {
+            post.comments = comments;
+        }
         const updatedPost = await post.save();
         return res.status(200).json(updatedPost);
     }

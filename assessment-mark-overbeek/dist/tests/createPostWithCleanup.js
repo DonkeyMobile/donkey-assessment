@@ -40,21 +40,17 @@ async function runTest() {
     // 3. Create post
     const postRes = await axios.post(POSTS, {
       title: "Test Post",
-      content: "This is a test post.",
+      content: "This is a test post with comment.",
       timelineId,
-      userId
+      userId,
+      comments: [
+        {
+          content: "Initial comment",
+          userId
+        }]
     });
     postId = postRes.data._id;
-    console.log("📝 Post created:", postId);
-
-    // 4. Create comment
-    const commentRes = await axios.post(COMMENTS, {
-        content: "This is a test comment.",
-        postId,
-        userId
-        });
-        commentId = commentRes.data._id;
-        console.log("📝 Comment created:", commentId);
+    console.log("📝 Post created with one comment:", postId);
 
     // 4. Upload attachment
     const form = new FormData();
@@ -69,8 +65,8 @@ async function runTest() {
 
 
     // 5. Cleanup
-    await axios.delete(`${POSTS}/${postId}`);
-    console.log("🧹 Post deleted with cascaded delete of comments and attachments");
+     await axios.delete(`${POSTS}/${postId}`);
+    console.log("🧹 Post deleted with cascaded delete of attachments");
 
     await axios.delete(`${TIMELINES}/${timelineId}`);
     console.log("🧹 Timeline deleted");
