@@ -1,34 +1,31 @@
+import mongoose from "mongoose";
 import { Attachment } from "../models/attachment.js";
 import { Post } from "../models/post.js";
-/**
- * Create a new attachment
- */
 export const createAttachment = async (req, res) => {
     try {
-        const { fileName, fileType, file, postId } = req.body;
-        // 1. Validate input
-        if (!fileName || !fileType || !postId) {
-            return res.status(400).json({ message: "Filename, filetype and postId are required." });
+        const file = req.file;
+        const { postId } = req.body;
+        if (!postId) {
+            return res.status(400).json({ message: "postId is required." });
         }
-        // 2. Check if the post exists
+        if (!mongoose.Types.ObjectId.isValid(postId)) {
+            return res.status(400).json({ message: "Invalid postId format." });
+        }
         const post = await Post.findById(postId);
         if (!post) {
             return res.status(404).json({ message: "Post not found." });
         }
-        // 3. Create the attachment
-        const newAttachment = new Attachment({
-            fileName,
-            fileType,
-            file,
-            postId: postId,
-            createdAt: new Date()
+        const attachment = new Attachment({
+            fileName: file.originalname,
+            fileType: file.mimetype,
+            file: file.buffer,
+            postId: postId
         });
-        let savedAttachment = await newAttachment.save();
-        // 4. Respond with the created attachment
-        return res.status(201).json(savedAttachment);
+        const savedAttachment = await attachment.save();
+        res.status(201).json({ id: savedAttachment._id, filename: savedAttachment.fileName });
     }
-    catch (error) {
-        console.error("Error creating attachment:", error);
-        return res.status(500).json({ message: "Internal server error" });
+    catch (err) {
+        console.error("Upload error:", err);
+        res.status(500).json({ message: "Failed to upload attachment." });
     }
 };
