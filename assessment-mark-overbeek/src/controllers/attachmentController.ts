@@ -5,7 +5,12 @@ import { Post } from "../models/post.js";
 
 export const createAttachment = async (req: Request, res: Response) => {
   try {
-    const file = (req as Request & { file: Express.Multer.File }).file;
+    const file = (req as Request & { file?: Express.Multer.File }).file;
+    if (!file) {
+      return res.status(400).json({ message: "No file uploaded." });
+    }
+    const safeName = file.originalname.replace(/[^\w.\-]+/g, "_");
+
     const { postId } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(postId)) {
@@ -18,13 +23,19 @@ export const createAttachment = async (req: Request, res: Response) => {
     }
 
     const newAttachment = new Attachment({
-      fileName: file.originalname,
+      fileName: safeName,
       fileType: file.mimetype,
       file: file.buffer,
       postId: postId
     });
 
-    res.status(201).json({ id: newAttachment._id, filename: newAttachment.fileName });
+    try {
+      await newAttachment.save();
+    } catch (err: any) {
+      return res.status(400).json({ message: err.message });
+    }
+
+    return res.status(201).json({ id: newAttachment._id, filename: newAttachment.fileName });
   } catch (error) {
     console.error("Upload error:", error);
     res.status(500).json({ message: "Failed to upload attachment."} );

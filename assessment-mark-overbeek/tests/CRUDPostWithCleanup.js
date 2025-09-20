@@ -20,7 +20,7 @@ async function runTest() {
     await mongoose.connect(MONGO_URI);
     console.log("✅ Connected to MongoDB");
 
-    // 1. Create user
+    // Create user
     const userRes = await axios.post(USERS, {
       name: "Test Author",
       email: "author@example.com"
@@ -28,7 +28,7 @@ async function runTest() {
     userId = userRes.data._id;
     console.log("👤 User created:", userId);
 
-    // 2. Create timeline
+    // Create timeline
     const timelineRes = await axios.post(TIMELINES, {
       title: "Test Timeline",
       description: "For post testing",
@@ -37,7 +37,7 @@ async function runTest() {
     timelineId = timelineRes.data._id;
     console.log("🗓️ Timeline created:", timelineId);
 
-    // 3. Create post
+    // Create post
     const postRes = await axios.post(POSTS, {
       title: "Test Post",
       content: "This is a test post with comment.",
@@ -52,9 +52,9 @@ async function runTest() {
     postId = postRes.data._id;
     console.log("📝 Post created with one comment:", postId);
 
-    // 4. Upload attachment
+    // Upload attachment
     const form = new FormData();
-    form.append("file", fs.createReadStream(path.join("dist/tests", "DonkeyMobile.png")));
+    form.append("file", fs.createReadStream(path.join("tests", "DonkeyMobile.png")));
     form.append("postId", postId);
 
     const attachRes = await axios.post(ATTACHMENTS, form, {
@@ -63,9 +63,23 @@ async function runTest() {
     attachmentId = attachRes.data.id;
     console.log("📎 Attachment uploaded:", attachmentId);
 
+    // Get post
+    const getPostRes = await axios.get(`${POSTS}/${postId}`);
+    console.log("🔍 Retrieved post:", getPostRes.data);
 
-    // 5. Cleanup
-     await axios.delete(`${POSTS}/${postId}`);
+    // Update post
+    const updatedPostRes = await axios.patch(`${POSTS}/${postId}`, {
+      title: "Updated Test Post",
+      content: "This post has been updated with new content."
+      });
+    console.log("✏️ Post updated:", updatedPostRes.data);
+
+
+    //
+    // Cleanup
+    //
+
+    await axios.delete(`${POSTS}/${postId}`);
     console.log("🧹 Post deleted with cascaded delete of attachments");
 
     await axios.delete(`${TIMELINES}/${timelineId}`);

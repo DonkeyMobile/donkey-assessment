@@ -32,15 +32,14 @@ export const createPost = async (req: Request, res: Response) => {
       content,
       timelineId,
       userId,
-      comments,
-      createdAt: new Date()
+      comments
     });
 
     // force schema validation
     try {
         await newPost.save();
     }catch (err: any) {
-        return res.status(400).json({error: err.message, err});       
+        return res.status(400).json({error: err.message});       
     }
 
     return res.status(201).json(newPost);
@@ -72,7 +71,7 @@ export const getPost = async (req: Request, res: Response) => {
 
 export const getAllPosts = async (req: Request, res: Response) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().lean();
     return res.status(200).json(posts);
   } catch (error) {
     console.error("Error fetching posts:", error);

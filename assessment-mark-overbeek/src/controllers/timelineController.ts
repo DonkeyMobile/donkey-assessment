@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-import { Timeline, ITimeline } from "../models/timeline.js";
+import { Timeline } from "../models/timeline.js";
+import type { ITimeline } from "../models/timeline.js";
 
 /**
- * Create a new post
+ * Create a new timeline
  */
 export const createTimeline = async (req: Request, res: Response) => {
   try {
@@ -17,7 +18,7 @@ export const createTimeline = async (req: Request, res: Response) => {
     try {
         await newTimeline.save();
     }catch (err: any) {
-        return res.status(400).json({error: err.message, err});
+        return res.status(400).json({error: err.message});
     }
 
     // Respond with the created timeline

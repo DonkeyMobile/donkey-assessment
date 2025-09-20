@@ -1,11 +1,11 @@
 ## start server
 
-`node server.js`
+`npm run build && node dist/server.js`
 
 ## start test file
 
-`node createPostWithCleanup.js`
+`node tests/CRUDPostWithCleanup.js`
 
 ## compile .ts files from src folder to .js files in dist folder
 
-`npx tsc`
+`npm run build`

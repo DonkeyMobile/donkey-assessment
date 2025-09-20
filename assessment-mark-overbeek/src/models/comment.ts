@@ -1,5 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { IUser } from "./user.js";
+import type { IUser } from "./user.js";
 
 export interface IComment extends Document {
   content: string;
@@ -17,5 +17,8 @@ const commentSchema = new mongoose.Schema({
     userId: { type : Schema.Types.ObjectId, ref: 'User', required: true },       //reference to User model
     createdAt: { type: Date, default: Date.now }
 });
+
+// Query helpers
+commentSchema.index({ userId: 1, createdAt: -1 });
 
 export const Comment = mongoose.model<IComment>("Comment", commentSchema);

@@ -25,6 +25,6 @@ const userSchema = new Schema<IUser>({
       "Email must be a valid format"
     ]
   }
-});
+}, { timestamps: true });
 
 export const User = mongoose.model<IUser>("User", userSchema);
