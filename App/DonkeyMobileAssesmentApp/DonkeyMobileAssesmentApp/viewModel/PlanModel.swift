@@ -19,11 +19,11 @@ struct Plan: Identifiable {
     }
 }
 
+
 let plans = [
-    Plan(title: "something something title", planImageName: "post1", description: "Me and my bible"),
-    Plan(title: "something something title", planImageName: "post2", description: "Different Description of what is going on in life"),
-    Plan(title: "Walking and Talking", planImageName: "post3", description: "Hey are you interested in long walks of peace?"),
-    Plan(title: "something something title", planImageName: "post4", description: "Me and my bible"),
-    Plan(title: "something something title", planImageName: "post5", description: "Me and my bible"),
-    
+    Plan(title: "Walking in Faith", planImageName: "post3", description: "Discover how to trust God daily and walk confidently in His promises — one step at a time."),
+    Plan(title: "Finding Peace in His Presence", planImageName: "post2", description: "Learn to slow down, breathe, and rest in God’s peace even when life feels uncertain or busy."),
+    Plan(title: "Love in Action", planImageName: "post8", description: "A 7-day journey exploring how to live out Christ’s love through kindness, patience, and compassion."),
+    Plan(title: "Strength in Surrender", planImageName: "post4", description: "True strength is found not in control, but in surrendering your plans to God’s perfect will."),
+    Plan(title: "Rooted in Scripture", planImageName: "post1", description: "Grow deeper in your faith by spending intentional time in God’s Word and applying it to daily life.")
 ]

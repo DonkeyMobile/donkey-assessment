@@ -28,7 +28,7 @@ struct PlanCard: View {
             
         }
         .frame(width: 200, height: 260, alignment: .topLeading) // Make sure that cards are same height and width
-        .padding(.vertical, 20)
+        .padding(.top, 20)
         .padding(.horizontal, 8)
     }
 }

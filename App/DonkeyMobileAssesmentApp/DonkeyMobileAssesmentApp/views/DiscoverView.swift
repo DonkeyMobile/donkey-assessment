@@ -9,11 +9,10 @@ import SwiftUI
 
 struct DiscoverView: View {
     var body: some View {
-        NavigationView{
+        NavigationView(){
             ScrollView{
                 PlanView(plans: plans)
-                Divider()
-                //GroupView(groups:groups)
+                GroupView(groups: groups)
             }
             .navigationTitle("Discover")
             .toolbar {
