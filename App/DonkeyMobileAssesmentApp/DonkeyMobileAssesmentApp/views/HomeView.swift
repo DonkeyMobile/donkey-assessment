@@ -13,7 +13,19 @@ struct HomeView: View {
             ScrollView{
                 StoryView()
                 Divider()
+                PostListView(posts:posts)
             }
+            .navigationTitle("Discover")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Image(systemName: "line.3.horizontal")
+                }
+                ToolbarItem(placement: .navigationBarTrailing){
+                    Image(systemName: "person.circle.fill")
+                }
+            }
+//            .navigationBarItems(leading: Image(systemName: "pencil.and.outline"),
+//                trailing: Image(systemName: "bell.fill"))
         }
     }
 }
