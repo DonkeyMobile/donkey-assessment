@@ -13,11 +13,9 @@ struct PostListView: View {
         VStack {
             ForEach(posts) { post in
                 PostCard(post: post)
-                    .listRowInsets(EdgeInsets())
-                    .listRowSeparator(.hidden)
-                    .padding(.vertical, 7)
+//                    .listRowInsets(EdgeInsets())
+                    .padding(.vertical, 8)
             }
-            
         }
         .listStyle(.plain)
     }

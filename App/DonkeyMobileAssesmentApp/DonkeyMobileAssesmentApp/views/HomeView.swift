@@ -15,7 +15,7 @@ struct HomeView: View {
                 Divider()
                 PostListView(posts:posts)
             }
-            .navigationTitle("Discover")
+            .navigationTitle("Following")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Image(systemName: "line.3.horizontal")
@@ -33,3 +33,4 @@ struct HomeView: View {
 #Preview {
     HomeView()
 }
+
