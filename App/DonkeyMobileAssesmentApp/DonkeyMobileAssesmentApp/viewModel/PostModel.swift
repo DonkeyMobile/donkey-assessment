@@ -2,7 +2,7 @@
 //  PostModel.swift
 //  DonkeyMobileAssesmentApp
 //
-//  Created by Paul Tolnor on 14/10/2025.
+//  Created by Paul on 14/10/2025.
 //
 
 import Foundation
@@ -11,7 +11,6 @@ struct Post: Identifiable {
     let id = UUID()
     let name: String
     let username: String
-//    let title: String
     let userProfileImage: String
     let postImageName: String
     let description: String
@@ -19,7 +18,6 @@ struct Post: Identifiable {
     init(name: String, username:String, userProfileImage: String,  postImageName: String, description: String) {
         self.name = name
         self.username = username
-//        self.title = title
         self.userProfileImage = userProfileImage
         self.postImageName = postImageName
         self.description = description

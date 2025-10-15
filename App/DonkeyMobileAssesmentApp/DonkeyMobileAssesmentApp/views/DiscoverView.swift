@@ -2,7 +2,7 @@
 //  DiscoverView.swift
 //  DonkeyMobileAssesmentApp
 //
-//  Created by Paul Tolnor on 14/10/2025.
+//  Created by Paul on 14/10/2025.
 //
 
 import SwiftUI

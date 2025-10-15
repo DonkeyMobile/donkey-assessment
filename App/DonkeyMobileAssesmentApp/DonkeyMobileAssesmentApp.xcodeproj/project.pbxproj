@@ -24,9 +24,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		71DCA7C92E9E741B00A1FC0D /* DonkeyMobileAssesmentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DonkeyMobileAssesmentApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		71DCA7D62E9E741D00A1FC0D /* DonkeyMobileAssesmentAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DonkeyMobileAssesmentAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		71DCA7E02E9E741D00A1FC0D /* DonkeyMobileAssesmentAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DonkeyMobileAssesmentAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		71DCA7C92E9E741B00A1FC0D /* DonkeyMobileAssesmentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = DonkeyMobileAssesmentApp.app; path = "/Users/paultolnor/Documents/GitHub/donkey-assessment/App/DonkeyMobileAssesmentApp/build/Debug-iphoneos/DonkeyMobileAssesmentApp.app"; sourceTree = "<absolute>"; };
+		71DCA7D62E9E741D00A1FC0D /* DonkeyMobileAssesmentAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = DonkeyMobileAssesmentAppTests.xctest; path = "/Users/paultolnor/Documents/GitHub/donkey-assessment/App/DonkeyMobileAssesmentApp/build/Debug-iphoneos/DonkeyMobileAssesmentApp.app/PlugIns/DonkeyMobileAssesmentAppTests.xctest"; sourceTree = "<absolute>"; };
+		71DCA7E02E9E741D00A1FC0D /* DonkeyMobileAssesmentAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = DonkeyMobileAssesmentAppUITests.xctest; path = "/Users/paultolnor/Documents/GitHub/donkey-assessment/App/DonkeyMobileAssesmentApp/build/Debug-iphoneos/DonkeyMobileAssesmentAppUITests-Runner.app/PlugIns/DonkeyMobileAssesmentAppUITests.xctest"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -78,18 +78,7 @@
 				71DCA7CB2E9E741B00A1FC0D /* DonkeyMobileAssesmentApp */,
 				71DCA7D92E9E741D00A1FC0D /* DonkeyMobileAssesmentAppTests */,
 				71DCA7E32E9E741D00A1FC0D /* DonkeyMobileAssesmentAppUITests */,
-				71DCA7CA2E9E741B00A1FC0D /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		71DCA7CA2E9E741B00A1FC0D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				71DCA7C92E9E741B00A1FC0D /* DonkeyMobileAssesmentApp.app */,
-				71DCA7D62E9E741D00A1FC0D /* DonkeyMobileAssesmentAppTests.xctest */,
-				71DCA7E02E9E741D00A1FC0D /* DonkeyMobileAssesmentAppUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,8 +184,11 @@
 			);
 			mainGroup = 71DCA7C02E9E741B00A1FC0D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				71DCA82A2E9EF20B00A1FC0D /* XCRemoteSwiftPackageReference "ViewInspector" */,
+			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 71DCA7CA2E9E741B00A1FC0D /* Products */;
+			productRefGroup = 71DCA7C02E9E741B00A1FC0D;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -558,6 +550,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		71DCA82A2E9EF20B00A1FC0D /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 71DCA7C12E9E741B00A1FC0D /* Project object */;
 }

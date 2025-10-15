@@ -2,7 +2,7 @@
 //  GroupCard.swift
 //  DonkeyMobileAssesmentApp
 //
-//  Created by Paul Tolnor on 14/10/2025.
+//  Created by Paul on 14/10/2025.
 //
 
 import SwiftUI
@@ -36,15 +36,5 @@ struct GroupCard: View {
 #Preview {
     GroupCard(group: groups[0])
 }
-//
-//  PlanCard.swift
-//  DonkeyMobileAssesmentApp
-//
-//  Created by Paul Tolnor on 14/10/2025.
-//
 
-import SwiftUI
-
-
-// Reusable helper
 
