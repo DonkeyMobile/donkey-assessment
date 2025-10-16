@@ -1,0 +1,23 @@
+//
+//  PostListView.swift
+//  DonkeyMobileAssesmentApp
+//
+//  Created by Paul on 14/10/2025.
+//
+
+import SwiftUI
+
+struct PostListView: View {
+    let posts: [Post]
+    var body: some View {
+        VStack {
+            ForEach(posts) { post in
+                PostCard(post: post)
+//                    .listRowInsets(EdgeInsets())
+                    .padding(.vertical, 8)
+            }
+        }
+        .listStyle(.plain)
+    }
+}
+
