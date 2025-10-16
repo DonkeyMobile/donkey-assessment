@@ -1,9 +1,15 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+wouter  = User.find_or_create_by!(email: "wouter@example.com") { |u| u.name = "Wouter" }
+jordy = User.find_or_create_by!(email: "jordy@example.com")   { |u| u.name = "Jordy" }
+joost = User.find_or_create_by!(email: "joost@example.com")   { |u| u.name = "Joost" }
+
+first_post = Post.find_or_create_by!(user: joost, description: "I think you should hire me.")
+_second_post = Post.find_or_create_by!(user: wouter, description: "I am going to win the next mario kart tournament.")
+
+comment1 = Comment.find_or_create_by!(post: first_post, user: wouter, body: "idk yet")
+comment2 = Comment.find_or_create_by!(post: first_post,  user: jordy, body: "just send me the assignment.")
+
+first_post.likes.find_or_create_by!(user: wouter)
+first_post.likes.find_or_create_by!(user: jordy)
+
+comment1.likes.find_or_create_by!(user: wouter)
+comment2.likes.find_or_create_by!(user: jordy)
