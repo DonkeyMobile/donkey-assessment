@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: .
+    environment:
+      - RAILS_ENV=development
+      - PORT=3000
+    command: ["./bin/rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+    ports:
+      - "3000:3000"
+    volumes:
+      # Persist SQLite databases and app storage between container restarts
+      - rails_storage:/rails/storage
+      - rails_logs:/rails/log
+    restart: unless-stopped
+
+volumes:
+  rails_storage:
+  rails_logs:
+
+
