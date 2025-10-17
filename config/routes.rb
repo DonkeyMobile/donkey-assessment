@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   resources :posts, defaults: { format: :json }
   resources :comments, only: [ :create ], defaults: { format: :json }
   resources :likes, only: [ :create, :destroy ], defaults: { format: :json }
+
+  apipie
 end

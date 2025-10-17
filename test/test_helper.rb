@@ -3,6 +3,11 @@ require_relative "../config/environment"
 require "rails/test_help"
 require "factory_bot_rails"
 
+# Disable Apipie validation in test environment
+Apipie.configure do |config|
+  config.validate = false
+end
+
 module ActiveSupport
   class TestCase
     # Run tests in parallel with specified workers

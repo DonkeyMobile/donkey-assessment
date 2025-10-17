@@ -49,6 +49,22 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "must exist", json_response["errors"]["likeable"].first
   end
 
+  test "#create returns errors when user tries to like their own post" do
+    user = create(:user)
+    post = create(:post, user: user)
+    post "/likes", params: { user_id: user.id, likeable_type: "Post", likeable_id: post.id }
+    assert_response :unprocessable_entity
+    assert_equal "cannot like their own content", json_response["errors"]["user"].first
+  end
+
+  test "#create returns errors when user tries to like their own comment" do
+    user = create(:user)
+    post = create(:post)
+    comment = create(:comment, user: user, post: post)
+    post "/likes", params: { user_id: user.id, likeable_type: "Comment", likeable_id: comment.id }
+    assert_response :unprocessable_entity
+    assert_equal "cannot like their own content", json_response["errors"]["user"].first
+  end
 
   test "#create returns errors when user tries to like the same post twice" do
     user = create(:user)

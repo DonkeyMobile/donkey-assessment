@@ -1,4 +1,15 @@
 class CommentsController < ApplicationController
+  resource_description do
+    short "Comments API"
+    description "API for managing comments on posts"
+    formats [ "json" ]
+  end
+
+  api :POST, "/comments", "Create a new comment"
+  param :body, String, desc: "Comment body text", required: true
+  param :user_id, :number, desc: "User ID who created the comment", required: true
+  param :post_id, :number, desc: "Post ID to comment on", required: true
+  error 422, "Validation failed - missing required fields or invalid data"
   def create
     build_comment
     save_comment or render_errors

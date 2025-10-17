@@ -1,9 +1,22 @@
 class LikesController < ApplicationController
+  resource_description do
+    short "Likes API"
+    description "API for managing likes on posts and comments"
+    formats [ "json" ]
+  end
+
+  api :POST, "/likes", "Create a new like"
+  param :user_id, :number, desc: "User ID who created the like", required: true
+  param :likeable_type, String, desc: "Type of object being liked (Post or Comment)", required: true
+  param :likeable_id, :number, desc: "ID of the object being liked", required: true
+  error 422, "Validation failed - user cannot like their own content, duplicate like, or missing required fields"
   def create
     build_like
     save_like or render_errors
   end
 
+  api :DELETE, "/likes/:id", "Remove a like"
+  param :id, :number, desc: "Like ID", required: true
   def destroy
     load_like
     @like.destroy if @like.present?
