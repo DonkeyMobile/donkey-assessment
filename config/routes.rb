@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :posts, defaults: { format: :json }
+  resources :comments, only: [ :create ], defaults: { format: :json }
 end
