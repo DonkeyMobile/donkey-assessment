@@ -15,3 +15,14 @@ module ActiveSupport
     include FactoryBot::Syntax::Methods
   end
 end
+
+# Helpers available to all integration tests
+module JsonResponseHelper
+  def json_response
+    JSON.parse(@response.body)
+  end
+end
+
+class ActionDispatch::IntegrationTest
+  include JsonResponseHelper
+end
