@@ -1,8 +1,13 @@
 class PostsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
+  DEFAULT_PER_PAGE = 10
+  DEFAULT_SORT = :desc
+
   def index
     load_posts
+    paginate_posts
+    order_posts
   end
 
   def show
@@ -29,6 +34,14 @@ class PostsController < ApplicationController
 
   def load_posts
     @posts ||= post_scope
+  end
+
+  def paginate_posts
+    @posts = @posts.page(params[:page]).per(params[:per_page] || DEFAULT_PER_PAGE)
+  end
+
+  def order_posts
+    @posts = @posts.order(created_at: params[:sort] || DEFAULT_SORT)
   end
 
   def load_post
