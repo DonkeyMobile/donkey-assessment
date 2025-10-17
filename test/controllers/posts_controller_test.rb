@@ -128,11 +128,38 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "must exist", json_response["errors"]["user"].first
   end
 
+  test "#create creates a post with attachments" do
+    user = create(:user)
+    file = Rack::Test::UploadedFile.new(Rails.root.join("test/fixtures/files/test.txt"), "text/plain")
+    post "/posts", params: {
+      description: "Hello world with attachment",
+      user_id: user.id,
+      attachments: [ file ]
+    }
+    assert_response :success
+    assert_equal "Hello world with attachment", json_response["post"]["description"]
+    assert_equal 1, json_response["post"]["attachments"].count
+    assert_equal "test.txt", json_response["post"]["attachments"].first["filename"]
+  end
+
   test "#update updates a post with valid params" do
     post = create(:post)
     put "/posts/#{post.id}", params: { description: "Hello world" }
     assert_response :success
     assert_equal "Hello world", json_response["post"]["description"]
+  end
+
+  test "#update updates a post with attachments" do
+    post = create(:post)
+    file = Rack::Test::UploadedFile.new(Rails.root.join("test/fixtures/files/test.txt"), "text/plain")
+    put "/posts/#{post.id}", params: {
+      description: "Hello world with attachment",
+      attachments: [ file ]
+    }
+    assert_response :success
+    assert_equal "Hello world with attachment", json_response["post"]["description"]
+    assert_equal 1, json_response["post"]["attachments"].count
+    assert_equal "test.txt", json_response["post"]["attachments"].first["filename"]
   end
 
   test "#update returns errors when description is blank" do

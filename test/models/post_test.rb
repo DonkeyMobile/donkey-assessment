@@ -19,4 +19,12 @@ class PostTest < ActiveSupport::TestCase
     create_list(:comment, 3, post: post)
     assert_equal 3, post.comments.count
   end
+
+  test "post can have attachments" do
+    post = create(:post)
+    file = Rack::Test::UploadedFile.new(Rails.root.join("test/fixtures/files/test.txt"), "text/plain")
+    post.attachments.attach(file)
+    assert_equal 1, post.attachments.count
+    assert_equal "test.txt", post.attachments.first.filename.to_s
+  end
 end

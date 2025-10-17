@@ -62,7 +62,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.permit(:description, :user_id)
+    params.permit(:description, :user_id, attachments: [])
   end
 
   def render_errors
