@@ -16,8 +16,8 @@ class PostsController < ApplicationController
   param :sort, String, desc: "Sort order (asc or desc, default: desc)", required: false
   def index
     load_posts
-    paginate_posts
     order_posts
+    paginate_posts
   end
 
   api :GET, "/posts/:id", "Show a specific post"
@@ -61,15 +61,21 @@ class PostsController < ApplicationController
   private
 
   def load_posts
-    @posts ||= post_scope
+    @posts ||= post_scope.includes(:user, { comments: :user }, { likes: :user }, attachments_attachments: :blob)
   end
 
   def paginate_posts
-    @posts = @posts.page(params[:page]).per(params[:per_page] || DEFAULT_PER_PAGE)
+    if params[:per_page].present?
+      bounded_per_page = [ [ params[:per_page].to_i, 1 ].max, 100 ].min
+      @posts = @posts.page(params[:page]).per(bounded_per_page)
+    else
+      @posts = @posts.page(params[:page]).per(DEFAULT_PER_PAGE)
+    end
   end
 
   def order_posts
-    @posts = @posts.order(created_at: params[:sort] || DEFAULT_SORT)
+    sort_direction = %w[asc desc].include?(params[:sort]) ? params[:sort] : DEFAULT_SORT
+    @posts = @posts.order(created_at: sort_direction)
   end
 
   def load_post
