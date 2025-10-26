@@ -6,15 +6,11 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.egsdevelopment.template.presentation.R
 import com.egsdevelopment.template.presentation.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * @author e.smits
- * @version 1
- * @since 06-08-2020
- */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -30,5 +26,6 @@ class MainActivity : AppCompatActivity() {
         )
         setTheme(R.style.AppTheme)
         setContentView(binding.root)
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
     }
 }

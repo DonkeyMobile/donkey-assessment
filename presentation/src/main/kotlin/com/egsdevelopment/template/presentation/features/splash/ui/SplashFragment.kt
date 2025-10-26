@@ -23,7 +23,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     private fun initiateDelayAndNavigate() = binding?.apply {
         lifecycleScope.launch {
             delay(2500L)
-            findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
         }
     }
 

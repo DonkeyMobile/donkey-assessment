@@ -3,6 +3,14 @@
     <string name="app_name">Template</string>
     <string name="example_text">Example text</string>
 
+    <!-- Login flow -->
+    <string name="login_title">Uw kerk, uw community</string>
+    <string name="login_description">Login en bekijk de meest recente posts binnen uw community</string>
+    <string name="login_username_hint">Gebruikersnaam</string>
+    <string name="login_password_hint">Wachtwoord</string>
+    <string name="login_button">Login</string>
+    <string name="login_error">Gebruikersnaam en/of wachtwoord combinatie bestaat niet</string>
+
     <!-- content descriptions -->
     <string name="cd_splash_icon">Splash icon</string>
 </resources>

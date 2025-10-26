@@ -9,13 +9,11 @@
 
     <style name="SplashFragmentTitle">
         <item name="android:textColor">@color/splashTitle</item>
-        <item name="android:fontFamily">@font/montserratblack</item>
         <item name="android:textSize">@dimen/title</item>
     </style>
 
     <style name="SplashFragmentSubTitle">
         <item name="android:textColor">@color/splashSubTitle</item>
-        <item name="android:fontFamily">@font/montserratblackitalic</item>
         <item name="android:textSize">@dimen/subtitle</item>
     </style>
 

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <LinearLayout
+        android:id="@+id/views_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/page_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_title"
+            android:textColor="@color/textColor"
+            android:textSize="32sp" />
+
+        <TextView
+            android:id="@+id/page_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_description"
+            android:textColor="@color/textColor"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/login_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/login_error"
+            android:textColor="@color/textColorError"
+            android:visibility="invisible"
+            tools:visibility="visible" />
+
+        <EditText
+            android:id="@+id/username_input_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints="username"
+            android:backgroundTint="@color/textColorHint"
+            android:hint="@string/login_username_hint"
+            android:inputType="text"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColorHint" />
+
+        <EditText
+            android:id="@+id/password_input_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints="password"
+            android:backgroundTint="@color/textColorHint"
+            android:hint="@string/login_password_hint"
+            android:inputType="text"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColorHint" />
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@color/buttonColor"
+            android:enabled="false"
+            android:text="@string/login_button"
+            android:textColor="@color/textColorInverted" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
