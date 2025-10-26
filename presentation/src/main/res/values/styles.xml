@@ -1,0 +1,22 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="SplashFragmentTitle">
+        <item name="android:textColor">@color/splashTitle</item>
+        <item name="android:fontFamily">@font/montserratblack</item>
+        <item name="android:textSize">@dimen/title</item>
+    </style>
+
+    <style name="SplashFragmentSubTitle">
+        <item name="android:textColor">@color/splashSubTitle</item>
+        <item name="android:fontFamily">@font/montserratblackitalic</item>
+        <item name="android:textSize">@dimen/subtitle</item>
+    </style>
+
+</resources>

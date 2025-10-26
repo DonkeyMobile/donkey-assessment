@@ -1,0 +1,55 @@
+[versions]
+annotation = "1.9.1"
+appCompat = "1.7.1"
+accompanist = "0.15.0"
+coreKtx = "1.17.0"
+coroutinesVersion = "1.10.2"
+dataStoreVersion = "1.1.7"
+kotlin = "2.2.20"
+daggerHilt = "2.57.2"
+gradle = "8.13.0"
+navigation = "2.9.5"
+junit = "4.13.2"
+okhttp = "5.1.0"
+retrofit = "3.0.0"
+retrofitJsonConverterExtension = "1.0.0"
+room = "2.8.1"
+serialization = "1.9.0"
+timber = "5.0.1"
+ksp = "2.2.20-2.0.3"
+
+[plugins]
+android-library-plugin = { id = "com.android.library", version.ref = "gradle" }
+kotlin-jvm-plugin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+dagger-hilt-plugin = { id = "com.google.dagger.hilt.android", version.ref = "daggerHilt" }
+android-application-plugin = { id = "com.android.application", version.ref = "gradle" }
+kotlin-kapt-plugin = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-android-plugin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+navigation-safe-args-plugin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
+google-devtools-ksp = { id= "com.google.devtools.ksp", version.ref = "ksp"}
+
+[libraries]
+androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation"}
+androidx-app-compat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appCompat"}
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx"}
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStoreVersion"}
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name ="navigation-fragment-ktx", version.ref = "navigation" }
+
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room"}
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room"}
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room"}
+coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutinesVersion" }
+coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
+dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHilt" }
+dagger = { group = "com.google.dagger", name = "dagger", version.ref = "daggerHilt" }
+dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "daggerHilt" }
+junit = { group = "junit", name = "junit", version.ref = "junit"}
+kotlin-std-lib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-json-converter-extension = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitJsonConverterExtension" }
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+

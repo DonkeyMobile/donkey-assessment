@@ -1,0 +1,8 @@
+<resources>
+    <!-- app info -->
+    <string name="app_name">Template</string>
+    <string name="example_text">Example text</string>
+
+    <!-- content descriptions -->
+    <string name="cd_splash_icon">Splash icon</string>
+</resources>

@@ -1,5 +1,7 @@
-# Donkey assessments
+# Template
 
-* [Frontend developer assignment](frontend-developer-assignment.md)
-* [Backend developer assignment](backend-developer-assignment.md)
-* [Data scientist assignment](data-scientist-assignment.md)
+Empty template for a modern Android app
+
+## How to use
+
+When starting a fresh project from this template, please change app logo accordingly and create correct theming
