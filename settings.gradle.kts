@@ -1,5 +1,5 @@
 include(":app", ":presentation", ":domain", ":data")
-rootProject.name = "Template"
+rootProject.name = "Donkey Mobile"
 pluginManagement {
     repositories {
         google()

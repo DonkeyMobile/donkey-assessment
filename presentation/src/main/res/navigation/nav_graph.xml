@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.egsdevelopment.template.presentation.features.splash.ui.SplashFragment"
+        android:name="com.egsdevelopment.donkeymobile.presentation.features.splash.ui.SplashFragment"
         tools:layout="@layout/fragment_splash"
         android:label="SplashFragment" >
         <action
@@ -17,12 +17,12 @@
     <fragment
         android:id="@+id/homeFragment"
         tools:layout="@layout/fragment_home"
-        android:name="com.egsdevelopment.template.presentation.features.home.ui.HomeFragment"
+        android:name="com.egsdevelopment.donkeymobile.presentation.features.home.ui.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/loginFragment"
         tools:layout="@layout/fragment_login"
-        android:name="com.egsdevelopment.template.presentation.features.login.ui.LoginFragment"
+        android:name="com.egsdevelopment.donkeymobile.presentation.features.login.ui.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"

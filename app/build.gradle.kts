@@ -16,16 +16,16 @@ android {
     signingConfigs {
         create("release") {
             storePassword = "SnowBall888!"
-            keyAlias = "template-release"
+            keyAlias = "donkeymobile-release"
             keyPassword = "SnowBall888!"
             storeFile =
-                file("/Users/evertsmits/Documents/egsdevelopment/Android/keystores/template-release")
+                file("/Users/evertsmits/Documents/egsdevelopment/Android/keystores/donkeymobile-release")
         }
     }
-    namespace = "com.egsdevelopment.template.app"
+    namespace = "com.egsdevelopment.donkeymobile.app"
 
     defaultConfig {
-        applicationId = "com.egsdevelopment.template"
+        applicationId = "com.egsdevelopment.donkeymobile"
         minSdk = AppConfig.minSdkVersion
         compileSdk = AppConfig.compileSdkVersion
         targetSdk = AppConfig.targetSdkVersion

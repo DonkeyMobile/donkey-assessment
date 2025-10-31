@@ -9,7 +9,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.egsdevelopment.template.presentation.main.MainActivity"
+            android:name="com.egsdevelopment.donkeymobile.presentation.main.MainActivity"
             android:exported="true"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">

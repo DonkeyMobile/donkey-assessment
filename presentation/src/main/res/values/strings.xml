@@ -1,6 +1,6 @@
 <resources>
     <!-- app info -->
-    <string name="app_name">Template</string>
+    <string name="app_name">Donkey Mobile</string>
     <string name="example_text">Example text</string>
 
     <!-- Login flow -->

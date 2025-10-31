@@ -13,7 +13,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.egsdevelopment.template.presentation"
+    namespace = "com.egsdevelopment.donkeymobile.presentation"
     defaultConfig {
         compileSdk = AppConfig.compileSdkVersion
         minSdk = AppConfig.minSdkVersion

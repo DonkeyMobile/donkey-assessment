@@ -3,7 +3,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.egsdevelopment.template.app.App"
+        android:name="com.egsdevelopment.donkeymobile.app.App"
         android:allowBackup="true"
         android:supportsRtl="true">
     </application>
