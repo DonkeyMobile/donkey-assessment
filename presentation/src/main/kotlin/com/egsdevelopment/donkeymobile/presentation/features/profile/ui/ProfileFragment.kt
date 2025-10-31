@@ -4,6 +4,7 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.ColorInt
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -26,6 +27,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        WindowInsetsControllerCompat(requireActivity().window, requireActivity().window.decorView).isAppearanceLightStatusBars = true
         binding = FragmentProfileBinding.bind(view)
         binding?.container?.applyWindowInsetTop()
         initCollectors()
@@ -38,16 +40,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun onProfile(profile: ProfileDisplay?) = binding?.apply {
         profile?.let {
-            setAvatar(profile.user)
+            avatar.setUser(profile.user)
             username.text = profile.user.username
             bio.text = profile.bio
         }
-    }
-
-    private fun setAvatar(userDisplay: UserDisplay) = binding?.apply {
-        val background = avatar.background as? GradientDrawable
-        background?.setColor(userDisplay.avatarColor)
-        avatar.text = userDisplay.username.first().uppercase()
     }
 
     private fun initLogoutButton() = binding?.apply {

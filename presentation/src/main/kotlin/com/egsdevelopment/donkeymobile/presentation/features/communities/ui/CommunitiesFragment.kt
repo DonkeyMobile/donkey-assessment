@@ -2,6 +2,7 @@ package com.egsdevelopment.donkeymobile.presentation.features.communities.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -25,6 +26,7 @@ class CommunitiesFragment : Fragment(R.layout.fragment_communitites) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        WindowInsetsControllerCompat(requireActivity().window, requireActivity().window.decorView).isAppearanceLightStatusBars = false
         binding = FragmentCommunititesBinding.bind(view)
         binding?.topbar?.applyWindowInsetTop()
         initPager()

@@ -7,6 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
     <style name="SplashFragmentTitle">
         <item name="android:textColor">@color/splashTitle</item>
         <item name="android:textSize">@dimen/title</item>
@@ -18,17 +19,32 @@
     </style>
 
     <style name="PostTitle">
+        <item name="fontFamily">@font/alef_regular</item>
         <item name="android:textColor">@color/textColor</item>
         <item name="android:textSize">@dimen/title</item>
     </style>
 
+    <style name="UserAvatar">
+        <item name="fontFamily">@font/alef_regular</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">@dimen/normal</item>
+    </style>
+
     <style name="PostMessage">
+        <item name="fontFamily">@font/lato_regular</item>
         <item name="android:textColor">@color/regularText</item>
         <item name="android:textSize">@dimen/normal</item>
     </style>
 
     <style name="PostTimeStamp">
+        <item name="fontFamily">@font/lato_regular</item>
         <item name="android:textColor">@color/metaText</item>
         <item name="android:textSize">@dimen/small</item>
+    </style>
+
+    <style name="TopBarTitle">
+        <item name="fontFamily">@font/alef_regular</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">@dimen/subtitle</item>
     </style>
 </resources>

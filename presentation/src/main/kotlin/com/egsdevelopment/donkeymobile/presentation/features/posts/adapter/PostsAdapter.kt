@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.egsdevelopment.donkeymobile.presentation.R
 import com.egsdevelopment.donkeymobile.presentation.features.posts.display.PostDisplay
+import com.egsdevelopment.donkeymobile.presentation.view.AvatarView
 
 class PostsAdapter(
     val posts: List<PostDisplay>
@@ -35,8 +36,7 @@ class PostsAdapter(
             holder.image.setImageDrawable(null)
             holder.image.isGone = true
         }
-        (holder.avatar.background as? GradientDrawable)?.setColor(post.user.avatarColor)
-        holder.avatar.text = post.user.username.first().toString().uppercase()
+        holder.avatar.setUser(post.user)
         holder.userName.text = post.user.username
         holder.timeStamp.text = post.time
     }
@@ -50,7 +50,7 @@ class PostsAdapter(
         val message: TextView = itemView.findViewById(R.id.post_message)
         val image: ImageView = itemView.findViewById(R.id.post_image)
         val timeStamp: TextView = itemView.findViewById(R.id.post_timestamp)
-        val avatar: TextView = itemView.findViewById(R.id.post_avatar)
+        val avatar: AvatarView = itemView.findViewById(R.id.post_avatar)
         val userName: TextView = itemView.findViewById(R.id.post_name)
     }
 }

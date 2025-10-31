@@ -8,6 +8,8 @@
     <color name="buttonColor">#AC804C</color>
     <color name="buttonColorDisabled">#493A21</color>
     <color name="textColor">#000000</color>
+    <color name="topBarBackground">#AC804C</color>
+    <color name="topBarTextColor">#FFFFFF</color>
     <color name="regularText">#202020</color>
     <color name="metaText">#2D2C2C</color>
     <color name="textColorHint">#BFAC804C</color>
