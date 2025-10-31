@@ -9,6 +9,6 @@ class PostProvider @Inject constructor(
 ) {
 
     fun provide(): List<PostEntity> {
-        return generator.generate(450)
+        return generator.posts
     }
 }

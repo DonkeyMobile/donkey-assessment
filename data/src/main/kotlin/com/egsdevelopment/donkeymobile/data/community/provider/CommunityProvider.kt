@@ -11,9 +11,23 @@ class CommunityProvider @Inject constructor(
     private val COMMUNITY_AMOUNT = 9
     private val CHUNK_SIZE = 50
 
+    private val communityNames: List<String> = listOf(
+        "Gemeente De Lichtbron",
+        "Evangelische Kerk De Weg",
+        "Protestantse Wijkgemeente Het Kompas",
+        "Katholieke Parochie Sint-Jan de Doper",
+        "Baptistengemeente Het Fundament",
+        "Christengemeente Levend Water",
+        "Vrije Evangelische Gemeente De Rank",
+        "Gereformeerde Kerk De Oase",
+        "Samenkomsthuis De Ark"
+    )
+
     private val providedPosts = postProvider.provide()
 
-    fun provideList(): List<CommunityEntity> {
+    val communities = provideList()
+
+    private fun provideList(): List<CommunityEntity> {
         val communities = mutableListOf<CommunityEntity>()
         repeat(COMMUNITY_AMOUNT) { index ->
             communities.add(provide(index, CHUNK_SIZE))
@@ -30,16 +44,4 @@ class CommunityProvider @Inject constructor(
             posts = providedPosts.subList(fromIndex, toIndex)
         )
     }
-
-    private val communityNames: List<String> = listOf(
-        "Gemeente De Lichtbron",
-        "Evangelische Kerk De Weg",
-        "Protestantse Wijkgemeente Het Kompas",
-        "Katholieke Parochie Sint-Jan de Doper",
-        "Baptistengemeente Het Fundament",
-        "Christengemeente Levend Water",
-        "Vrije Evangelische Gemeente De Rank",
-        "Gereformeerde Kerk De Oase",
-        "Samenkomsthuis De Ark"
-    )
 }

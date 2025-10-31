@@ -1,25 +1,12 @@
 package com.egsdevelopment.donkeymobile.data.post.generator
 
 import com.egsdevelopment.donkeymobile.data.post.entity.PostEntity
+import com.egsdevelopment.donkeymobile.data.user.provider.UserProvider
 import javax.inject.Inject
 
-class PostGenerator @Inject constructor() {
-
-    fun generate(amount: Int): List<PostEntity> {
-        val posts = mutableListOf<PostEntity>()
-        repeat(amount) { index ->
-            posts.add(
-                PostEntity(
-                    id = index,
-                    title = titles[(titles.indices).random()],
-                    message = messages[(messages.indices).random()],
-                    imgSrc = images[(images.indices).random()],
-                    timeStamp = timestamps[(timestamps.indices).random()],
-                )
-            )
-        }
-        return posts
-    }
+class PostGenerator @Inject constructor(
+    private val userProvider: UserProvider
+) {
 
     /**
      * Just a dataset of images of churches to enrich posts. We want to add some random nulls to simulate posts without image content
@@ -31,16 +18,13 @@ class PostGenerator @Inject constructor() {
         "https://upload.wikimedia.org/wikipedia/commons/c/c3/A_CHURCH_INTERIOR_%29.jpg",
         "https://upload.wikimedia.org/wikipedia/commons/f/f7/Eunate-inside_iglesia_santa_maria.jpg",
         "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/St._Gertrude_Old_Church_Interior_1%2C_Riga%2C_Latvia_-_Diliff.jpg/1533px-St._Gertrude_Old_Church_Interior_1%2C_Riga%2C_Latvia_-_Diliff.jpg?20150120163232",
-        "https://pixnio.com/free-images/2021/03/11/2021-03-11-12-26-22-1800x1200.jpg",
-        "https://i1.pickpik.com/photos/987/417/269/architecture-bright-catholic-church-preview.jpg",
-        "https://www.lookandlearn.com/history-images/preview/YLV/YLV1/YLV1037/YLV1037178_RC-Church-Maitland.jpg",
-        "https://b2385643.smushcdn.com/2385643/wp-content/uploads/2019/04/Unifying-Architecture-and-Design-NB-min.jpg?lossy=1&strip=1&webp=1",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
+        "https://upload.wikimedia.org/wikipedia/commons/5/5f/People_gathering_in_front_of_the_Sixth_Presbyterian_Church_for_the_2018_Jewish_pittsburgh_shooting_event.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/2/25/Central_Christian_Church_worship_service.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/e/e5/All_Saints_Church%2C_Highweek_from_the_graveyard.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/d/d2/Church_Service_1600s.jpeg",
+        "https://upload.wikimedia.org/wikipedia/commons/a/ae/BonfimSalvador-CCBY.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/1/19/St_Casimir_Church_Exterior_At_Dusk%2C_Vilnius%2C_Lithuania_-_Diliff.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Church_service%2C_Yerevan_%285211267961%29.jpg/1200px-Church_service%2C_Yerevan_%285211267961%29.jpg",
         null,
         null,
         null,
@@ -115,6 +99,27 @@ class PostGenerator @Inject constructor() {
         "2025-07-07T09:00:00Z",
         "2025-07-21T09:00:00Z"
     )
+
+    private val users = userProvider.provide()
+
+    val posts = generate(450)
+
+    private fun generate(amount: Int): List<PostEntity> {
+        val posts = mutableListOf<PostEntity>()
+        repeat(amount) { index ->
+            posts.add(
+                PostEntity(
+                    id = index,
+                    title = titles[(titles.indices).random()],
+                    message = messages[(messages.indices).random()],
+                    imgSrc = images[(images.indices).random()],
+                    timeStamp = timestamps[(timestamps.indices).random()],
+                    userId = users[(users.indices).random()].id
+                )
+            )
+        }
+        return posts
+    }
 }
 
 

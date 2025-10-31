@@ -1,7 +1,9 @@
 package com.egsdevelopment.domain.authentication.model.user
 
 data class User(
-    val id: Long,
-    val credentials: UserCredentials,
+    val id: Int,
+    val name: String,
+    val bio: String,
+    val avatarHexColor: String,
     val communitiesIds: List<Int>
 )

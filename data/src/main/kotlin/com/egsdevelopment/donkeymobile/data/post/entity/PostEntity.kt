@@ -5,5 +5,6 @@ data class PostEntity(
     val title: String,
     val message: String,
     val imgSrc: String?,
-    val timeStamp: String
+    val timeStamp: String,
+    val userId: Int
 )

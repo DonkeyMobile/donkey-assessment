@@ -17,4 +17,18 @@
         <item name="android:textSize">@dimen/subtitle</item>
     </style>
 
+    <style name="PostTitle">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">@dimen/title</item>
+    </style>
+
+    <style name="PostMessage">
+        <item name="android:textColor">@color/regularText</item>
+        <item name="android:textSize">@dimen/normal</item>
+    </style>
+
+    <style name="PostTimeStamp">
+        <item name="android:textColor">@color/metaText</item>
+        <item name="android:textSize">@dimen/small</item>
+    </style>
 </resources>

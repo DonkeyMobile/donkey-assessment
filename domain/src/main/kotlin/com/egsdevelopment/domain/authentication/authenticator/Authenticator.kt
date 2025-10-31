@@ -7,5 +7,7 @@ interface Authenticator {
 
     fun login(credentials: UserCredentials): Result<User>
 
+    fun logout()
+
     fun getCurrentUser(): Result<User>
 }

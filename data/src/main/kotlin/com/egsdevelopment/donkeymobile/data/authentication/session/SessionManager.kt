@@ -17,4 +17,8 @@ class SessionManager @Inject constructor() {
     }
 
     fun getLoggedInUser(): User? = loggedInUser
+
+    fun logout() {
+        loggedInUser = null
+    }
 }

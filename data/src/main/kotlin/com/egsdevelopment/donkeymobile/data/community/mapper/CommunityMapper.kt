@@ -15,7 +15,7 @@ class CommunityMapper @Inject constructor(
         }
     }
 
-    private fun map(entity: CommunityEntity): Community {
+    fun map(entity: CommunityEntity): Community {
         return Community(
             id = entity.id,
             name = entity.name,

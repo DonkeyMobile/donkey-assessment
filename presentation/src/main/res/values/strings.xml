@@ -11,6 +11,9 @@
     <string name="login_button">Login</string>
     <string name="login_error">Gebruikersnaam en/of wachtwoord combinatie bestaat niet</string>
 
+    <!-- Logout flow -->
+    <string name="logout_button">Logout</string>
+
     <!-- content descriptions -->
     <string name="cd_splash_icon">Splash icon</string>
 </resources>

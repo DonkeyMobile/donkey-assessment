@@ -57,12 +57,6 @@ dependencies {
     // Androidx annotation
     implementation(libs.androidx.annotation)
 
-    // Room
-    implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.androidx.room.compiler)
-    ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
-
     // DataStore
     implementation(libs.androidx.datastore.preferences)
 
