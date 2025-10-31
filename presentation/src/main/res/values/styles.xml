@@ -30,9 +30,21 @@
         <item name="android:textSize">@dimen/normal</item>
     </style>
 
+    <style name="UserName">
+        <item name="fontFamily">@font/alef_regular</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">@dimen/large</item>
+    </style>
+
+    <style name="Bio">
+        <item name="fontFamily">@font/lato_regular</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">@dimen/normal</item>
+    </style>
+
     <style name="PostMessage">
         <item name="fontFamily">@font/lato_regular</item>
-        <item name="android:textColor">@color/regularText</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:textSize">@dimen/normal</item>
     </style>
 
@@ -46,5 +58,11 @@
         <item name="fontFamily">@font/alef_regular</item>
         <item name="android:textColor">@color/textColor</item>
         <item name="android:textSize">@dimen/subtitle</item>
+    </style>
+
+    <style name="Button">
+        <item name="fontFamily">@font/alef_regular</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">@dimen/large</item>
     </style>
 </resources>

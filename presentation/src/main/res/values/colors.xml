@@ -2,20 +2,19 @@
 <resources>
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#616161</color>
-    <color name="postDivider">#EAEAEA</color>
     <color name="colorAccent">#DAA403</color>
+    <color name="postDivider">#F4F4F4</color>
     <color name="colorBackground">#FFFFFF</color>
     <color name="buttonColor">#AC804C</color>
     <color name="buttonColorDisabled">#493A21</color>
     <color name="textColor">#000000</color>
     <color name="topBarBackground">#AC804C</color>
     <color name="topBarTextColor">#FFFFFF</color>
-    <color name="regularText">#202020</color>
     <color name="metaText">#2D2C2C</color>
     <color name="textColorHint">#BFAC804C</color>
     <color name="textColorInverted">#FFFFFF</color>
     <color name="avatarTextColor">#FFFFFF</color>
-    <color name="textColorError">#FF0000</color>
+    <color name="textColorError">#940000</color>
 
     <!-- Splash -->d
     <color name="splashTitle">#000000</color>

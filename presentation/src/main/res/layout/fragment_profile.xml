@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorBackground"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:padding="16dp">
 
     <LinearLayout
@@ -24,29 +24,32 @@
 
         <TextView
             android:id="@+id/username"
+            style="@style/UserName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="16dp"
-            android:textColor="@color/textColor"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
+            android:textColor="@color/textColor"
             tools:text="Evert Smits" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/bio"
+        style="@style/Bio"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:textColor="@color/textColor"
         android:layout_marginBottom="16dp"
+        android:textColor="@color/textColor"
         app:layout_constraintBottom_toTopOf="@id/logout_button"
         app:layout_constraintTop_toBottomOf="@id/container"
         tools:text="Als ik in de kerk zit, zie ik de mogelijkheden één voor één voorbij komen: Een vriend vraagt of hij kleingeld mag lenen voor de collecte, want dat heeft hij nooit meer bij zich. De bloemengroet gaat naar een mevrouw van wie ik graag zou willen dat ik snel het gezicht erbij kon zoeken. Situaties die soepeler kunnen. Maar er is meer dan alleen de puur praktische toepassing. Betrokkenheid op elkaar en het delen van inspiratie kun je zoveel makkelijker maken. Dat is de reden dat ik Donkey Mobile heb opgericht. De kerk met zijn tijdloze boodschap van liefde voor God en de naaste willen wij ondersteunen met onze kennis van apps en mobiel. Concreet willen wij een technologie maken die kerken uit verschillende plaatsen in staat stelt hun eigen app te maken. Dat kan, want uiteindelijk zijn de gevraagde functionaliteiten in Utrecht hetzelfde als in Amsterdam of Urk. Hoe prachtig zou het zijn als wij straks iedere kerk een app geven" />
 
     <Button
         android:id="@+id/logout_button"
+        style="@style/Button"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:background="@color/buttonColor"

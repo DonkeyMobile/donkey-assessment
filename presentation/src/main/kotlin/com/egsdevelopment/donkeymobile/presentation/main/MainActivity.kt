@@ -26,6 +26,5 @@ class MainActivity : AppCompatActivity() {
         )
         setTheme(R.style.AppTheme)
         setContentView(binding.root)
-        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
     }
 }

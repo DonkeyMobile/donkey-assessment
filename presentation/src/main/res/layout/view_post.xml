@@ -28,6 +28,7 @@
                 android:id="@+id/post_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                style="@style/UserName"
                 android:layout_marginHorizontal="16dp"
                 android:ellipsize="end"
                 android:gravity="center_vertical"

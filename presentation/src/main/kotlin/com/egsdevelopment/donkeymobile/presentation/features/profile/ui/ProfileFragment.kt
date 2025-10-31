@@ -1,9 +1,7 @@
 package com.egsdevelopment.donkeymobile.presentation.features.profile.ui
 
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.ColorInt
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,12 +9,11 @@ import androidx.navigation.fragment.findNavController
 import com.egsdevelopment.donkeymobile.presentation.R
 import com.egsdevelopment.donkeymobile.presentation.databinding.FragmentProfileBinding
 import com.egsdevelopment.donkeymobile.presentation.features.profile.display.ProfileDisplay
-import com.egsdevelopment.donkeymobile.presentation.features.profile.display.UserDisplay
 import com.egsdevelopment.donkeymobile.presentation.features.profile.viewmodel.ProfileViewModel
 import com.egsdevelopment.donkeymobile.presentation.features.util.collectWithLifeCycle
 import com.egsdevelopment.donkeymobile.presentation.util.extensions.applyWindowInsetTop
+import com.egsdevelopment.donkeymobile.presentation.util.extensions.isDarkModeOn
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -27,7 +24,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        WindowInsetsControllerCompat(requireActivity().window, requireActivity().window.decorView).isAppearanceLightStatusBars = true
+        WindowInsetsControllerCompat(
+            requireActivity().window,
+            requireActivity().window.decorView
+        ).isAppearanceLightStatusBars = !isDarkModeOn()
         binding = FragmentProfileBinding.bind(view)
         binding?.container?.applyWindowInsetTop()
         initCollectors()
