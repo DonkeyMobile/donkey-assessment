@@ -16,4 +16,7 @@
 
     <!-- content descriptions -->
     <string name="cd_splash_icon">Splash icon</string>
+    
+    <!-- fallbacks -->
+    <string name="time_fallback">Datum en tijd onbekend</string>
 </resources>

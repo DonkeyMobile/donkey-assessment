@@ -53,6 +53,8 @@ dependencies {
 
     // testing
     testImplementation(libs.junit)
+    testImplementation(kotlin("test"))
+    testImplementation(libs.mockk)
 
     // hilt
     implementation(libs.dagger.hilt.android)

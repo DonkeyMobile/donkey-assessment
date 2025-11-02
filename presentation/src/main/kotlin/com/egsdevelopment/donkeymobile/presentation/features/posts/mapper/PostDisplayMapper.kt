@@ -23,7 +23,10 @@ class PostDisplayMapper @Inject constructor(
             message = post.message,
             imageSrc = post.imgSrc,
             user = userDisplayMapper.map(post.user),
-            time = timeFormatter.format(post.timeStamp)
+            time = timeFormatter.format(
+                post.timeStamp,
+                TimeFormatter.DAY_MONTH_YEAR_HOUR_MINUTE_PATTERN
+            )
         )
     }
 }

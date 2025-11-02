@@ -1,6 +1,5 @@
 package com.egsdevelopment.donkeymobile.presentation.features.posts.adapter
 
-import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +37,8 @@ class PostsAdapter(
         }
         holder.avatar.setUser(post.user)
         holder.userName.text = post.user.username
-        holder.timeStamp.text = post.time
+        holder.timeStamp.text =
+            post.time ?: holder.itemView.context.getString(R.string.time_fallback)
     }
 
     override fun getItemCount(): Int {

@@ -7,5 +7,5 @@ data class PostDisplay(
     val message: String,
     val imageSrc: String?,
     val user: UserDisplay,
-    val time: String
+    val time: String?
 )
