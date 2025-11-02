@@ -1,8 +1,8 @@
 package com.egsdevelopment.donkeymobile.data.community.mapper
 
 import com.egsdevelopment.donkeymobile.data.community.entity.CommunityEntity
-import com.egsdevelopment.domain.community.model.Community
 import com.egsdevelopment.donkeymobile.data.post.mapper.PostMapper
+import com.egsdevelopment.donkeymobile.domain.community.model.Community
 import javax.inject.Inject
 
 class CommunityMapper @Inject constructor(

@@ -1,11 +1,11 @@
 package com.egsdevelopment.donkeymobile.data.authentication.module
 
+import com.egsdevelopment.donkeymobile.data.authentication.authenticator.AuthenticatorImpl
+import com.egsdevelopment.donkeymobile.domain.authentication.authenticator.Authenticator
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import com.egsdevelopment.domain.authentication.authenticator.Authenticator
-import com.egsdevelopment.donkeymobile.data.authentication.authenticator.AuthenticatorImpl
 
 @Module
 @InstallIn(SingletonComponent::class)

@@ -1,13 +1,13 @@
 package com.egsdevelopment.donkeymobile.data.authentication.authenticator
 
-import com.egsdevelopment.domain.authentication.authenticator.Authenticator
-import com.egsdevelopment.domain.authentication.error.AuthenticationFailed
-import com.egsdevelopment.domain.authentication.error.Unauthenticated
-import com.egsdevelopment.domain.authentication.model.user.User
-import com.egsdevelopment.domain.authentication.model.user.UserCredentials
-import com.egsdevelopment.donkeymobile.data.user.provider.UserProvider
 import com.egsdevelopment.donkeymobile.data.authentication.session.SessionManager
 import com.egsdevelopment.donkeymobile.data.user.mapper.UserMapper
+import com.egsdevelopment.donkeymobile.data.user.provider.UserProvider
+import com.egsdevelopment.donkeymobile.domain.authentication.authenticator.Authenticator
+import com.egsdevelopment.donkeymobile.domain.authentication.error.AuthenticationFailed
+import com.egsdevelopment.donkeymobile.domain.authentication.error.Unauthenticated
+import com.egsdevelopment.donkeymobile.domain.authentication.model.user.User
+import com.egsdevelopment.donkeymobile.domain.authentication.model.user.UserCredentials
 import javax.inject.Inject
 
 class AuthenticatorImpl @Inject constructor(

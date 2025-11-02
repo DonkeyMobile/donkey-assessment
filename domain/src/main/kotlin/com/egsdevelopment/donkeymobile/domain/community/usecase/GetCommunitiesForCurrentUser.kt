@@ -1,8 +1,8 @@
-package com.egsdevelopment.domain.community.usecase
+package com.egsdevelopment.donkeymobile.domain.community.usecase
 
-import com.egsdevelopment.domain.authentication.model.user.User
-import com.egsdevelopment.domain.community.model.Community
-import com.egsdevelopment.domain.community.repository.CommunityRepository
+import com.egsdevelopment.donkeymobile.domain.authentication.model.user.User
+import com.egsdevelopment.donkeymobile.domain.community.model.Community
+import com.egsdevelopment.donkeymobile.domain.community.repository.CommunityRepository
 import javax.inject.Inject
 
 class GetCommunitiesForCurrentUser @Inject constructor(

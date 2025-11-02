@@ -1,6 +1,6 @@
 package com.egsdevelopment.donkeymobile.presentation.features.community.mapper
 
-import com.egsdevelopment.domain.community.model.Community
+import com.egsdevelopment.donkeymobile.domain.community.model.Community
 import com.egsdevelopment.donkeymobile.presentation.features.community.display.CommunityDisplay
 import com.egsdevelopment.donkeymobile.presentation.features.posts.mapper.PostDisplayMapper
 import javax.inject.Inject

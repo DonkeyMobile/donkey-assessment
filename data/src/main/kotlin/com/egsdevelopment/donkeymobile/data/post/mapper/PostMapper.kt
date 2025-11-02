@@ -1,10 +1,10 @@
 package com.egsdevelopment.donkeymobile.data.post.mapper
 
-import com.egsdevelopment.domain.authentication.model.user.User
-import com.egsdevelopment.domain.post.model.Post
 import com.egsdevelopment.donkeymobile.data.post.entity.PostEntity
 import com.egsdevelopment.donkeymobile.data.user.mapper.UserMapper
 import com.egsdevelopment.donkeymobile.data.user.provider.UserProvider
+import com.egsdevelopment.donkeymobile.domain.authentication.model.user.User
+import com.egsdevelopment.donkeymobile.domain.post.model.Post
 import javax.inject.Inject
 
 class PostMapper @Inject constructor(

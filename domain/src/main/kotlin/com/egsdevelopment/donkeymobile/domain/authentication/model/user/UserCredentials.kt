@@ -1,4 +1,4 @@
-package com.egsdevelopment.domain.authentication.model.user
+package com.egsdevelopment.donkeymobile.domain.authentication.model.user
 
 data class UserCredentials(
     val username: String,

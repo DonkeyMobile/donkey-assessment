@@ -1,6 +1,6 @@
 package com.egsdevelopment.donkeymobile.data.user.entity
 
-data class UserEntitiy(
+data class UserEntity(
     val id: Int,
     val bio: String,
     val username: String,

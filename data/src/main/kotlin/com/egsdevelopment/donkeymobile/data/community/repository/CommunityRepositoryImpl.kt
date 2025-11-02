@@ -1,9 +1,9 @@
 package com.egsdevelopment.donkeymobile.data.community.repository
 
-import com.egsdevelopment.domain.community.model.Community
-import com.egsdevelopment.domain.community.repository.CommunityRepository
 import com.egsdevelopment.donkeymobile.data.community.mapper.CommunityMapper
 import com.egsdevelopment.donkeymobile.data.community.provider.CommunityProvider
+import com.egsdevelopment.donkeymobile.domain.community.model.Community
+import com.egsdevelopment.donkeymobile.domain.community.repository.CommunityRepository
 import javax.inject.Inject
 
 class CommunityRepositoryImpl @Inject constructor(

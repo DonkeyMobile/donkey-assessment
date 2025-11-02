@@ -1,6 +1,6 @@
 package com.egsdevelopment.donkeymobile.presentation.features.posts.mapper
 
-import com.egsdevelopment.domain.post.model.Post
+import com.egsdevelopment.donkeymobile.domain.post.model.Post
 import com.egsdevelopment.donkeymobile.presentation.features.posts.display.PostDisplay
 import com.egsdevelopment.donkeymobile.presentation.features.posts.formatter.TimeFormatter
 import com.egsdevelopment.donkeymobile.presentation.features.profile.mapper.UserDisplayMapper

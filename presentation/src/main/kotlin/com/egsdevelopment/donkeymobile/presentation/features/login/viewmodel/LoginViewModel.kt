@@ -2,6 +2,8 @@ package com.egsdevelopment.donkeymobile.presentation.features.login.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.egsdevelopment.donkeymobile.domain.authentication.model.user.UserCredentials
+import com.egsdevelopment.donkeymobile.domain.authentication.usecase.LoginUser
 import com.egsdevelopment.donkeymobile.presentation.features.login.event.LoginEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -10,8 +12,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import com.egsdevelopment.domain.authentication.model.user.UserCredentials
-import com.egsdevelopment.domain.authentication.usecase.LoginUser
 import javax.inject.Inject
 
 @HiltViewModel

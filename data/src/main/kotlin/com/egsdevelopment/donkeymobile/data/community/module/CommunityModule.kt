@@ -1,7 +1,7 @@
 package com.egsdevelopment.donkeymobile.data.community.module
 
-import com.egsdevelopment.domain.community.repository.CommunityRepository
 import com.egsdevelopment.donkeymobile.data.community.repository.CommunityRepositoryImpl
+import com.egsdevelopment.donkeymobile.domain.community.repository.CommunityRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

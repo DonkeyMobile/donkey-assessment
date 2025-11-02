@@ -1,8 +1,8 @@
 package com.egsdevelopment.donkeymobile.presentation.features.profile.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.egsdevelopment.domain.authentication.usecase.GetCurrentUser
-import com.egsdevelopment.domain.authentication.usecase.LogoutUser
+import com.egsdevelopment.donkeymobile.domain.authentication.usecase.GetCurrentUser
+import com.egsdevelopment.donkeymobile.domain.authentication.usecase.LogoutUser
 import com.egsdevelopment.donkeymobile.presentation.features.profile.display.ProfileDisplay
 import com.egsdevelopment.donkeymobile.presentation.features.profile.mapper.ProfileDisplayMapper
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,6 +1,6 @@
-package com.egsdevelopment.domain.post.model
+package com.egsdevelopment.donkeymobile.domain.post.model
 
-import com.egsdevelopment.domain.authentication.model.user.User
+import com.egsdevelopment.donkeymobile.domain.authentication.model.user.User
 
 data class Post(
     val id: Int,

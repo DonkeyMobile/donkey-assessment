@@ -1,6 +1,6 @@
-package com.egsdevelopment.domain.authentication.usecase
+package com.egsdevelopment.donkeymobile.domain.authentication.usecase
 
-import com.egsdevelopment.domain.authentication.authenticator.Authenticator
+import com.egsdevelopment.donkeymobile.domain.authentication.authenticator.Authenticator
 import javax.inject.Inject
 
 class LogoutUser @Inject constructor(

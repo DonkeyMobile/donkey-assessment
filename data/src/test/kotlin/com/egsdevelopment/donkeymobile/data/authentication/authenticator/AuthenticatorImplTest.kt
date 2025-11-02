@@ -1,10 +1,10 @@
 package com.egsdevelopment.donkeymobile.data.authentication.authenticator
 
-import com.egsdevelopment.domain.authentication.error.AuthenticationFailed
-import com.egsdevelopment.domain.authentication.model.user.UserCredentials
 import com.egsdevelopment.donkeymobile.data.authentication.session.SessionManager
 import com.egsdevelopment.donkeymobile.data.user.mapper.UserMapper
 import com.egsdevelopment.donkeymobile.data.user.provider.UserProvider
+import com.egsdevelopment.donkeymobile.domain.authentication.error.AuthenticationFailed
+import com.egsdevelopment.donkeymobile.domain.authentication.model.user.UserCredentials
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.TestCase.assertTrue

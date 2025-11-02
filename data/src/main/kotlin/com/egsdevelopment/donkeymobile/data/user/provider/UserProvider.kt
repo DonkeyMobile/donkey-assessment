@@ -1,17 +1,17 @@
 package com.egsdevelopment.donkeymobile.data.user.provider
 
-import com.egsdevelopment.domain.authentication.model.user.UserCredentials
-import com.egsdevelopment.donkeymobile.data.user.entity.UserEntitiy
+import com.egsdevelopment.donkeymobile.data.user.entity.UserEntity
+import com.egsdevelopment.donkeymobile.domain.authentication.model.user.UserCredentials
 import javax.inject.Inject
 
 class UserProvider @Inject constructor() {
 
-    fun provide(): List<UserEntitiy> {
+    fun provide(): List<UserEntity> {
         return users
     }
 
     private val users = listOf(
-        UserEntitiy(
+        UserEntity(
             id = 0,
             username = "e_smits",
             password = "Test1234",
@@ -19,7 +19,7 @@ class UserProvider @Inject constructor() {
             avatarHexColor = "#FF0000",
             communitiesIds = listOf(0, 1, 2)
         ),
-        UserEntitiy(
+        UserEntity(
             id = 1,
             username = "jordy_donkeymobile",
             password = "TestJordy1234",
@@ -27,7 +27,7 @@ class UserProvider @Inject constructor() {
             bio = "De afgelopen jaren ben ik werkzaam geweest als Android en iOS developer bij verschillende bedrijven op nationaal en internationaal niveau. Zo heb ik apps ontwikkeld voor het huren van hoogwerkers, het scannen van je boodschappen in de supermarkt en het digitaliseren van al je plastic pasjes. De opgedane kennis en ervaring kan ik nu gebruiken om DE app voor kerken te maken! Ik ben dankbaar dat Donkey Mobile op mijn pad terecht is gekomen en hoop op deze manier een steentje bij te dragen aan Gods Koninkrijk.",
             communitiesIds = listOf(3, 4, 5)
         ),
-        UserEntitiy(
+        UserEntity(
             id = 2,
             username = "henrik_donkeymobile",
             password = "TestHenrik1234",
@@ -37,7 +37,7 @@ class UserProvider @Inject constructor() {
         )
     )
 
-    fun getUserForCredentials(credentials: UserCredentials): UserEntitiy? {
+    fun getUserForCredentials(credentials: UserCredentials): UserEntity? {
         return users.firstOrNull { user ->
             user.username.lowercase() == credentials.username.lowercase() &&
                     user.password.lowercase() == credentials.password.lowercase()

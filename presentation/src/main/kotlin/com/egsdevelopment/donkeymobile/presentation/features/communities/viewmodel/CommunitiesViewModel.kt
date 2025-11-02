@@ -1,10 +1,9 @@
 package com.egsdevelopment.donkeymobile.presentation.features.communities.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.egsdevelopment.domain.authentication.usecase.GetCurrentUser
-import com.egsdevelopment.domain.community.usecase.GetCommunitiesForCurrentUser
+import com.egsdevelopment.donkeymobile.domain.authentication.usecase.GetCurrentUser
+import com.egsdevelopment.donkeymobile.domain.community.usecase.GetCommunitiesForCurrentUser
 import com.egsdevelopment.donkeymobile.presentation.features.communities.state.CommunitiesState
-import com.egsdevelopment.donkeymobile.presentation.features.community.mapper.CommunityDisplayMapper
 import com.egsdevelopment.donkeymobile.presentation.features.profile.mapper.UserDisplayMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

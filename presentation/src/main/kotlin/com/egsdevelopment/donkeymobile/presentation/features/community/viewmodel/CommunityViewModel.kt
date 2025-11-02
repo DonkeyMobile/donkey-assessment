@@ -1,7 +1,7 @@
 package com.egsdevelopment.donkeymobile.presentation.features.community.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.egsdevelopment.domain.community.usecase.GetCommunity
+import com.egsdevelopment.donkeymobile.domain.community.usecase.GetCommunity
 import com.egsdevelopment.donkeymobile.presentation.features.community.display.CommunityDisplay
 import com.egsdevelopment.donkeymobile.presentation.features.community.mapper.CommunityDisplayMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
