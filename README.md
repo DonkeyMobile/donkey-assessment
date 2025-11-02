@@ -76,3 +76,9 @@ A user is member of several groups. The timeline of these groups contains inspir
 - Login Henrik:
   - Username: henrik_donkeymobile
   - Password: TestHenrik1234
+
+## GIT
+- Clone donkey-assessment
+- Switch branch EvertSmits
+- Open project in Android Studio
+- Check of Build info hierboven overeenkomt en pas aan waar nodig (jdk 18 downloaden bijv.)
