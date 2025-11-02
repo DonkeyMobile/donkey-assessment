@@ -35,6 +35,8 @@ dependencies {
 
     // testing
     testImplementation(libs.junit)
+    testImplementation(kotlin("test"))
+    testImplementation(libs.mockk)
 
     // coroutines
     implementation(libs.coroutines.android)

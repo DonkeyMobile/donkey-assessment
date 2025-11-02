@@ -1,22 +1,22 @@
 [versions]
 annotation = "1.9.1"
 appCompat = "1.7.1"
-accompanist = "0.15.0"
 coreKtx = "1.17.0"
 coroutinesVersion = "1.10.2"
 dataStoreVersion = "1.1.7"
-kotlin = "2.2.20"
+kotlin = "2.2.21"
 daggerHilt = "2.57.2"
 gradle = "8.13.0"
 navigation = "2.9.5"
 junit = "4.13.2"
-okhttp = "5.1.0"
+okhttp = "5.2.1"
 retrofit = "3.0.0"
 retrofitJsonConverterExtension = "1.0.0"
 serialization = "1.9.0"
 timber = "5.0.1"
 ksp = "2.2.20-2.0.3"
 glide = "5.0.5"
+mockk = "1.14.6"
 
 [plugins]
 android-library-plugin = { id = "com.android.library", version.ref = "gradle" }
@@ -49,4 +49,5 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhtt
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-json-converter-extension = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitJsonConverterExtension" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
