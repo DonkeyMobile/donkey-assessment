@@ -1,7 +1,5 @@
 # Android developer assessment - Evert Smits
 
-## LET OP ASSESSMENT IS NOG WORK IN PROGRESS
-
 ## Opdracht omschrijving
 ### Requirements
 Permalink: Requirements
@@ -22,38 +20,59 @@ A user is member of several groups. The timeline of these groups contains inspir
     - Data layer
         - Data provider
             - User
-                - Id
+                - ID
                 - Username
                 - password
-                - Groups
-            - Timeline object per group
-                - Posts list
+                - Communitiy ID's
+            - Posts list per Community
+                - Posts lijst
                     - Image
-                    - Text
-                    - User
-                    - Group id
-            - Group
-                - Id
+                    - Title
+                    - Message
+                    - User ID
+            - Community
+                - ID
                 - Name
         - Repository
             - Gebruikt dataprovider en levert een mapped input op
+        - Authenticator
+          - login, logout en beheert user
     - Domain
         - Models
             - User
-            - Group
+            - Community
             - Post
         - UseCases
             - LoginUser
-            - GetGroupsForUserID
-            - FetchPostsForGroupID
+            - LogoutUser
+            - GetCommunitiesForCurrentUser
+            - GetCommunity
+            - GetCurrentuser
     - Presentation
-        - SplashFragment
-            - Nice logo
-            - Nice gradient
         - LoginFragment
-            - Fake login based on username + pw combination
+            - Fake login gebasseerd op username + pw combinatie
         - HomeFragment
-            - ViewPager (page per group)
-                - GroupFragment
+            - ViewPager (page per community)
+                - CommunityFragment
                     - RecyclerView
                         - Posts
+                          - Optionele image
+                          - Title
+                          - Message
+                          - Timestamp
+                          - User
+        - ProfileFragment
+          - profiel info
+          - uitloggen
+## Build info
+- Android Studio Narwhal 3 Feature Drop 2025.1.3
+- Jvm 18
+- Gradle 8.14.3
+
+## INFO VOOR JORDY & HENRIK
+- Login Jordy:
+  - Username: jordy_donkeymobile
+  - Password: TestJordy1234
+- Login Henrik:
+  - Username: henrik_donkeymobile
+  - Password: TestHenrik1234

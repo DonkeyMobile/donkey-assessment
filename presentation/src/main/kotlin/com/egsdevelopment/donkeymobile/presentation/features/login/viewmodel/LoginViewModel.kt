@@ -41,7 +41,6 @@ class LoginViewModel @Inject constructor(
     fun startLogin() {
         viewModelScope.launch {
             val credentials = UserCredentials(filledUserName, filledPassword)
-            //
             loginUser(credentials)
                 .onSuccess {
                     mutableEvent.emit(LoginEvent.LoginSuccess)

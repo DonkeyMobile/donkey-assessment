@@ -9,7 +9,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class UserModule {
+abstract class AuthenticatorModule {
 
     @Binds
     abstract fun bindAuthenticator(authenticatorImpl: AuthenticatorImpl): Authenticator

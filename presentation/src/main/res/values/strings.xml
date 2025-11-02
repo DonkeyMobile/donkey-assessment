@@ -19,4 +19,7 @@
     
     <!-- fallbacks -->
     <string name="time_fallback">Datum en tijd onbekend</string>
+
+    <!-- Error -->
+    <string name="communities_error">Hmm, er ging iets mis tijdens het ophalen van de communities. Probeer het later nog eens.</string>
 </resources>

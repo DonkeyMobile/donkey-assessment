@@ -24,6 +24,10 @@ class CommunityViewModel @Inject constructor(
         getCommunity(id)?.let { community ->
             mutableCommunity.value = communityDisplayMapper.map(community)
         } ?: {
+            /**
+             * Normally we should use a state (failure) like in in the CommunitiesViewModel here.
+             * But omitted for assessment speed purposes.
+             */
             Timber.d("Commmunity not found")
         }
     }

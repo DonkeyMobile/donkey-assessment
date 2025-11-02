@@ -29,7 +29,7 @@ class CommunitiesViewModel @Inject constructor(
     private fun fetchCommunitiesForUser() {
         getCurrentUser()
             .onSuccess { user ->
-                val result = getCommunitiesForCurrentUser(user)
+                getCommunitiesForCurrentUser(user)
                     .onSuccess { communities ->
                         communityNames = communities.map { community -> community.name }
                         mutableState.value = CommunitiesState.Data(
@@ -37,12 +37,12 @@ class CommunitiesViewModel @Inject constructor(
                             communityIDs = communities.map { community -> community.id }
                         )
                     }
-                    .onFailure { failure ->
-                        mutableState.value = CommunitiesState.Failure(failure.message.toString())
-                    }
+                    .onFailure(::onFailure)
             }
-            .onFailure { failure ->
-                mutableState.value = CommunitiesState.Failure(failure.message.toString())
-            }
+            .onFailure(::onFailure)
+    }
+
+    private fun onFailure(throwable: Throwable) {
+        mutableState.value = CommunitiesState.Failure(throwable.message.toString())
     }
 }

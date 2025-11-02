@@ -2,7 +2,6 @@ package com.egsdevelopment.donkeymobile.presentation.features.login.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -13,7 +12,9 @@ import com.egsdevelopment.donkeymobile.presentation.databinding.FragmentLoginBin
 import com.egsdevelopment.donkeymobile.presentation.features.login.event.LoginEvent
 import com.egsdevelopment.donkeymobile.presentation.features.login.viewmodel.LoginViewModel
 import com.egsdevelopment.donkeymobile.presentation.features.util.collectWithLifeCycle
+import com.egsdevelopment.donkeymobile.presentation.util.extensions.StatusBarMode
 import com.egsdevelopment.donkeymobile.presentation.util.extensions.isDarkModeOn
+import com.egsdevelopment.donkeymobile.presentation.util.extensions.setStatusBarMode
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,11 +25,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        WindowInsetsControllerCompat(requireActivity().window, requireActivity().window.decorView).isAppearanceLightStatusBars = !isDarkModeOn()
+        setStatusBarMode(if (isDarkModeOn()) StatusBarMode.ICONS_LIGHT else StatusBarMode.ICONS_DARK)
         binding = FragmentLoginBinding.bind(view)
         initUI()
         initCollectors()
-
     }
 
     private fun initUI() {

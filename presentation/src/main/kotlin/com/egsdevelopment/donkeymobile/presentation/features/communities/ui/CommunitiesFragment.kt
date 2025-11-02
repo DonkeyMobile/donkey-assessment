@@ -2,7 +2,8 @@ package com.egsdevelopment.donkeymobile.presentation.features.communities.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,7 +14,9 @@ import com.egsdevelopment.donkeymobile.presentation.features.communities.adapter
 import com.egsdevelopment.donkeymobile.presentation.features.communities.state.CommunitiesState
 import com.egsdevelopment.donkeymobile.presentation.features.communities.viewmodel.CommunitiesViewModel
 import com.egsdevelopment.donkeymobile.presentation.features.util.collectWithLifeCycle
+import com.egsdevelopment.donkeymobile.presentation.util.extensions.StatusBarMode
 import com.egsdevelopment.donkeymobile.presentation.util.extensions.applyWindowInsetTop
+import com.egsdevelopment.donkeymobile.presentation.util.extensions.setStatusBarMode
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,14 +29,14 @@ class CommunitiesFragment : Fragment(R.layout.fragment_communitites) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        WindowInsetsControllerCompat(requireActivity().window, requireActivity().window.decorView).isAppearanceLightStatusBars = false
+        setStatusBarMode(StatusBarMode.ICONS_LIGHT)
         binding = FragmentCommunititesBinding.bind(view)
         binding?.topbar?.applyWindowInsetTop()
-        initPager()
+        initPagerListener()
         initCollectors()
     }
 
-    private fun initPager() = binding?.apply {
+    private fun initPagerListener() = binding?.apply {
         communitiesPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
@@ -50,16 +53,27 @@ class CommunitiesFragment : Fragment(R.layout.fragment_communitites) {
 
     private fun onState(state: CommunitiesState) = binding?.apply {
         when (state) {
-            is CommunitiesState.Data -> {
-                topbar.setUser(state.user)
-                topbar.setOnUserClick(::onUserClick)
-                communitiesPager.adapter =
-                    CommunitiesPagerAdapter(this@CommunitiesFragment, state.communityIDs)
-            }
-
-            is CommunitiesState.Failure -> TODO()
-            CommunitiesState.Loading -> TODO()
+            is CommunitiesState.Data -> onData(state)
+            is CommunitiesState.Failure -> onFailure()
+            CommunitiesState.Loading -> onLoading()
         }
+    }
+
+    private fun onData(state: CommunitiesState.Data) = binding?.apply {
+        errorContainer.isGone = true
+        loadingContainer.isGone = true
+        topbar.setUser(state.user)
+        topbar.setOnUserClick(::onUserClick)
+        communitiesPager.adapter =
+            CommunitiesPagerAdapter(this@CommunitiesFragment, state.communityIDs)
+    }
+
+    private fun onLoading() = binding?.apply {
+        loadingContainer.isVisible = true
+    }
+
+    private fun onFailure() = binding?.apply {
+        errorContainer.isVisible = true
     }
 
     private fun onUserClick() {

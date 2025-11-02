@@ -8,8 +8,8 @@ class CommunityProvider @Inject constructor(
     postProvider: PostProvider
 ) {
 
-    private val COMMUNITY_AMOUNT = 9
-    private val CHUNK_SIZE = 50
+    private val communityAmount = 9 //9 communities in total, will spread them across 3 users
+    private val chunkSize = 50 //50 posts per community
 
     private val communityNames: List<String> = listOf(
         "Gemeente De Lichtbron",
@@ -29,8 +29,8 @@ class CommunityProvider @Inject constructor(
 
     private fun provideList(): List<CommunityEntity> {
         val communities = mutableListOf<CommunityEntity>()
-        repeat(COMMUNITY_AMOUNT) { index ->
-            communities.add(provide(index, CHUNK_SIZE))
+        repeat(communityAmount) { index ->
+            communities.add(provide(index, chunkSize))
         }
         return communities
     }

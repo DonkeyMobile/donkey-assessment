@@ -12,8 +12,8 @@ class PostDisplayMapper @Inject constructor(
 ) {
 
     fun mapList(list: List<Post>): List<PostDisplay> {
-        return list.map {
-            map(it)
+        return list.map { post ->
+            map(post)
         }
     }
 

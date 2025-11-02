@@ -19,6 +19,6 @@ class CommunityRepositoryImpl @Inject constructor(
 
     override fun getCommunity(id: Int): Community? {
         val response = communityProvider.communities.firstOrNull { it.id == id } ?: return null
-        return communityMapper.map(response)
+        return communityMapper.mapItem(response)
     }
 }

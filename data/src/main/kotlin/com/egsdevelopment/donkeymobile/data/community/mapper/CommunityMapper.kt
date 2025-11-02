@@ -10,12 +10,12 @@ class CommunityMapper @Inject constructor(
 ) {
 
     fun mapList(list: List<CommunityEntity>): List<Community> {
-        return list.map {
-            map(it)
+        return list.map { entity ->
+            mapItem(entity)
         }
     }
 
-    fun map(entity: CommunityEntity): Community {
+    fun mapItem(entity: CommunityEntity): Community {
         return Community(
             id = entity.id,
             name = entity.name,

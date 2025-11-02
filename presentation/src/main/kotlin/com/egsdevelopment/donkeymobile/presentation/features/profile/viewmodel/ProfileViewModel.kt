@@ -32,6 +32,10 @@ class ProfileViewModel @Inject constructor(
                 mutableProfile.value = profileDisplayMapper.map(user)
             }
             .onFailure {
+                /**
+                 * Normally we should use a state (failure) like in in the CommunitiesViewModel here.
+                 * But omitted for assessment speed purposes.
+                 */
                 Timber.e("failure fetching profile")
             }
     }

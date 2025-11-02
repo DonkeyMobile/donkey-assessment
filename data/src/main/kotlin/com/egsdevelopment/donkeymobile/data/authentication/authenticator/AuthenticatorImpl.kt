@@ -31,6 +31,7 @@ class AuthenticatorImpl @Inject constructor(
     }
 
     override fun getCurrentUser(): Result<User> =
-        sessionManager.getLoggedInUser()?.let { Result.success(it) }
-            ?: Result.failure(Unauthenticated())
+        sessionManager.getLoggedInUser()?.let { user ->
+            Result.success(user)
+        } ?: Result.failure(Unauthenticated())
 }

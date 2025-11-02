@@ -5,7 +5,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Normally we would store a token in a secure location. But for this assessment this is fine
+ * Normally I would store a token in a secure location. But for this assessment this is fine
  */
 @Singleton
 class SessionManager @Inject constructor() {

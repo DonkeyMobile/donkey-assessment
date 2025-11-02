@@ -2,7 +2,6 @@ package com.egsdevelopment.donkeymobile.presentation.features.profile.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -11,8 +10,10 @@ import com.egsdevelopment.donkeymobile.presentation.databinding.FragmentProfileB
 import com.egsdevelopment.donkeymobile.presentation.features.profile.display.ProfileDisplay
 import com.egsdevelopment.donkeymobile.presentation.features.profile.viewmodel.ProfileViewModel
 import com.egsdevelopment.donkeymobile.presentation.features.util.collectWithLifeCycle
+import com.egsdevelopment.donkeymobile.presentation.util.extensions.StatusBarMode
 import com.egsdevelopment.donkeymobile.presentation.util.extensions.applyWindowInsetTop
 import com.egsdevelopment.donkeymobile.presentation.util.extensions.isDarkModeOn
+import com.egsdevelopment.donkeymobile.presentation.util.extensions.setStatusBarMode
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,10 +25,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        WindowInsetsControllerCompat(
-            requireActivity().window,
-            requireActivity().window.decorView
-        ).isAppearanceLightStatusBars = !isDarkModeOn()
+        setStatusBarMode(if (isDarkModeOn()) StatusBarMode.ICONS_LIGHT else StatusBarMode.ICONS_DARK)
         binding = FragmentProfileBinding.bind(view)
         binding?.container?.applyWindowInsetTop()
         initCollectors()
@@ -40,9 +38,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun onProfile(profile: ProfileDisplay?) = binding?.apply {
         profile?.let {
-            avatar.setUser(profile.user)
-            username.text = profile.user.username
-            bio.text = profile.bio
+            avatar.setUser(it.user)
+            username.text = it.user.username
+            bio.text = it.bio
         }
     }
 

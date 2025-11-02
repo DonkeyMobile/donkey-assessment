@@ -1,5 +1,6 @@
 package com.egsdevelopment.donkeymobile.presentation.features.posts.formatter
 
+import timber.log.Timber
 import java.time.DateTimeException
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
@@ -9,6 +10,7 @@ import javax.inject.Inject
 class TimeFormatter @Inject constructor() {
 
     companion object {
+        const val TAG = "TimeFormatter"
         const val DAY_MONTH_YEAR_HOUR_MINUTE_PATTERN = "dd MMM yyyy, HH:mm"
     }
 
@@ -18,6 +20,7 @@ class TimeFormatter @Inject constructor() {
             val offsetDateTime = parse(timeStamp) ?: return null
             offsetDateTime.format(formatter)
         } catch (exc: DateTimeException) {
+            Timber.e("$TAG: ${exc.message}")
             null
         }
     }
@@ -26,6 +29,7 @@ class TimeFormatter @Inject constructor() {
         return try {
             OffsetDateTime.parse(timeStamp)
         } catch (exc: DateTimeParseException) {
+            Timber.e("$TAG: ${exc.message}")
             null
         }
     }
@@ -34,6 +38,7 @@ class TimeFormatter @Inject constructor() {
         return try {
             DateTimeFormatter.ofPattern(pattern)
         } catch (exc: IllegalArgumentException) {
+            Timber.e("$TAG: ${exc.message}")
             null
         }
     }
