@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+
+  mysql:
+    image: mysql:8
+    container_name: donkey_mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: donkey_analytics
+      MYSQL_USER: donkey
+      MYSQL_PASSWORD: donkey
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mongo_data: {}
+  mysql_data:
