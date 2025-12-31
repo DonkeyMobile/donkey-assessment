@@ -23,6 +23,7 @@ class Comment {
     ObjectId _id
     ObjectId author
     ObjectId post
+    String comment
     Date createdAt
     Date updatedAt
 }

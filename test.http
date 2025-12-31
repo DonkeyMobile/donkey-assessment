@@ -1,0 +1,61 @@
+# Use this extension https://marketplace.visualstudio.com/items?itemName=anweber.vscode-httpyac
+@host=http://localhost:3000/api
+
+###
+# @name user
+POST /users
+Content-Type: application/json
+
+{
+    "firstName": "Tim",
+    "lastName": "Test",
+    "email": "test@tgdssa.nl"
+}
+
+###
+# @ref user
+DELETE /users
+Authorization: Bearer {{user._id}}
+
+###
+# @name post
+# @ref user
+POST /posts
+Authorization: Bearer {{user._id}}
+Content-Type: application/json
+
+{
+    "description": "Lorem ipsum "
+}
+
+###
+# @ref post
+GET /posts/{{post._id}}
+
+###
+# @name comment
+# @ref user
+# @ref post
+POST /posts/{{post._id}}/comments
+Authorization: Bearer {{user._id}}
+Content-Type: application/json
+
+{
+    "comment": "Lorem ipsum"
+}
+
+###
+# @ref post
+GET /posts/{{post._id}}/comments
+
+###
+# @ref user
+# @ref post
+# @ref comment
+DELETE /posts/{{post._id}}/comments/{{comment._id}}
+
+###
+# @ref user
+# @ref post
+DELETE /posts/{{post._id}}
+Authorization: Bearer {{user._id}}
