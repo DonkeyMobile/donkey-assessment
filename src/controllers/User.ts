@@ -7,7 +7,7 @@ export const createUser = async (
   next: NextFunction
 ) => {
   try {
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email }: IUser = req.body ?? {};
 
     if (!firstName || !lastName || !email) {
       return res.status(400).send("Missing fields");

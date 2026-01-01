@@ -8,7 +8,8 @@
       "esnext"
     ],
     "types": [
-      "node"
+      "node",
+      "jest"
     ],
     "sourceMap": true,
     "declaration": true,
@@ -23,7 +24,8 @@
     "skipLibCheck": true,
   },
   "include": [
-    "src"
+    "src",
+    "src/test"
   ],
   "exclude": [
     "node_modules",

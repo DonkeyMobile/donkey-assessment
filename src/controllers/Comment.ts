@@ -1,7 +1,5 @@
 import type { NextFunction, Response, Request } from "express";
-import Post from "../models/Post.js";
 import { isValidObjectId } from "mongoose";
-import User from "../models/User.js";
 import Comment from "../models/Comment.js";
 
 export const verifyCommentId = async (
@@ -29,7 +27,7 @@ export const createComment = async (
   next: NextFunction
 ) => {
   try {
-    const { comment }: ICommendBody = req.body;
+    const { comment }: ICommendBody = req.body ?? {};
 
     if (!comment) {
       return res.status(400).send("Missing fields");

@@ -1,7 +1,6 @@
 import type { NextFunction, Response, Request } from "express";
 import Post from "../models/Post.js";
 import { isValidObjectId } from "mongoose";
-import User from "../models/User.js";
 
 export const verifyPostId = async (
   req: Request,
@@ -28,7 +27,7 @@ export const createPost = async (
   next: NextFunction
 ) => {
   try {
-    const { description }: IPostBody = req.body;
+    const { description }: IPostBody = req.body ?? {};
 
     if (!description) {
       return res.status(400).send("Missing fields");

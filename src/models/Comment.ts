@@ -10,7 +10,11 @@ interface IComment {
 
 const commentSchema = new Schema<IComment>(
   {
-    comment: { type: String, required: true },
+    comment: {
+      type: String,
+      required: true,
+      maxlength: [100, "Comment cannot exceed 100 characters"],
+    },
     author: { type: Schema.Types.ObjectId, ref: "User", required: true },
     post: { type: Schema.Types.ObjectId, ref: "Post", required: true },
   },
