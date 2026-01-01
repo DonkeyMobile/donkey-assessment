@@ -127,5 +127,17 @@ describe("Comment controller integration tests", () => {
       expect(res.statusCode).toBe(400);
       expect(res.text).toBe("Invalid Id");
     });
+
+    test("Should delete the comment when the post is deleted", async () => {
+      const res = await request(app)
+        .delete(`/api/posts/${testIds.postId}`)
+        .set("Authorization", `Bearer ${testIds.userId}`);
+
+      expect(res.statusCode).toBe(200);
+
+      // Verify that it was deleted
+      const exists = await Comment.findById(testIds.commentId);
+      expect(exists).toBeNull();
+    });
   });
 });

@@ -1,6 +1,7 @@
 import type { NextFunction, Response, Request } from "express";
 import Post from "../models/Post.js";
 import { isValidObjectId } from "mongoose";
+import Comment from "../models/Comment.js";
 
 export const verifyPostId = async (
   req: Request,
@@ -54,6 +55,7 @@ export const deletePost = async (
     const { postId } = req.params;
 
     await Post.deleteOne({ _id: postId });
+    await Comment.deleteMany({ post: postId! });
 
     return res.sendStatus(200);
   } catch (error) {
@@ -69,10 +71,9 @@ export const getPost = async (
   try {
     const { postId } = req.params;
 
-    const post = await Post.findById(postId).populate(
-      "author",
-      "firstName lastName"
-    );
+    const post = await Post.findById(postId)
+      .populate("author", "firstName lastName")
+      .populate("commentCount");
 
     if (!post) {
       return res.status(404).send("Post was not found");

@@ -4,6 +4,7 @@ import { type IUser } from "./User.js";
 interface IPost {
   description: string;
   author: Types.ObjectId | IUser;
+  commentCount?: number;
 }
 
 const postSchema = new Schema<IPost>(
@@ -15,8 +16,15 @@ const postSchema = new Schema<IPost>(
     },
     author: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true } }
 );
+
+postSchema.virtual("commentCount", {
+  ref: "Comment",
+  localField: "_id",
+  foreignField: "post",
+  count: true,
+});
 
 const Post = model<IPost>("Post", postSchema);
 

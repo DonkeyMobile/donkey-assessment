@@ -70,6 +70,7 @@ describe("Post controller integration tests", () => {
       expect(res.statusCode).toBe(200);
       expect(res.body._id).toBe(testIds.postId);
       expect(res.body.description).toBe("Sample description");
+      expect(res.body.commentCount).toBe(1);
       expect(res.body.author.firstName).toBe("Test");
       expect(res.body.author.lastName).toBe("Name");
       expect(res.body).toHaveProperty("createdAt");
