@@ -1,6 +1,6 @@
 import express from "express";
 import type { Request, Response, NextFunction } from "express";
-import { Error, isValidObjectId } from "mongoose";
+import { Error as mongooseErrors } from "mongoose";
 
 import { apiRouter } from "./routes/api.js";
 
@@ -14,7 +14,7 @@ app.use("/uploads", express.static("./uploads"));
 
 // Handling errors globally
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  if (err instanceof Error.ValidationError) {
+  if (err instanceof mongooseErrors.ValidationError) {
     return res.status(400).send(err.message);
   }
   next(err);

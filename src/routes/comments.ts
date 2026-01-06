@@ -16,4 +16,4 @@ router.delete("/:commentId", verifyLogin, deleteComment);
 // Verify comment id's
 router.param("commentId", verifyCommentId);
 
-export { router as commendRouter };
+export { router as commentRouter };

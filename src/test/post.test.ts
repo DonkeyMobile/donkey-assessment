@@ -47,7 +47,7 @@ describe("Post controller integration tests", () => {
       expect(res.text).toBe("Missing fields");
     });
 
-    test("Should return 400 if the description is to long", async () => {
+    test("Should return 400 if the description is too long", async () => {
       const description = "a".repeat(501);
 
       const res = await request(app)
@@ -93,7 +93,7 @@ describe("Post controller integration tests", () => {
         expect(exists).toBeTruthy();
       });
 
-      test("Should return 400 if to many documents are uploaded", async () => {
+      test("Should return 400 if too many documents are uploaded", async () => {
         const description = "This is a test post";
 
         const res = await request(app)
@@ -160,7 +160,7 @@ describe("Post controller integration tests", () => {
       expect(res.text).toBe("Missing fields");
     });
 
-    test("Should return 400 if the description is to long", async () => {
+    test("Should return 400 if the description is too long", async () => {
       const longPost = {
         description: "a".repeat(501),
       };
@@ -227,7 +227,7 @@ describe("Post controller integration tests", () => {
     });
   });
 
-  describe("Delete /api/posts/:postId deleteComment", () => {
+  describe("Delete /api/posts/:postId deletePost", () => {
     test("Should delete the post and return 200", async () => {
       const res = await request(app)
         .delete(`/api/posts/${testIds.postId}`)

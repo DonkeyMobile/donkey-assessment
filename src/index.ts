@@ -7,9 +7,13 @@ const dbHost =
   "mongodb://root:Password@localhost:27018/donkey?authSource=admin";
 
 // Start server
-connect(dbHost).then(() => {
-  console.log("Connected to database");
-  app.listen(webPort, () => {
-    console.log("Server started on port:", webPort);
+connect(dbHost)
+  .then(() => {
+    console.log("Connected to database");
+    app.listen(webPort, () => {
+      console.log("Server started on port:", webPort);
+    });
+  })
+  .catch((error) => {
+    console.error("The application crashed with error:", error);
   });
-});

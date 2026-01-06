@@ -47,7 +47,7 @@ describe("Comment controller integration tests", () => {
       expect(res.text).toBe("Missing fields");
     });
 
-    test("Should return 400 if the comment is to long", async () => {
+    test("Should return 400 if the comment is too long", async () => {
       const longComment = {
         comment: "a".repeat(101),
       };
@@ -128,7 +128,7 @@ describe("Comment controller integration tests", () => {
       expect(res.text).toBe("Invalid Id");
     });
 
-    test("Should return 403 when deleting using a other user", async () => {
+    test("Should return 403 when deleting using another user", async () => {
       const res = await request(app)
         .delete(`/api/posts/${testIds.postId}/comments/${testIds.commentId}`)
         .set("Authorization", `Bearer ${testIds.user2Id}`);

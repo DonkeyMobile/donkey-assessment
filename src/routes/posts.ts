@@ -7,7 +7,7 @@ import {
   updatePost,
   verifyPostId,
 } from "../controllers/Post.js";
-import { commendRouter } from "./comments.js";
+import { commentRouter } from "./comments.js";
 import { verifyLogin } from "../controllers/Auth.js";
 import {
   attachmentsErrorHandler,
@@ -22,7 +22,7 @@ router.patch("/:postId", verifyLogin, updatePost);
 router.get("/", getPosts);
 router.get("/:postId", getPost);
 
-router.use("/:postId/comments", commendRouter);
+router.use("/:postId/comments", commentRouter);
 
 // Verify post id's
 router.param("postId", verifyPostId);

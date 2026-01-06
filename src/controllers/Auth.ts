@@ -18,17 +18,21 @@ export const verifyLogin = async (
   res: Response,
   next: NextFunction
 ) => {
-  const header = req.headers.authorization;
-  if (!header) {
-    return res.status(401).send("Please login");
+  try {
+    const header = req.headers.authorization;
+    if (!header) {
+      return res.status(401).send("Please login");
+    }
+    const token = header.split(" ")[1];
+    if (!token || !isValidObjectId(token)) {
+      return res.status(401).send("Please provide a valid login token");
+    }
+    if (!(await User.exists({ _id: token }))) {
+      return res.status(401).send("Invalid credentials");
+    }
+    req.userId = token;
+    next();
+  } catch (error) {
+    next(error);
   }
-  const token = header.split(" ")[1];
-  if (!token || !isValidObjectId(token)) {
-    return res.status(401).send("Please provide a valid login token");
-  }
-  if (!(await User.exists({ _id: token }))) {
-    return res.status(401).send("Invalid credentials");
-  }
-  req.userId = token;
-  next();
 };

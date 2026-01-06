@@ -11,13 +11,17 @@ export const verifyPostId = async (
   next: NextFunction,
   value: string
 ) => {
-  if (value && !isValidObjectId(value)) {
-    return res.status(400).send("Invalid Id");
+  try {
+    if (value && !isValidObjectId(value)) {
+      return res.status(400).send("Invalid Id");
+    }
+    if (!(await Post.exists({ _id: value }))) {
+      return res.status(404).send("Post was not found");
+    }
+    next();
+  } catch (error) {
+    next(error);
   }
-  if (!(await Post.exists({ _id: value }))) {
-    return res.status(404).send("Post was not found");
-  }
-  next();
 };
 
 interface IPostBody {
@@ -128,8 +132,8 @@ export const deletePost = async (
       return res.status(403).send("You are not allowed to delete this post");
     }
 
-    await Post.deleteOne({ _id: postId });
     await Comment.deleteMany({ post: postId! });
+    await Post.deleteOne({ _id: postId });
 
     deleteAttachments(post);
 

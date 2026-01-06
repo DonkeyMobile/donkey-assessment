@@ -6,7 +6,7 @@ import attachmentSchema from "./Attachment.js";
 interface IPost {
   description: string;
   author: Types.ObjectId | IUser;
-  images?: [IAttachment];
+  images?: IAttachment[];
   document?: IAttachment;
   commentCount?: number;
 }

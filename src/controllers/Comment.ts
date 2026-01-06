@@ -8,16 +8,20 @@ export const verifyCommentId = async (
   next: NextFunction,
   value: string
 ) => {
-  if (value && !isValidObjectId(value)) {
-    return res.status(400).send("Invalid Id");
+  try {
+    if (value && !isValidObjectId(value)) {
+      return res.status(400).send("Invalid Id");
+    }
+    if (!(await Comment.exists({ _id: value }))) {
+      return res.status(404).send("Comment was not found");
+    }
+    next();
+  } catch (error) {
+    next(error);
   }
-  if (!(await Comment.exists({ _id: value }))) {
-    return res.status(404).send("Comment was not found");
-  }
-  next();
 };
 
-interface ICommendBody {
+interface ICommentBody {
   comment: string;
 }
 
@@ -27,7 +31,7 @@ export const createComment = async (
   next: NextFunction
 ) => {
   try {
-    const { comment }: ICommendBody = req.body ?? {};
+    const { comment }: ICommentBody = req.body ?? {};
 
     if (!comment) {
       return res.status(400).send("Missing fields");
