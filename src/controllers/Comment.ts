@@ -54,6 +54,16 @@ export const deleteComment = async (
   try {
     const { commentId } = req.params;
 
+    const comment = await Comment.findById(commentId, { author: true });
+
+    if (!comment) {
+      return res.status(404).send("Comment was not found");
+    }
+
+    if (comment.author.toString() !== req.userId) {
+      return res.status(403).send("You are not allowed to delete this comment");
+    }
+
     await Comment.deleteOne({ _id: commentId });
 
     return res.sendStatus(200);

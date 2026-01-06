@@ -9,7 +9,7 @@ Content-Type: application/json
 {
     "firstName": "Tim",
     "lastName": "Test",
-    "email": "test@tdssa.nl"
+    "email": "test@example.com"
 }
 
 ###
@@ -22,11 +22,31 @@ Authorization: Bearer {{user._id}}
 # @ref user
 POST /posts
 Authorization: Bearer {{user._id}}
-Content-Type: application/json
+Content-Type: multipart/form-data; boundary=WebKitFormBoundary
 
-{
-    "description": "Lorem ipsum "
-}
+--WebKitFormBoundary
+Content-Disposition: form-data; name="description"
+
+Lorem ipsum 
+--WebKitFormBoundary
+Content-Disposition: form-data; name="document"; filename="document.pdf"
+Content-Type: application/pdf
+
+< ./test-data/document.pdf
+--WebKitFormBoundary
+Content-Disposition: form-data; name="images"; filename="image2.webp"
+Content-Type: image/webp
+
+< ./test-data/image2.webp
+--WebKitFormBoundary
+Content-Disposition: form-data; name="images"; filename="image1.png"
+Content-Type: image/png
+
+< ./test-data/image1.png
+--WebKitFormBoundary--
+
+###
+GET /posts
 
 ###
 # @ref post
@@ -53,6 +73,7 @@ GET /posts/{{post._id}}/comments
 # @ref post
 # @ref comment
 DELETE /posts/{{post._id}}/comments/{{comment._id}}
+Authorization: Bearer {{user._id}}
 
 ###
 # @ref user

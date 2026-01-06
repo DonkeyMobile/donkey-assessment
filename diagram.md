@@ -15,6 +15,8 @@ class Post {
     ObjectId _id
     ObjectId author
     String description
+    Attachment document
+    Attachment[] images
     Date createdAt
     Date updatedAt
 }
@@ -29,13 +31,14 @@ class Comment {
 }
 
 class Attachment {
-    ObjectId _id
-    ObjectId post
-    GridFS file
+    String fileName
+    String fileType
+    String path
 }
 
-Post "0..*" -- "1" User
-Post "1" -- "0..*" Comment
-Post "1" -- "0..*" Attachment
-Comment "0..*" -- "1" User
+Post "0..*" --> "1" User
+Post "1" <-- "0..*" Comment
+Post "1" -- "0..1" Attachment: document
+Post "1" -- "0..*" Attachment: images
+Comment "0..*" --> "1" User
 ```

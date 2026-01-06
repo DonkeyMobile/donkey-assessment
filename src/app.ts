@@ -10,6 +10,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api", apiRouter);
+app.use("/uploads", express.static("./uploads"));
 
 // Handling errors globally
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

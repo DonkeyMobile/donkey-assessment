@@ -128,6 +128,15 @@ describe("Comment controller integration tests", () => {
       expect(res.text).toBe("Invalid Id");
     });
 
+    test("Should return 403 when deleting using a other user", async () => {
+      const res = await request(app)
+        .delete(`/api/posts/${testIds.postId}/comments/${testIds.commentId}`)
+        .set("Authorization", `Bearer ${testIds.user2Id}`);
+
+      expect(res.statusCode).toBe(403);
+      expect(res.text).toBe("You are not allowed to delete this comment");
+    });
+
     test("Should delete the comment when the post is deleted", async () => {
       const res = await request(app)
         .delete(`/api/posts/${testIds.postId}`)
