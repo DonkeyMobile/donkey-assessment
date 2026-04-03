@@ -1,0 +1,13 @@
+<turbo-frame id="<%= like_frame_id(post) %>">
+  <div class="like-box">
+    <span class="stat"><%= post.likes.count %> likes</span>
+
+    <% if selected_user %>
+      <%= form_with url: timeline_post_like_path(post, user_id: selected_user.id), method: :post, data: { turbo_frame: like_frame_id(post) } do %>
+        <button type="submit" class="button button-inline">
+          <%= liked_by_selected_user?(post) ? "Unlike" : "Like" %>
+        </button>
+      <% end %>
+    <% end %>
+  </div>
+</turbo-frame>

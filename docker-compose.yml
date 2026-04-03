@@ -1,0 +1,60 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: timeline_api_development
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d timeline_api_development"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build:
+      context: .
+      target: development
+    command: sh -c "rm -f tmp/pids/server.pid && bundle check || bundle install && bundle exec rails server -p 3000 -b 0.0.0.0"
+    volumes:
+      - .:/rails
+      - bundle_cache:/usr/local/bundle
+    ports:
+      - "3000:3000"
+      - "9393:9393"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/timeline_api_development
+      RAILS_ENV: development
+      BUNDLE_PATH: /usr/local/bundle
+      BUNDLE_IGNORE_CONFIG: "1"
+      PUMA_METRICS: "true"
+      PUMA_METRICS_URL: tcp://0.0.0.0:9393
+
+  test:
+    build:
+      context: .
+      target: development
+    command: sh -c "bundle check || bundle install && bundle exec rspec"
+    volumes:
+      - .:/rails
+      - bundle_cache:/usr/local/bundle
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/timeline_api_test
+      RAILS_ENV: test
+      BUNDLE_PATH: /usr/local/bundle
+      BUNDLE_IGNORE_CONFIG: "1"
+      PUMA_METRICS: "false"
+
+volumes:
+  postgres_data:
+  bundle_cache:

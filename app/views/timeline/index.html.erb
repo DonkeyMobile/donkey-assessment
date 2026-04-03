@@ -1,0 +1,134 @@
+<section class="hero">
+  <p class="hero-kicker">Timeline Demo</p>
+  <h1>Readable timeline for browser checks.</h1>
+  <p>
+    This browser view sits on top of the JSON API so posts, comments, likes, and attachments are easy to review in one place.
+  </p>
+  <div class="hero-links">
+    <a class="chip" href="/">Create users</a>
+    <a class="chip" href="/api/v1/posts">Raw API: posts</a>
+    <a class="chip" href="<%= timeline_path(user_id: selected_user&.id) %>">Refresh timeline</a>
+  </div>
+
+  <% if available_users.any? %>
+    <%= form_with url: timeline_select_user_path, class: "toolbar" do |form| %>
+      <%= form.hidden_field :redirect_to, value: timeline_path %>
+      <div class="field" style="min-width: 260px;">
+        <%= form.label :user_id, "Current user" %>
+        <%= form.select :user_id, available_users.map { |user| [ "#{user.name} (##{user.id})", user.id ] }, { selected: selected_user&.id } %>
+      </div>
+      <%= form.submit "Use this user", class: "button" %>
+    <% end %>
+  <% end %>
+
+  <% if selected_user %>
+    <div class="hero-links" style="margin-top: 16px;">
+      <span class="chip chip-viewer">You are viewing as <strong style="margin-left: 6px;"><%= selected_user.name %></strong></span>
+    </div>
+  <% end %>
+
+  <%= form_with url: timeline_path, method: :get, class: "toolbar", local: true do |form| %>
+    <%= form.hidden_field :user_id, value: selected_user&.id %>
+    <div class="field" style="min-width: 220px;">
+      <%= form.label :sort, "Sort by" %>
+      <%= form.select :sort, [ [ "Newest first", "newest" ], [ "Oldest first", "oldest" ] ], { selected: current_sort_option } %>
+    </div>
+    <%= form.submit "Sort posts", class: "button" %>
+  <% end %>
+</section>
+
+<section class="split">
+  <aside class="card">
+    <div class="meta">Create from browser</div>
+    <h2 class="title">New post</h2>
+    <% if selected_user %>
+      <p class="meta">Posting as <strong><%= selected_user.name %></strong>.</p>
+    <% end %>
+    <%= form_with model: @post, url: timeline_path, class: "form-stack" do |form| %>
+      <%= hidden_field_tag :user_id, selected_user&.id %>
+      <div class="field">
+        <%= form.label :description %>
+        <%= form.text_area :description, placeholder: "Write something for the timeline..." %>
+      </div>
+
+      <div class="field">
+        <%= form.label :attachment_file, "Choose a file from your computer" %>
+        <%= form.file_field :attachment_file, accept: "image/*,video/*,.pdf,application/pdf" %>
+      </div>
+
+      <%= form.submit "Create post", class: "button" %>
+    <% end %>
+  </aside>
+
+  <section class="grid" style="margin-top: 0;">
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <article class="card">
+          <div class="card-top">
+            <div class="meta">
+              <strong><%= post.user.name %></strong>
+              · <%= post.date.strftime("%d %b %Y %H:%M") %>
+            </div>
+            <a class="chip" href="<%= timeline_post_path(post, user_id: selected_user&.id) %>">Open post</a>
+          </div>
+
+          <h2 class="title">Post #<%= post.id %></h2>
+          <p class="body"><%= post.description %></p>
+
+          <div class="stats">
+            <span class="stat"><%= post.likes.count %> likes</span>
+            <span class="stat"><%= post.comments.count %> comments</span>
+            <span class="stat"><%= post.post_attachments.count %> attachments</span>
+          </div>
+
+          <% if post.post_attachments.any? %>
+            <section class="attachments">
+              <% post.post_attachments.each do |attachment| %>
+                <div class="attachment">
+                  <strong><%= attachment.file_type.capitalize %></strong>
+                  <div class="meta"><a href="<%= attachment.url %>"><%= attachment.url %></a></div>
+                  <% if attachment.file_type == "photo" %>
+                    <img class="attachment-preview" src="<%= attachment.url %>" alt="Attachment preview for post <%= post.id %>">
+                  <% end %>
+                </div>
+              <% end %>
+            </section>
+          <% end %>
+        </article>
+      <% end %>
+    <% else %>
+      <div class="card empty">
+        No posts yet. Create one from the form on the left.
+      </div>
+    <% end %>
+
+    <% if defined?(@pagy) && @pagy.pages > 1 %>
+      <nav class="card" aria-label="Timeline pagination">
+        <div class="card-top">
+          <div class="meta">Page <%= @pagy.page %> of <%= @pagy.pages %></div>
+          <div class="pagination-nav">
+            <% if @pagy.previous %>
+              <a class="chip" href="<%= timeline_path(user_id: selected_user&.id, page: @pagy.previous, sort: current_sort_option) %>">Previous</a>
+            <% else %>
+              <span class="chip chip-muted">Previous</span>
+            <% end %>
+
+            <% pagination_window(@pagy).each do |page_number| %>
+              <% if page_number == @pagy.page %>
+                <span class="chip chip-active"><%= page_number %></span>
+              <% else %>
+                <a class="chip" href="<%= timeline_path(user_id: selected_user&.id, page: page_number, sort: current_sort_option) %>"><%= page_number %></a>
+              <% end %>
+            <% end %>
+
+            <% if @pagy.next %>
+              <a class="chip" href="<%= timeline_path(user_id: selected_user&.id, page: @pagy.next, sort: current_sort_option) %>">Next</a>
+            <% else %>
+              <span class="chip chip-muted">Next</span>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    <% end %>
+  </section>
+</section>
