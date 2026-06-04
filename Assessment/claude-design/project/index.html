@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donkey Inspire</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            serif: ['Newsreader', 'ui-serif', 'Georgia', 'serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            paper:    'oklch(0.972 0.008 78)',
+            surface:  'oklch(0.995 0.004 80)',
+            ink:      'oklch(0.245 0.008 60)',
+            'ink-soft': 'oklch(0.46 0.012 62)',
+            faint:    'oklch(0.62 0.012 64)',
+            line:     'oklch(0.905 0.010 72)',
+            charcoal: 'oklch(0.205 0.006 58)',
+            'charcoal-soft': 'oklch(0.28 0.007 58)',
+            accent:   'var(--accent)',
+            terracotta: 'oklch(0.585 0.108 45)',
+            'terracotta-dark': 'oklch(0.505 0.103 43)',
+            amber:    'oklch(0.765 0.105 72)',
+            'amber-soft': 'oklch(0.86 0.06 78)',
+          },
+          borderRadius: {
+            xl: '0.9rem',
+            '2xl': '1.25rem',
+          },
+          boxShadow: {
+            soft: '0 1px 2px rgba(40,30,20,0.04), 0 8px 24px -12px rgba(60,45,30,0.18)',
+            lift: '0 2px 4px rgba(40,30,20,0.05), 0 18px 40px -16px rgba(60,45,30,0.28)',
+          },
+          keyframes: {
+            'fade-in': { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
+            'rise':    { '0%': { transform: 'translateY(10px)' }, '100%': { transform: 'translateY(0)' } },
+            'scale-in':{ '0%': { transform: 'scale(0.985)' }, '100%': { transform: 'scale(1)' } },
+          },
+          animation: {
+            'fade-in': 'fade-in .35s ease both',
+            'rise': 'rise .45s cubic-bezier(.2,.7,.3,1) both',
+            'scale-in': 'scale-in .25s cubic-bezier(.2,.7,.3,1) both',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      --accent: #b5613c;                     /* terracotta */
+      --accent-dark: color-mix(in oklab, var(--accent), black 16%);
+      --accent-glow: color-mix(in oklab, var(--accent), transparent 86%);
+    }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes rise { from { transform: translateY(10px); } to { transform: translateY(0); } }
+    @keyframes scale-in { from { transform: scale(0.985); } to { transform: scale(1); } }
+    @media (prefers-reduced-motion: reduce) {
+      .animate-fade-in, .animate-rise, .animate-scale-in { animation: none !important; opacity: 1 !important; transform: none !important; }
+    }
+    html { scroll-behavior: smooth; }
+    body { background: oklch(0.972 0.008 78); color: oklch(0.245 0.008 60); -webkit-font-smoothing: antialiased; }
+    .font-serif { font-optical-sizing: auto; }
+    ::selection { background: var(--accent-glow); }
+    /* thin custom scrollbar */
+    .scroll-thin::-webkit-scrollbar { width: 9px; height: 9px; }
+    .scroll-thin::-webkit-scrollbar-thumb { background: oklch(0.82 0.01 70); border-radius: 9px; border: 2px solid transparent; background-clip: content-box; }
+    .scroll-thin::-webkit-scrollbar-track { background: transparent; }
+    /* accent helpers driven by --accent so Tweaks can recolor live */
+    .bg-accent-dark { background-color: var(--accent-dark); }
+    .bg-accent-soft { background-color: color-mix(in oklab, var(--accent), transparent 92%); }
+    .hover-accent-border { transition: border-color .2s; }
+    .hover-accent-border:hover { border-color: color-mix(in oklab, var(--accent), transparent 70%); }
+    .accent-glow { box-shadow: 0 0 0 4px var(--accent-glow); }
+    .masonry { column-gap: 1.25rem; }
+    .masonry > * { break-inside: avoid; margin-bottom: 1.25rem; }
+    @media (min-width: 640px) { .masonry { column-count: 2; } }
+    @media (min-width: 1024px) { .masonry { column-count: 3; } }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script src="data.js"></script>
+  <script type="text/babel" src="ui.jsx"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="public-site.jsx"></script>
+  <script type="text/babel" src="admin-portal.jsx"></script>
+  <script type="text/babel" src="root.jsx"></script>
+</body>
+</html>

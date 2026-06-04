@@ -1,0 +1,26 @@
+{
+  "name": "donkey-assessment",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "yarn workspace @donkey/shared build && yarn workspace @donkey/api build && yarn workspace @donkey/web build",
+    "dev:api": "yarn workspace @donkey/api dev",
+    "dev:web": "yarn workspace @donkey/web dev",
+    "test": "yarn workspace @donkey/api test && yarn workspace @donkey/web test",
+    "test:e2e": "yarn workspace @donkey/web test:e2e",
+    "lint": "yarn workspace @donkey/api lint && yarn workspace @donkey/web lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "3.8.3",
+    "typescript": "6.0.3"
+  }
+}

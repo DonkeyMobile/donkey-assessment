@@ -1,0 +1,17 @@
+node_modules
+.next
+dist
+build
+coverage
+test-results
+playwright-report
+.git
+.vscode
+.idea
+*.lock
+*.log
+.DS_Store
+**/prisma/migrations
+claude-design
+.env
+.env.*

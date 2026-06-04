@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+/* Keep the existing JS theme (colors, fonts, animations) via the v3-style config. */
+@config "../../tailwind.config.ts";
+
+:root {
+  --accent: #b5613c; /* terracotta */
+  --accent-dark: color-mix(in oklab, var(--accent), black 16%);
+  --accent-glow: color-mix(in oklab, var(--accent), transparent 86%);
+  color-scheme: light;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-rise,
+  .animate-scale-in,
+  .animate-hero-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: oklch(0.972 0.008 78);
+  color: oklch(0.245 0.008 60);
+  -webkit-font-smoothing: antialiased;
+}
+.font-serif {
+  font-optical-sizing: auto;
+}
+::selection {
+  background: var(--accent-glow);
+}
+
+/* thin custom scrollbar */
+.scroll-thin::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: oklch(0.82 0.01 70);
+  border-radius: 9px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* accent helpers driven by --accent */
+.bg-accent-dark {
+  background-color: var(--accent-dark);
+}
+.bg-accent-soft {
+  background-color: color-mix(in oklab, var(--accent), transparent 92%);
+}
+.hover-accent-border {
+  transition: border-color 0.2s;
+}
+.hover-accent-border:hover {
+  border-color: color-mix(in oklab, var(--accent), transparent 70%);
+}
+.accent-glow {
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+/* masonry */
+.masonry {
+  column-gap: 1.25rem;
+}
+.masonry > * {
+  break-inside: avoid;
+  margin-bottom: 1.25rem;
+}
+@media (min-width: 640px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+@media (min-width: 1024px) {
+  .masonry {
+    column-count: 3;
+  }
+}
