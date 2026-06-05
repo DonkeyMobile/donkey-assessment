@@ -34,7 +34,7 @@ export function toPersistencePayload(input: ContentInput) {
 }
 
 export function createPrismaInspirationItemRepository(
-  prisma: Pick<PrismaClient, "inspirationItem">
+  prisma: Pick<PrismaClient, "inspirationItem" | "$transaction">
 ): InspirationItemRepository {
   const orderBy = { date: "desc" as const };
   return {
@@ -51,24 +51,26 @@ export function createPrismaInspirationItemRepository(
       await prisma.inspirationItem.delete({ where: { id } });
     },
     reset: async () => {
-      await prisma.inspirationItem.deleteMany({});
-      await prisma.inspirationItem.createMany({
-        data: SEED.map((seedItem) => ({
-          type: seedItem.type,
-          status: seedItem.status,
-          category: seedItem.category,
-          title: seedItem.title,
-          author: seedItem.author,
-          date: new Date(seedItem.date),
-          quote: seedItem.quote ?? null,
-          excerpt: seedItem.excerpt ?? null,
-          body: seedItem.body ?? null,
-          readingTime: seedItem.readingTime ?? null,
-          caption: seedItem.caption ?? null,
-          ratio: seedItem.ratio ?? null,
-          imageUrl: seedItem.imageUrl ?? null,
-        })),
-      });
+      await prisma.$transaction([
+        prisma.inspirationItem.deleteMany({}),
+        prisma.inspirationItem.createMany({
+          data: SEED.map((seedItem) => ({
+            type: seedItem.type,
+            status: seedItem.status,
+            category: seedItem.category,
+            title: seedItem.title,
+            author: seedItem.author,
+            date: new Date(seedItem.date),
+            quote: seedItem.quote ?? null,
+            excerpt: seedItem.excerpt ?? null,
+            body: seedItem.body ?? null,
+            readingTime: seedItem.readingTime ?? null,
+            caption: seedItem.caption ?? null,
+            ratio: seedItem.ratio ?? null,
+            imageUrl: seedItem.imageUrl ?? null,
+          })),
+        }),
+      ]);
     },
   };
 }
