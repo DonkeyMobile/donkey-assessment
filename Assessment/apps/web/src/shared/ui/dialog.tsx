@@ -36,6 +36,9 @@ export function Dialog({
       if (e.key === "Tab" && panelRef.current) {
         const focusables = panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE);
         if (focusables.length === 0) {
+          // Nothing tabbable inside — keep focus on the panel instead of escaping.
+          e.preventDefault();
+          panelRef.current.focus();
           return;
         }
         const first = focusables[0];
