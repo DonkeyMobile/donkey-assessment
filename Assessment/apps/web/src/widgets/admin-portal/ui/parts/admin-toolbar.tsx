@@ -25,6 +25,7 @@ export function AdminToolbar({
         <Input
           value={query}
           onChange={(e) => onQuery(e.target.value)}
+          aria-label="Zoek op titel, auteur of categorie"
           placeholder="Zoek op titel, auteur of categorie…"
           className="pl-10"
         />
@@ -33,6 +34,7 @@ export function AdminToolbar({
         <Select
           value={typeFilter}
           onChange={(e) => onTypeFilterChange(e.target.value as TypeFilterValue)}
+          aria-label="Filter op type"
           className="sm:w-44"
         >
           <option value="all">Alle types</option>
