@@ -24,6 +24,9 @@ COPY apps/api apps/api
 RUN yarn workspace @donkey/api prisma:generate
 WORKDIR /app/apps/api
 RUN chmod +x docker-entrypoint.sh
+# Drop to the unprivileged `node` user (uid 1000, shipped by node:alpine).
+RUN chown -R node:node /app
+USER node
 EXPOSE 4000
 ENTRYPOINT ["sh", "docker-entrypoint.sh"]
 
@@ -42,8 +45,10 @@ ENV NODE_ENV=production
 ENV HOSTNAME=0.0.0.0
 ENV PORT=3000
 WORKDIR /app
-COPY --from=web-build /app/apps/web/.next/standalone ./
-COPY --from=web-build /app/apps/web/.next/static ./apps/web/.next/static
-COPY --from=web-build /app/apps/web/public ./apps/web/public
+COPY --from=web-build --chown=node:node /app/apps/web/.next/standalone ./
+COPY --from=web-build --chown=node:node /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=web-build --chown=node:node /app/apps/web/public ./apps/web/public
+# Run the Next server as the unprivileged `node` user.
+USER node
 EXPOSE 3000
 CMD ["node", "apps/web/server.js"]
