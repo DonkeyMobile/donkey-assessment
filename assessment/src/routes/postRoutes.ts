@@ -11,13 +11,14 @@ import {
 } from "../controllers/postController";
 import commentRoutes from "./commentRoutes";
 import { AttachmentType, IAttachment, Post } from "../models/Post";
+import sanitize from "sanitize-filename";
 
 const router = Router();
 
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, config.uploadDir),
   filename: (_req, file, cb) => {
-    const uniqueName = `${Date.now()}-${file.originalname}`;
+    const uniqueName = `${Date.now()}-${sanitize(file.originalname)}`;
     cb(null, uniqueName);
   },
 });
