@@ -42,4 +42,6 @@ const postSchema = new Schema<IPost>(
   { timestamps: true }
 );
 
+postSchema.index({ date: -1 });
+
 export const Post = model<IPost>("Post", postSchema);
