@@ -19,7 +19,7 @@ export async function createPost(req: Request, res: Response): Promise<void> {
       }
       attachments.push({
         fileName: file.originalname,
-        url: path.join(config.uploadDir, file.filename),
+        url: path.posix.join(config.uploadDir, file.filename),
         type,
         mimeType: file.mimetype,
       });
