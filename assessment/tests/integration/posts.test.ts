@@ -79,6 +79,59 @@ describe("Posts API", () => {
     const getRes = await request(app).get(`/api/posts/${created.body._id}`);
     expect(getRes.status).toBe(404);
   });
+
+  it("creates a post with an attachment", async () => {
+    const res = await request(app)
+      .post("/api/posts")
+      .field("date", "2024-01-01")
+      .field("description", "Post with attachment")
+      .attach("files", Buffer.from("fake image content"), {
+        filename: "photo.png",
+        contentType: "image/png",
+      });
+
+    expect(res.status).toBe(201);
+    expect(res.body.attachments).toHaveLength(1);
+    expect(res.body.attachments[0]).toMatchObject({
+      fileName: "photo.png",
+      type: "photo",
+      mimeType: "image/png",
+    });
+  });
+
+  it("supports multiple attachments of different types", async () => {
+    const res = await request(app)
+      .post("/api/posts")
+      .field("date", "2024-01-01")
+      .field("description", "Post with multiple attachments")
+      .attach("files", Buffer.from("fake pdf content"), {
+        filename: "doc.pdf",
+        contentType: "application/pdf",
+      })
+      .attach("files", Buffer.from("fake video content"), {
+        filename: "clip.mp4",
+        contentType: "video/mp4",
+      });
+
+    expect(res.status).toBe(201);
+    expect(res.body.attachments).toHaveLength(2);
+    const types = res.body.attachments.map((a: { type: string }) => a.type);
+    expect(types).toEqual(expect.arrayContaining(["pdf", "video"]));
+  });
+
+  it("skips unsupported attachment types", async () => {
+    const res = await request(app)
+      .post("/api/posts")
+      .field("date", "2024-01-01")
+      .field("description", "Post with unsupported attachment")
+      .attach("files", Buffer.from("fake content"), {
+        filename: "notes.txt",
+        contentType: "text/plain",
+      });
+
+    expect(res.status).toBe(201);
+    expect(res.body.attachments).toHaveLength(0);
+  });
 });
 
 describe("Comments API", () => {
