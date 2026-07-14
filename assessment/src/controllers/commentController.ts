@@ -6,10 +6,6 @@ export async function createComment(req: Request, res: Response): Promise<void> 
   try {
     const { postId } = req.params;
     const { description, author } = req.body;
-    if (!description || !author) {
-      res.status(400).json({ message: "description and author are required" });
-      return;
-    }
     const post = await Post.findById(postId);
     if (!post) {
       res.status(404).json({ message: "Post not found" });

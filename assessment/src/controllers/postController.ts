@@ -1,15 +1,30 @@
 import { Request, Response } from "express";
+import path from "path";
 import { Post } from "../models/Post";
 import { Comment } from "../models/Comment";
+import { IAttachment } from "../models/Post";
+import { config } from "../config";
+import { attachmentTypeFromMime } from "../utils/attachments";
 
 export async function createPost(req: Request, res: Response): Promise<void> {
   try {
     const { date, description } = req.body;
-    if (!date || !description) {
-      res.status(400).json({ message: "date and description are required" });
-      return;
+    const files = (req.files as Express.Multer.File[]) || [];
+    const attachments: IAttachment[] = [];
+    for (const file of files) {
+      const type = attachmentTypeFromMime(file.mimetype);
+      if (!type) {
+        console.warn(`Unsupported file type: ${file.mimetype} for file ${file.originalname}, skipping`);
+        continue;
+      }
+      attachments.push({
+        fileName: file.originalname,
+        url: path.join(config.uploadDir, file.filename),
+        type,
+        mimeType: file.mimetype,
+      });
     }
-    const post = await Post.create({ date, description, attachments: req.body.attachments || [] });
+    const post = await Post.create({ date, description, attachments });
     res.status(201).json(post);
   } catch (error) {
     res.status(500).json({ message: "Failed to create post", error: (error as Error).message });

@@ -19,7 +19,9 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mongoose": "^8.4.0",
-    "multer": "^2.0.0"
+    "multer": "^2.0.0",
+    "sanitize-filename": "^1.6.4",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

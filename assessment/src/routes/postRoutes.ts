@@ -1,6 +1,5 @@
 import { Router } from "express";
 import multer from "multer";
-import path from "path";
 import { config } from "../config";
 import {
   createPost,
@@ -10,8 +9,9 @@ import {
   deletePost,
 } from "../controllers/postController";
 import commentRoutes from "./commentRoutes";
-import { AttachmentType, IAttachment, Post } from "../models/Post";
 import sanitize from "sanitize-filename";
+import { validate } from "../middleware/validate";
+import { createPostSchema, updatePostSchema, objectIdParamSchema } from "../validation/postValidation";
 
 const router = Router();
 
@@ -23,47 +23,16 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
-
-function attachmentTypeFromMime(mimeType: string): AttachmentType | null {
-  if (mimeType.startsWith("image/")) return AttachmentType.PHOTO;
-  if (mimeType.startsWith("video/")) return AttachmentType.VIDEO;
-  if (mimeType === "application/pdf") return AttachmentType.PDF;
-  return null;
-}
+const upload = multer({
+  storage,
+  limits: { fileSize: 25 * 1024 * 1024, files: 10 },
+});
 
 router.get("/", getPosts);
-router.get("/:id", getPostById);
-router.post("/", createPost);
-router.put("/:id", updatePost);
-router.delete("/:id", deletePost);
-
-router.post("/:id/attachments", upload.array("files"), async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
-    if (!post) {
-      res.status(404).json({ message: "Post not found" });
-      return;
-    }
-    const files = (req.files as Express.Multer.File[]) || [];
-    const attachments: IAttachment[] = [];
-    for (const file of files) {
-      const type = attachmentTypeFromMime(file.mimetype);
-      if (!type) continue;
-      attachments.push({
-        fileName: file.originalname,
-        url: path.join(config.uploadDir, file.filename),
-        type,
-        mimeType: file.mimetype,
-      });
-    }
-    post.attachments.push(...attachments);
-    await post.save();
-    res.status(201).json(post);
-  } catch (error) {
-    res.status(500).json({ message: "Failed to upload attachments", error: (error as Error).message });
-  }
-});
+router.get("/:id", validate({ params: objectIdParamSchema }), getPostById);
+router.post("/", upload.array("files"), validate({ body: createPostSchema }), createPost);
+router.put("/:id", validate({ params: objectIdParamSchema, body: updatePostSchema }), updatePost);
+router.delete("/:id", validate({ params: objectIdParamSchema }), deletePost);
 
 router.use("/:postId/comments", commentRoutes);
 
