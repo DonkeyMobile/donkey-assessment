@@ -14,10 +14,12 @@ curl -i -X POST "$BASE/api/posts" \
 echo -e "\n"
 
 echo "== Create a post with file attachments =="
+DUMMY_FILE="./uploads/dummy-$(date +%s).pdf"
+printf 'dummy attachment\n' > "$DUMMY_FILE"
 POST_JSON=$(curl -s -X POST "$BASE/api/posts" \
   -F "date=2026-07-14" \
   -F "description=Post with attachments" \
-  -F "files=@./uploads/1784059362665-doc.pdf")
+  -F "files=@$DUMMY_FILE")
 echo "$POST_JSON"
 echo -e "\n"
 

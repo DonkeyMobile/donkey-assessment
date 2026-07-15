@@ -1,11 +1,13 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
+import helmet from "helmet";
 import postRoutes from "./routes/postRoutes";
 
 export function createApp(): Application {
   const app = express();
 
   app.use(cors());
+  app.use(helmet());
   app.use(express.json());
 
   app.get("/health", (_req: Request, res: Response) => {
@@ -20,7 +22,8 @@ export function createApp(): Application {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-    res.status(500).json({ message: "Internal server error", error: err.message });
+    const isProduction = process.env.NODE_ENV === "production";
+    res.status(500).json({ message: "Internal server error", error: isProduction ? undefined : err.message });
   });
 
   return app;

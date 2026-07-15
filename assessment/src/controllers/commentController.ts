@@ -6,14 +6,13 @@ export async function createComment(req: Request, res: Response): Promise<void> 
   try {
     const { postId } = req.params;
     const { description, author } = req.body;
-    const post = await Post.findById(postId);
-    if (!post) {
+    const postExist = await Post.exists({ _id: postId });
+    if (!postExist) {
       res.status(404).json({ message: "Post not found" });
       return;
     }
     const comment = await Comment.create({ post: postId, description, author });
-    post.comments.push(comment._id);
-    await post.save();
+    await Post.findByIdAndUpdate(postId, { $push: { comments: comment._id } });
     res.status(201).json(comment);
   } catch (error) {
     res.status(500).json({ message: "Failed to create comment", error: (error as Error).message });
@@ -31,10 +30,14 @@ export async function getCommentsForPost(req: Request, res: Response): Promise<v
 
 export async function updateComment(req: Request, res: Response): Promise<void> {
   try {
-    const comment = await Comment.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const comment = await Comment.findOneAndUpdate(
+      { _id: req.params.id, post: req.params.postId },
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
     if (!comment) {
       res.status(404).json({ message: "Comment not found" });
       return;
@@ -47,7 +50,7 @@ export async function updateComment(req: Request, res: Response): Promise<void> 
 
 export async function deleteComment(req: Request, res: Response): Promise<void> {
   try {
-    const comment = await Comment.findByIdAndDelete(req.params.id);
+    const comment = await Comment.findOneAndDelete({ _id: req.params.id, post: req.params.postId });
     if (!comment) {
       res.status(404).json({ message: "Comment not found" });
       return;

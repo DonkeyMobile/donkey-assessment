@@ -4,7 +4,8 @@ export const postIdParamSchema = z.object({
   postId: z.string().regex(/^[0-9a-fA-F]{24}$/, "Invalid postId format"),
 });
 
-export const commentIdParamSchema = z.object({
+export const postAndCommentIdParamSchema = z.object({
+  postId: z.string().regex(/^[0-9a-fA-F]{24}$/, "Invalid postId format"),
   id: z.string().regex(/^[0-9a-fA-F]{24}$/, "Invalid id format"),
 });
 

@@ -13,15 +13,18 @@ Node.js + TypeScript + MongoDB API for creating, reading, updating and deleting 
 ```
 src/
   config/         # environment configuration
-  db/             # database connection
-  models/         # Mongoose schemas (Post, Comment)
   controllers/    # request handlers
+  db/             # database connection
+  middleware/     # Express middleware (validation)
+  models/         # Mongoose schemas (Post, Comment)
   routes/         # Express routers
+  utils/          # utility functions
+  validation/     # request validation schemas
   app.ts          # Express app setup
   server.ts       # entry point, bootstraps DB + server
 tests/
-  unit/           # model-level unit tests
   integration/    # API tests using an in-memory MongoDB
+  unit/           # model-level unit tests
 ```
 
 ## Getting started
@@ -54,14 +57,16 @@ npm test
 
 ## API overview
 
+Health check:
+- GET /health
+
 | Method | Path                                | Description                  |
 |--------|--------------------------------------|-------------------------------|
 | GET    | /api/posts                           | List posts                   |
-| POST   | /api/posts                           | Create post                  |
+| POST   | /api/posts                           | Create post (with optional file attachments as multipart `files`) |
 | GET    | /api/posts/:id                       | Get post by id (with comments)|
 | PUT    | /api/posts/:id                       | Update post                  |
 | DELETE | /api/posts/:id                       | Delete post (and its comments)|
-| POST   | /api/posts/:id/attachments           | Upload attachments (multipart `files`) |
 | GET    | /api/posts/:postId/comments          | List comments for a post     |
 | POST   | /api/posts/:postId/comments          | Add comment to a post        |
 | PUT    | /api/posts/:postId/comments/:id      | Update comment               |

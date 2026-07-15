@@ -1,3 +1,4 @@
+import fs from "fs";
 import { AttachmentType } from "../models/Post";
 
 export function attachmentTypeFromMime(mimeType: string): AttachmentType | null {
@@ -5,4 +6,16 @@ export function attachmentTypeFromMime(mimeType: string): AttachmentType | null 
   if (mimeType.startsWith("video/")) return AttachmentType.VIDEO;
   if (mimeType === "application/pdf") return AttachmentType.PDF;
   return null;
+}
+
+export function deleteUploadedFile(filePath: string): void {
+  fs.unlink(filePath, (err) => {
+    if (err) console.error(`Failed to delete file ${filePath}:`, err);
+  });
+}
+
+export function deleteUploadedFiles(files: Express.Multer.File[]): void {
+  for (const file of files) {
+    deleteUploadedFile(file.path);
+  }
 }

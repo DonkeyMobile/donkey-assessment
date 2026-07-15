@@ -4,13 +4,7 @@ import { Comment } from "../../src/models/Comment";
 describe("Comment model", () => {
   it("requires post, description and author", async () => {
     const comment = new Comment({});
-    let error: Error | null = null;
-    try {
-      await comment.validate();
-    } catch (err) {
-      error = err as Error;
-    }
-    expect(error).not.toBeNull();
+    await expect(comment.validate()).rejects.toThrow();
   });
 
   it("creates a valid comment", () => {

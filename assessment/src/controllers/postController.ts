@@ -4,17 +4,18 @@ import { Post } from "../models/Post";
 import { Comment } from "../models/Comment";
 import { IAttachment } from "../models/Post";
 import { config } from "../config";
-import { attachmentTypeFromMime } from "../utils/attachments";
+import { attachmentTypeFromMime, deleteUploadedFile, deleteUploadedFiles } from "../utils/attachments";
 
 export async function createPost(req: Request, res: Response): Promise<void> {
+  const files = (req.files as Express.Multer.File[]) || [];
   try {
     const { date, description } = req.body;
-    const files = (req.files as Express.Multer.File[]) || [];
     const attachments: IAttachment[] = [];
     for (const file of files) {
       const type = attachmentTypeFromMime(file.mimetype);
       if (!type) {
         console.warn(`Unsupported file type: ${file.mimetype} for file ${file.originalname}, skipping`);
+        deleteUploadedFile(file.path);
         continue;
       }
       attachments.push({
@@ -27,6 +28,7 @@ export async function createPost(req: Request, res: Response): Promise<void> {
     const post = await Post.create({ date, description, attachments });
     res.status(201).json(post);
   } catch (error) {
+    deleteUploadedFiles(files);
     res.status(500).json({ message: "Failed to create post", error: (error as Error).message });
   }
 }
@@ -77,6 +79,9 @@ export async function deletePost(req: Request, res: Response): Promise<void> {
       return;
     }
     await Comment.deleteMany({ post: post._id });
+    for (const attachment of post.attachments) {
+      deleteUploadedFile(attachment.url);
+    }
     res.status(204).send();
   } catch (error) {
     res.status(500).json({ message: "Failed to delete post", error: (error as Error).message });
