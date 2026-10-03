@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>splashBackground</string>
+	</dict>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>satoshi-400.ttf</string>
+		<string>satoshi-700.ttf</string>
+		<string>clash-grotesk-500.ttf</string>
+		<string>clash-grotesk-700.ttf</string>
+	</array>
+</dict>
+</plist>
